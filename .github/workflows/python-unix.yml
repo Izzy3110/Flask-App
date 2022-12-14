@@ -8,7 +8,7 @@ on:
 jobs:
 
   basic-debian-run_tests:
-    runs-on: bullseye-20221205
+    runs-on: bullseye-slim
 
     strategy:
       matrix:
