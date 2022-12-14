@@ -10,7 +10,7 @@ jobs:
 
   run_tests-ubuntu:
 
-    runs-on: [ubuntu-latest,self-hosted]
+    runs-on: [ubuntu-latest]
 
     strategy:
       matrix:
