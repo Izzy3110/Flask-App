@@ -3,8 +3,17 @@ import json
 
 import os
 from flask import request, jsonify
-from .flask_app.wsgi import create_app
-from .wyl import validate_post_data
+from src.flask_app.wsgi import create_app
+from src.wyl import validate_post_data
+
+import inspect
+import os
+import sys
+
+test_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+src_dir = os.path.join(test_dir, '..', 'flask_app')
+sys.path.append(src_dir)
+
 
 tested_app = create_app()
 tested_app.secret_key = os.urandom(32)
@@ -90,4 +99,5 @@ class FlaskAppTests(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    print(sys.path)
     unittest.main()
