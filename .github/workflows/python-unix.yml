@@ -1,4 +1,4 @@
-name: Run tests on any Push event
+name: tests-on_push
 on:
   push:
     tags:
