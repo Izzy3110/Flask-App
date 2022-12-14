@@ -9,8 +9,7 @@ jobs:
 
 
   run_tests-ubuntu:
-
-    runs-on: [ubuntu-latest,self-hosted]
+    runs-on: [ubuntu-latest]
 
     strategy:
       matrix:
@@ -44,7 +43,7 @@ jobs:
         run: coverage report
   run_tests-debian-selfhosted:
 
-    runs-on: self-hosted
+    runs-on: [debian-latest]
 
     strategy:
       matrix:
