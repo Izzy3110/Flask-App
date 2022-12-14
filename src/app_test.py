@@ -4,7 +4,7 @@ import json
 import os
 from flask import request, jsonify
 from .flask_app.wsgi import create_app
-from wyl import validate_post_data
+from .wyl import validate_post_data
 
 tested_app = create_app()
 tested_app.secret_key = os.urandom(32)
