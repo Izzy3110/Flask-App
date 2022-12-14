@@ -75,13 +75,3 @@ jobs:
           path: htmlcov/index.html
       - name: Tests report
         run: coverage report
-  build:
-      runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        id: cp310
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: "pip"
-      - run: echo '${{ steps.cp310.outputs.python-version }}'
