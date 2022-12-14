@@ -1,14 +1,10 @@
 import os
 from flask import request, jsonify
-from flask_app.wsgi import create_app
+from src.flask_app.wsgi import create_app
 from src.wyl import validate_post_data
 
 app = create_app()
 app.secret_key = os.urandom(32)
-
-@app.route('/', methods=['GET'])
-def hello():
-    return 'Hello World!'
 
 
 @app.route('/api', methods=['GET', 'POST'])
