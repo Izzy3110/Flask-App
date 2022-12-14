@@ -24,9 +24,11 @@ def expected_json():
                       'width': '1000', 'height': '523'},
             'publisher': {'@type': 'Organization', 'name': 'Hackers and Slackers', 'founder': 'Todd Birchard',
                           'logo': {'@type': 'ImageObject',
-                                   'url': 'https://hackersandslackers-cdn.storage.googleapis.com/2020/03/logo-blue-full.png',
+                                   'url': 'https://hackersandslackers-cdn.storage.googleapis.com/2020/03/' +
+                                          'logo-blue-full.png',
                                    'width': 60, 'height': 60}},
-            'description': 'Create interactive user experiences by writing Django views to handle dynamic content, submitting forms, and interacting with data.',
+            'description': 'Create interactive user experiences by writing Django views to handle'+
+                           ' dynamic content, submitting forms, and interacting with data.',
             'mainEntityOfPage': {'@type': 'WebPage', '@id': 'https://hackersandslackers.com'}}
 
 
