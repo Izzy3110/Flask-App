@@ -1,5 +1,5 @@
 import unittest
-from app import app as tested_app
+from src import app as tested_app
 import json
 
 
