@@ -72,6 +72,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: coverage-report-html
-          path: htmlcov/index.html
+          path: htmlcov
       - name: Tests report
         run: coverage report
