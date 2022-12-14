@@ -108,3 +108,4 @@ venv.bak/
 # Pycharm
 .idea
 extruct_tutorial/tests/data/
+flask_app/
