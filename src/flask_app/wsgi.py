@@ -1,4 +1,4 @@
-from src.flask_app.flask_login_tutorial import create_app
+from flask_login_tutorial import create_app
 
 app = create_app()
 
