@@ -28,7 +28,3 @@ class Config:
     STATIC_FOLDER = "static"
     TEMPLATES_FOLDER = "templates"
     COMPRESSOR_DEBUG = environ.get("COMPRESSOR_DEBUG")
-
-
-URL = 'https://hackersandslackers.com/scraping-urls-with-beautifulsoup/'
-
