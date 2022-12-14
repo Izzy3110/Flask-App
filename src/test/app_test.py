@@ -1,21 +1,26 @@
+import importlib
 import unittest
 import json
-
-import os
 from flask import request, jsonify
-from src.flask_app.wsgi import create_app
-from src.wyl import validate_post_data
-
-import inspect
 import os
 import sys
-
-test_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-src_dir = os.path.join(test_dir, '..', 'flask_app')
-sys.path.append(src_dir)
+from importlib import util
 
 
-tested_app = create_app()
+def lazy_import(name):
+    spec = util.find_spec(name)
+    loader = util.LazyLoader(spec.loader)
+    spec.loader = loader
+    module = util.module_from_spec(spec)
+    sys.modules[name] = module
+    loader.exec_module(module)
+    return module
+
+
+wsgi = lazy_import("wsgi")
+wyl = lazy_import("wyl")
+
+tested_app = wsgi.create_app()
 tested_app.secret_key = os.urandom(32)
 
 
@@ -33,7 +38,7 @@ def api():
     if request.method == 'GET':
         return jsonify({'status': 'test'})
     elif request.method == 'POST':
-        if validate_post_data(request.json):
+        if wyl.validate_post_data(request.json):
             return jsonify({'status': 'OK'})
         else:
             return jsonify({'status': 'bad input'}), 400
@@ -99,5 +104,4 @@ class FlaskAppTests(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    print(sys.path)
     unittest.main()
