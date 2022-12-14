@@ -40,9 +40,9 @@ jobs:
         run: |
           pytest -v
       - name: Run tests
-        run: coverage run src/app_test.py
+        run: coverage run src/test/app_test.py
       - name: Run tests HTML
-        run: coverage html src/app_test.py
+        run: coverage html src/test/app_test.py
       - name: Tests report
         run: coverage report
 
