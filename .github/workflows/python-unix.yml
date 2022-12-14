@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: "pip"
-          cache-depency-path: |
+          cache-dependency-path: |
             **/requirements*.txt
       - name: Install requirements
         run: |
@@ -54,7 +54,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: "pip"
-          cache-depency-path: |
+          cache-dependency-path: |
             **/requirements*.txt
       - name: Install requirements
         run: |
