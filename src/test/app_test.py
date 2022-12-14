@@ -1,4 +1,5 @@
 import importlib
+import inspect
 import unittest
 import json
 from flask import request, jsonify
@@ -15,6 +16,12 @@ def lazy_import(name):
     sys.modules[name] = module
     loader.exec_module(module)
     return module
+
+test_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+src_dir = os.path.join(test_dir, '..', 'flask_app')
+sys.path.append(src_dir)
+src_dir = os.path.join(test_dir, '..', 'flask_app', 'wyl')
+sys.path.append(src_dir)
 
 
 wsgi = lazy_import("wsgi")
