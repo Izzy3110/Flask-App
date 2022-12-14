@@ -6,6 +6,8 @@ on:
     branches:
       - '*'
 jobs:
+
+
   run_tests-ubuntu:
 
     runs-on: [ubuntu-latest]
@@ -40,9 +42,9 @@ jobs:
           path: htmlcov/index.html
       - name: Tests report
         run: coverage report
-  run_tests-debian:
+  run_tests-debian-selfhosted:
 
-    runs-on: [debian-latest]
+    runs-on: self-hosted
 
     strategy:
       matrix:
