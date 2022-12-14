@@ -1,6 +1,33 @@
 import unittest
-from src import app as tested_app
 import json
+
+import os
+from flask import request, jsonify
+from src.flask_app.wsgi import create_app
+from src.wyl import validate_post_data
+
+tested_app = create_app()
+tested_app.secret_key = os.urandom(32)
+
+
+@tested_app.route('/api', methods=['GET', 'POST'])
+def api():
+    """
+    /api entpoint
+    GET - returns json= {'status': 'test'}
+    POST -  {
+            name - str not null
+            age - int optional
+            }
+    :return:
+    """
+    if request.method == 'GET':
+        return jsonify({'status': 'test'})
+    elif request.method == 'POST':
+        if validate_post_data(request.json):
+            return jsonify({'status': 'OK'})
+        else:
+            return jsonify({'status': 'bad input'}), 400
 
 
 class FlaskAppTests(unittest.TestCase):
