@@ -16,9 +16,7 @@ jobs:
     steps:
       - name: Get pip cache dir
         id: pip-cache
-        run: |
-          echo "::set-output name=dir::$(pip cache dir)"
-
+        run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
       - name: pip cache
         uses: actions/cache@v3
         with:

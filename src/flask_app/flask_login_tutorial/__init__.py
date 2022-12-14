@@ -19,7 +19,7 @@ sys.path.append(src_dir)
 
 def create_app():
     app = Flask(__name__, instance_relative_config=False)
-    app.config.from_object("Config")
+    app.config.from_object("config.Config")
 
     db.init_app(app)
     login_manager.init_app(app)
