@@ -1,15 +1,14 @@
-name: tests-on_push
+name: main-tests-on_push
 on:
   push:
     tags:
       - '!refs/tags/*'
     branches:
-      - '*'
+      - 'main'
 jobs:
 
-
-  run_tests:
-    runs-on: ubuntu-latest
+  basic-debian-run_tests:
+    runs-on: bullseye-20221205
 
     strategy:
       matrix:
@@ -41,8 +40,8 @@ jobs:
           path: htmlcov/index.html
       - name: Tests report
         run: coverage report
-  run_tests-debian:
-    runs-on: debian-bullseye
+  basic-ubuntu-run_tests:
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
