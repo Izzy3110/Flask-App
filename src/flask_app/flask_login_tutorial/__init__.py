@@ -13,7 +13,7 @@ class Config:
 
     FLASK_APP = environ.get("FLASK_APP")
     FLASK_ENV = environ.get("FLASK_ENV")
-    SECRET_KEY = environ.get("SECRET_KEY")
+    SECRET_KEY = environ.get("SECRET_KEY", os.urandom(32))
 
     # Flask-SQLAlchemy
     SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI", "sqlite:///database.db")
@@ -34,20 +34,9 @@ class Config:
 db = SQLAlchemy()
 login_manager = LoginManager()
 
-
-import inspect
-import os
-import sys
-
-
-test_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-src_dir = os.path.join(test_dir, "config.py")
-sys.path.append(src_dir)
-
-
 def create_app():
     app = Flask(__name__, instance_relative_config=False)
-    app.config.from_object("config.Config")
+    app.config.from_object(Config)
 
     db.init_app(app)
     login_manager.init_app(app)
