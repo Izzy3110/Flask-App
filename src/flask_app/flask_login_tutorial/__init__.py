@@ -7,6 +7,16 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 
 
+import inspect
+import os
+import sys
+
+
+test_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+src_dir = os.path.join(test_dir, "config.py")
+sys.path.append(src_dir)
+
+
 def create_app():
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_object("Config")
