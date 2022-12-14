@@ -7,8 +7,8 @@ on:
       - 'main'
 jobs:
 
-  basic-debian-run_tests:
-    runs-on: [bullseye-slim, ubuntu-latest]
+  basic-ubuntu-run_tests:
+    runs-on: [ubuntu-latest]
 
     strategy:
       matrix:
