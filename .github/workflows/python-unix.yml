@@ -43,7 +43,7 @@ jobs:
 
 
   basic-self-run_tests:
-    runs-on: [self-hosted]
+    runs-on: [self-hosted, windows-latest]
 
     strategy:
       matrix:
