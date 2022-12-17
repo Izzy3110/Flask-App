@@ -34,7 +34,7 @@ formatter = RequestFormatter(
 default_handler.setFormatter(formatter)
 
 
-config_spec = importlib.util.spec_from_file_location("config", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "flask_app", "config.py"))
+config_spec = importlib.util.spec_from_file_location("config", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "config.py"))
 loader = importlib.util.LazyLoader(config_spec.loader)
 config_spec.loader = loader
 module = importlib.util.module_from_spec(config_spec)
