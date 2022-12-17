@@ -15,23 +15,22 @@ auth_bp = Blueprint(
 
 def mysql_time() -> str:
     unaware_utc = datetime.now(timezone.utc)
-    print('Timezone naive:', unaware_utc)
+    current_app.logger.debug('tz: Timezone naive:', unaware_utc)
 
     then = unaware_utc + timedelta(hours=1)
 
     aware = datetime.now(pytz.utc)
-    print('Timezone Aware:', aware)
+    current_app.logger.debug('tz: Timezone Aware:', aware)
 
     # US/Central timezone datetime
     aware_europe_berlin = datetime.now(pytz.timezone('Europe/Berlin'))
-    print('Europe/Berlin DateTime', aware_europe_berlin)
+    current_app.logger.debug('tz: Europe/Berlin DateTime', aware_europe_berlin)
 
     return aware_europe_berlin.strftime('%Y-%m-%d %H:%M:%S')
 
 
 @auth_bp.route("/signup", methods=["GET", "POST"])
 def signup():
-    global mysql_time
     """
     User sign-up page.
 
@@ -65,13 +64,6 @@ def signup():
 
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
-    print(list(request.headers.keys()))
-    print(request.headers.get('Host'))
-    print(request.headers.get('X-Forwarded-For'))
-    print(request.headers.get('X-Real-Ip'))
-    print(request.headers.get('X-Real-Ip'))
-    print(request.headers.get('X-Forwarded-Proto'))
-    print(current_app.logger)
     current_app.logger.debug("CONN: "+request.headers.get('X-Real-Ip'))
     """
     Log-in page for registered users.
@@ -81,7 +73,7 @@ def login():
     """
     # Bypass if user is logged in
     if current_user.is_authenticated:
-
+        current_app.logger.debug("LOGIN detected: "+current_user.email)            
         return redirect(url_for("main_bp.dashboard"))
 
     form = LoginForm()
@@ -90,9 +82,9 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password(password=form.password.data):
 
-            current_user.last_login = mysql_time()
-            db.session.commit()  # Create new user
-
+            print("UPDATE USER LOGIN TIME")
+            user.update_last_login()
+            
             login_user(user)
             next_page = request.args.get("next")
             return redirect(next_page or url_for("main_bp.dashboard"))

@@ -10,9 +10,11 @@ from flask.logging import default_handler
 import logging
 import os
 from os import environ
+import inspect
+
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-load_dotenv(os.path.join(basedir, ".env"))
+load_dotenv(os.path.join(basedir, "..", ".env"))
 
 
 class RequestFormatter(logging.Formatter):
@@ -42,31 +44,34 @@ name = "config"
 sys.modules[name] = module
 loader.exec_module(module)
 config = module
-from config import table_prefix
+from config import table_prefix, Config as CurrentConfig
 
-
-class Config:
-    """Set Flask configuration from environment variables."""
-
-    FLASK_APP = environ.get("FLASK_APP", "wsgi.py")
-    FLASK_ENV = environ.get("FLASK_ENV", "production")
-    SECRET_KEY = environ.get("SECRET_KEY", os.urandom(32))
-
-    # Flask-SQLAlchemy
-    SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI", "mysql+pymysql://flask_app_mysql:myFlaskMysqlPass1@localhost:3306/flask_app")
-    SQLALCHEMY_ECHO = True
-    SQLALCHEMY_TRACK_MODIFICATIONS = True
-
-    # Flask-Assets
-    LESS_BIN = environ.get("LESS_BIN")
-    ASSETS_DEBUG = environ.get("ASSETS_DEBUG")
-    LESS_RUN_IN_DEBUG = environ.get("LESS_RUN_IN_DEBUG")
-
-    # Static Assets
-    STATIC_FOLDER = "static"
-    TEMPLATES_FOLDER = "templates"
-    COMPRESSOR_DEBUG = environ.get("COMPRESSOR_DEBUG", True)
-
+try:
+    if Config is not None:
+        if type(CurrentConfig) == type(Config):
+            if not CurrentConfig == Config:
+                common_ = {}
+                uncommon_ = {}
+                for m in inspect.getmembers(CurrentConfig):
+                    if not m[0].startswith("_"):
+                        if hasattr(Config, m[0]):
+                            if getattr(Config, m[0]) == m[1]:
+                                common_[m[0]] = m[1]
+                            else:
+                                uncommon_[m[0]] = m[1]
+                        print("--")
+                print(len(uncommon_.keys()))
+                print(uncommon_)
+                print(common_)
+                #print("---")
+                #for m in inspect.getmembers(Config):
+                #    if not m[0].startswith("_"):
+                #        print(m)
+                print("---##")
+            else:
+                print("Config loaded")
+except NameError:
+    pass
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -74,12 +79,7 @@ login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__, instance_relative_config=False)
-    app.config.from_object(Config)
-
-
-    app.logger.debug("PREFIX: "+table_prefix)
-
-
+    app.config.from_object(CurrentConfig)
     db.init_app(app)
     login_manager.init_app(app)
 
@@ -90,11 +90,12 @@ def create_app():
         app.register_blueprint(routes.main_bp)
         app.register_blueprint(auth.auth_bp)
         app.register_blueprint(scrape.scrape_bp)
-        app.config.from_object(Config)
+        
 
-        # db.create_all()
+        db.create_all()
 
         if app.config["FLASK_ENV"] == "development":
+            print("compiling assets...")
             compile_static_assets(app)
 
         return app
