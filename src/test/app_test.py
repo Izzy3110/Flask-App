@@ -118,10 +118,17 @@ class FlaskAppTests(unittest.TestCase):
         
     def test_post_scrape_url(self):
         global expected_json
+        
         url = sample_url()
         """Match scrape's fetched metadata to known value."""
-        metadata = scrape(url)
-        assert metadata == expected_json
+        # metadata = scrape(url)
+        # assert metadata == expected_json
+        r = self.app.post('/scrape/',
+                          content_type='application/json',
+                          data=json.dumps({'url': sample_url}))
+        # self.assertEqual(r.json, {'status': 'OK'})
+        self.assertEqual(r.status_code, 200)
+        
 
 
     def test_endpoints_api_get(self):
