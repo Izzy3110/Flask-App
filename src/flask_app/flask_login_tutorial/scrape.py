@@ -8,7 +8,7 @@ import uuid
 import os
 import json
 from urllib.parse import urlparse
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup
 import lxml.html as lh
 import lxml
 from flask_login import current_user, login_required, logout_user
@@ -29,7 +29,7 @@ def scrape(url: str, scrape_uuid: str):
     if not os.path.isdir(os.path.join("data", netloc)):
         os.mkdir(os.path.join("data", netloc))
 
-    soup = bs(html.decode("utf-8"), "lxml")  # make BeautifulSoup
+    soup = BeautifulSoup(html.decode("utf-8"), "lxml")  # make BeautifulSoup
 
     links = soup.findAll("a")
     links_ = []
