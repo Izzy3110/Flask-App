@@ -2,9 +2,19 @@
 from os import environ, path
 import os
 from dotenv import load_dotenv
+from datetime import datetime
 
 basedir = path.abspath(path.dirname(__file__))
 load_dotenv(path.join(basedir, ".env"))
+
+db_prefix = "flapp_"
+
+
+def date_filestr(timestamp: int = None):
+    dt_file_format = "%Y%m%d_%H%M%S"
+    if timestamp is not None:
+        return datetime.fromtimestamp(timestamp).strftime(dt_file_format)
+    return datetime.now().strftime(dt_file_format)
 
 
 class Config:
@@ -15,7 +25,7 @@ class Config:
     SECRET_KEY = environ.get("SECRET_KEY")
 
     # Flask-SQLAlchemy
-    SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI", "sqlite:///database.db")
+    SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI", "sqlite:///database_"+date_filestr()+".db")
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 

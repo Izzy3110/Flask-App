@@ -1,8 +1,44 @@
 """Database models."""
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
-
+import os
+import inspect
+import sys
 from . import db
+
+
+import unittest
+import json
+
+from flask import request, jsonify
+
+import inspect
+import os
+import sys
+
+import importlib.util
+import sys
+
+
+def lazy_import(name):
+    spec = importlib.util.find_spec(name)
+    loader = importlib.util.LazyLoader(spec.loader)
+    spec.loader = loader
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    loader.exec_module(module)
+    return module
+
+
+test_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+src_dir = os.path.join(test_dir, '..', 'flask_app')
+sys.path.append(src_dir)
+
+flask_app = lazy_import("flask_app")
+
+
+
+print(type(flask_app))
 
 
 class User(UserMixin, db.Model):
