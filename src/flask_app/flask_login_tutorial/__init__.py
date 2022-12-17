@@ -77,7 +77,7 @@ def create_app():
     app.config.from_object(Config)
 
 
-    app.logger.debug("PREFIX: "+table_prefix)
+
 
 
     db.init_app(app)
@@ -91,7 +91,7 @@ def create_app():
         app.register_blueprint(auth.auth_bp)
         app.register_blueprint(scrape.scrape_bp)
         app.config.from_object(Config)
-
+        app.logger.debug("PREFIX: " + table_prefix)
         # db.create_all()
 
         if app.config["FLASK_ENV"] == "development":
