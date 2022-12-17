@@ -1,3 +1,6 @@
+import importlib
+import sys
+
 from dotenv import load_dotenv
 from flask import Flask
 from flask_login import LoginManager
@@ -22,7 +25,8 @@ class RequestFormatter(logging.Formatter):
             record.remote_addr = None
 
         return super().format(record)   
-      
+
+
 formatter = RequestFormatter(
     '[%(asctime)s] %(remote_addr)s requested %(url)s\n'
     '%(levelname)s in %(module)s: %(message)s'
@@ -30,8 +34,15 @@ formatter = RequestFormatter(
 default_handler.setFormatter(formatter)
 
 
-  
-
+config_spec = importlib.util.spec_from_file_location("config", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "flask_app", "config.py"))
+loader = importlib.util.LazyLoader(config_spec.loader)
+config_spec.loader = loader
+module = importlib.util.module_from_spec(config_spec)
+name = "config"
+sys.modules[name] = module
+loader.exec_module(module)
+config = module
+print(config)
 class Config:
     """Set Flask configuration from environment variables."""
 
