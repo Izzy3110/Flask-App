@@ -2,11 +2,35 @@ from dotenv import load_dotenv
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from flask import has_request_context, request
+from flask.logging import default_handler
+import logging
 import os
 from os import environ
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, ".env"))
 
+
+class RequestFormatter(logging.Formatter):
+    def format(self, record):
+        if has_request_context():
+            record.url = request.url
+            record.remote_addr = request.remote_addr
+        else:
+            record.url = None
+            record.remote_addr = None
+
+        return super().format(record)   
+      
+formatter = RequestFormatter(
+    '[%(asctime)s] %(remote_addr)s requested %(url)s\n'
+    '%(levelname)s in %(module)s: %(message)s'
+)
+default_handler.setFormatter(formatter)
+
+
+  
 
 class Config:
     """Set Flask configuration from environment variables."""
@@ -17,8 +41,8 @@ class Config:
 
     # Flask-SQLAlchemy
     SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI", "mysql+pymysql://flask_app_mysql:myFlaskMysqlPass1@localhost:3306/flask_app")
-    SQLALCHEMY_ECHO = False
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     # Flask-Assets
     LESS_BIN = environ.get("LESS_BIN")
@@ -38,6 +62,8 @@ def create_app():
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_object(Config)
 
+    
+
     db.init_app(app)
     login_manager.init_app(app)
 
@@ -49,7 +75,8 @@ def create_app():
         app.register_blueprint(auth.auth_bp)
         app.register_blueprint(scrape.scrape_bp)
         app.config.from_object(Config)
-        db.create_all()
+
+        # db.create_all()
 
         if app.config["FLASK_ENV"] == "development":
             compile_static_assets(app)
