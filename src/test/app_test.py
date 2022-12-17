@@ -69,7 +69,7 @@ class FlaskAppTests(unittest.TestCase):
 
     def test_endpoints_scrape_exists(self):
         r = self.app.get('/scrape/')
-        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.status_code, 302)
 
     def test_endpoints_api_get(self):
         r = self.app.get('/api')
