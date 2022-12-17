@@ -1,0 +1,32 @@
+[Unit]
+Description=flask app
+
+# Requirements
+Requires=network.target
+
+# Dependency ordering
+After=network.target
+
+[Service]
+TimeoutStartSec=0
+RestartSec=10
+Restart=always
+
+# path to app
+WorkingDirectory=/usr/local/src/Flask-App/src/flask_app
+
+StandardOutput=journal
+StandardError=journal+console
+SyslogIdentifier=Flask-App
+
+User=login_app
+
+KillSignal=SIGQUIT
+Type=simple
+
+
+# Main process
+ExecStart=/usr/local/src/Flask-App/venv/bin/uwsgi --ini uwsgi.ini
+
+[Install]
+WantedBy=multi-user.target
