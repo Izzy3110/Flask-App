@@ -19,6 +19,11 @@ import sys
 import importlib.util
 import sys
 
+print("LAZY")
+
+print(importlib.util.find_spec("flask_app"))
+
+print("LAZY")
 
 def lazy_import(name):
     spec = importlib.util.find_spec(name)
