@@ -127,7 +127,7 @@ class FlaskAppTests(unittest.TestCase):
                           content_type='application/json',
                           data=json.dumps({'url': url}))
         # self.assertEqual(r.json, {'status': 'OK'})
-        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.status_code, 302)
         
 
 
