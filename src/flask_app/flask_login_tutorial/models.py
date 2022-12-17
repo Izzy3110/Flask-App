@@ -20,7 +20,7 @@ import importlib.util
 import sys
 
 print("LAZY")
-print(os.listdir(os.path.join(os.path.abspath(__file__),"..")))
+print(os.listdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")))
 print(importlib.util.spec_from_file_location("flask_app"))
 print(importlib.util.find_spec("flask_app"))
 
