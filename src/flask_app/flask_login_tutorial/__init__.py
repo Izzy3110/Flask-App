@@ -42,7 +42,9 @@ name = "config"
 sys.modules[name] = module
 loader.exec_module(module)
 config = module
-print(config)
+from config import table_prefix
+
+
 class Config:
     """Set Flask configuration from environment variables."""
 
@@ -69,11 +71,14 @@ class Config:
 db = SQLAlchemy()
 login_manager = LoginManager()
 
+
 def create_app():
     app = Flask(__name__, instance_relative_config=False)
-    app.config.from_object(config.Config)
+    app.config.from_object(Config)
 
-    
+
+    app.logger.debug("PREFIX: "+table_prefix)
+
 
     db.init_app(app)
     login_manager.init_app(app)
