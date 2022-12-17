@@ -5,6 +5,8 @@ on:
       - '!refs/tags/*'
     branches:
       - 'main'
+env:
+  FLASK_DEBUG: development
 jobs:
 
   basic-ubuntu-run_tests:
