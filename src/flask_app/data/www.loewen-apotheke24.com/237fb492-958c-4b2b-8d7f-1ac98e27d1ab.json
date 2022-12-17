@@ -1,0 +1,347 @@
+{
+    "uuid": "237fb492-958c-4b2b-8d7f-1ac98e27d1ab",
+    "url": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/",
+    "scrape_json": {
+        "microdata": [],
+        "json-ld": [
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/",
+                        "url": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/",
+                        "name": "Labo Life 2L ALERG Kapseln Sparpack - L\u00f6wen Apotheke24",
+                        "isPartOf": {
+                            "@id": "https://www.loewen-apotheke24.com/de/#website"
+                        },
+                        "primaryImageOfPage": {
+                            "@id": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/#primaryimage"
+                        },
+                        "image": {
+                            "@id": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/#primaryimage"
+                        },
+                        "thumbnailUrl": "https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-l\u00f6wen-apotheke.jpg",
+                        "datePublished": "2021-01-17T14:12:29+00:00",
+                        "dateModified": "2022-12-05T07:04:09+00:00",
+                        "description": "L\u00f6wen Apotheke24 - Spezialist f\u00fcr Naturheilkunde - kurze Lieferzeit - gratis ab 30 \u20ac - Labo Life 2L ALERG Kapseln - 10\u20ac sparen im Vorteilspack",
+                        "breadcrumb": {
+                            "@id": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/#breadcrumb"
+                        },
+                        "inLanguage": "de-DE",
+                        "potentialAction": [
+                            {
+                                "@type": "ReadAction",
+                                "target": [
+                                    "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "ImageObject",
+                        "inLanguage": "de-DE",
+                        "@id": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/#primaryimage",
+                        "url": "https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-l\u00f6wen-apotheke.jpg",
+                        "contentUrl": "https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-l\u00f6wen-apotheke.jpg",
+                        "width": 600,
+                        "height": 600,
+                        "caption": "labo life 2l alerg kapseln produkt angebot l\u00f6wen apotheke"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Home",
+                                "item": "https://www.loewen-apotheke24.com/de/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Shop",
+                                "item": "https://www.loewen-apotheke24.com/de/shop/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "Labo Life 2L ALERG Kapseln 3x Vorteilspack"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://www.loewen-apotheke24.com/de/#website",
+                        "url": "https://www.loewen-apotheke24.com/de/",
+                        "name": "L\u00f6wen Apotheke24",
+                        "description": "Spezialist f\u00fcr Naturmedizin - Versandapotheke Baden-Baden",
+                        "publisher": {
+                            "@id": "https://www.loewen-apotheke24.com/de/#organization"
+                        },
+                        "alternateName": "L\u00f6wen Apotheke",
+                        "potentialAction": [
+                            {
+                                "@type": "SearchAction",
+                                "target": {
+                                    "@type": "EntryPoint",
+                                    "urlTemplate": "https://www.loewen-apotheke24.com/de/?s={search_term_string}"
+                                },
+                                "query-input": "required name=search_term_string"
+                            }
+                        ],
+                        "inLanguage": "de-DE"
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "https://www.loewen-apotheke24.com/de/#organization",
+                        "name": "L\u00f6wen Apotheke",
+                        "alternateName": "L\u00f6wen Apotheke24",
+                        "url": "https://www.loewen-apotheke24.com/de/",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "inLanguage": "de-DE",
+                            "@id": "https://www.loewen-apotheke24.com/de/#/schema/logo/image/",
+                            "url": "https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/logo-loewen-apotheke24.png",
+                            "contentUrl": "https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/logo-loewen-apotheke24.png",
+                            "width": 242,
+                            "height": 70,
+                            "caption": "L\u00f6wen Apotheke"
+                        },
+                        "image": {
+                            "@id": "https://www.loewen-apotheke24.com/de/#/schema/logo/image/"
+                        }
+                    }
+                ]
+            },
+            {
+                "@context": "https://schema.org/",
+                "@graph": [
+                    {
+                        "@context": "https://schema.org/",
+                        "@type": "BreadcrumbList",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "item": {
+                                    "name": "Startseite",
+                                    "@id": "https://www.loewen-apotheke24.com/de/"
+                                }
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "item": {
+                                    "name": "Shop",
+                                    "@id": "https://www.loewen-apotheke24.com/de/shop/"
+                                }
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "item": {
+                                    "name": "Labo Life",
+                                    "@id": "https://www.loewen-apotheke24.com/de/product_cat/labo-life/"
+                                }
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 4,
+                                "item": {
+                                    "name": "Labo Life 2L ALERG Kapseln 3x Vorteilspack",
+                                    "@id": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "@context": "https://schema.org/",
+                        "@type": "Product",
+                        "@id": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/#product",
+                        "name": "Labo Life 2L ALERG Kapseln 3x Vorteilspack",
+                        "url": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/",
+                        "description": "Labo Life 2L ALERG Kapseln 3x 30 St. im Vorteilspack\r\n\r\n\r\nLabo Life 2L ALERG Kapseln importiert die L\u00f6wen Apotheke f\u00fcr Sie alle Pr\u00e4parate der Firma Labo Life Belgium auf Ihren Wunsch.\r\n\r\nPZN: - (Pharmazentralnummer)\r\n\r\nDarreichungsform: Kapseln - 3x 30 St\u00fcck\r\n\r\nVerordnungsart: Rezeptfrei\r\n\r\nMarke: Labo Life\r\n\r\nHersteller: Labo Life",
+                        "image": "https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-l\u00f6wen-apotheke.jpg",
+                        "sku": "ALERG3",
+                        "offers": [
+                            {
+                                "@type": "Offer",
+                                "price": "115.13",
+                                "priceValidUntil": "2023-12-31",
+                                "priceSpecification": {
+                                    "price": "115.13",
+                                    "priceCurrency": "EUR",
+                                    "valueAddedTaxIncluded": "false"
+                                },
+                                "priceCurrency": "EUR",
+                                "availability": "http://schema.org/InStock",
+                                "url": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/",
+                                "seller": {
+                                    "@type": "Organization",
+                                    "name": "L\u00f6wen Apotheke24",
+                                    "url": "https://www.loewen-apotheke24.com/de/"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "opengraph": [
+            {
+                "og:locale": "de_DE",
+                "og:title": "Labo Life 2L ALERG Kapseln 3x Vorteilspack",
+                "og:description": "L\u00f6wen Apotheke24 - Spezialist f\u00fcr Naturheilkunde - Weltweiter Versand - kurze Lieferzeit - gratis Lieferung ab 30 \u20ac -",
+                "og:url": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/",
+                "og:site_name": "L\u00f6wen Apotheke24",
+                "article:modified_time": "2022-12-05T07:04:09+00:00",
+                "og:image": "https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-l\u00f6wen-apotheke.jpg",
+                "og:image:width": "600",
+                "og:image:height": "600",
+                "og:image:type": "image/jpeg",
+                "@type": "article",
+                "@context": {
+                    "og": "http://ogp.me/ns#",
+                    "article": "http://ogp.me/ns/article#"
+                }
+            }
+        ],
+        "rdfa": [
+            {
+                "@id": "",
+                "http://ogp.me/ns#description": [
+                    {
+                        "@value": "L\u00f6wen Apotheke24 - Spezialist f\u00fcr Naturheilkunde - Weltweiter Versand - kurze Lieferzeit - gratis Lieferung ab 30 \u20ac -"
+                    }
+                ],
+                "http://ogp.me/ns#image": [
+                    {
+                        "@value": "https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-l\u00f6wen-apotheke.jpg"
+                    }
+                ],
+                "http://ogp.me/ns#image:height": [
+                    {
+                        "@value": "600"
+                    }
+                ],
+                "http://ogp.me/ns#image:type": [
+                    {
+                        "@value": "image/jpeg"
+                    }
+                ],
+                "http://ogp.me/ns#image:width": [
+                    {
+                        "@value": "600"
+                    }
+                ],
+                "http://ogp.me/ns#locale": [
+                    {
+                        "@value": "de_DE"
+                    }
+                ],
+                "http://ogp.me/ns#site_name": [
+                    {
+                        "@value": "L\u00f6wen Apotheke24"
+                    }
+                ],
+                "http://ogp.me/ns#title": [
+                    {
+                        "@value": "Labo Life 2L ALERG Kapseln 3x Vorteilspack"
+                    }
+                ],
+                "http://ogp.me/ns#type": [
+                    {
+                        "@value": "article"
+                    }
+                ],
+                "http://ogp.me/ns#url": [
+                    {
+                        "@value": "https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/"
+                    }
+                ],
+                "http://ogp.me/ns/article#modified_time": [
+                    {
+                        "@value": "2022-12-05T07:04:09+00:00"
+                    }
+                ],
+                "https://api.w.org/": [
+                    {
+                        "@id": "https://www.loewen-apotheke24.com/de/wp-json/"
+                    }
+                ],
+                "https://versandhandel.dimdi.de/websearch/servlet/Gate?accessid=dimdi_var&term=3c387956690121ccc8763184f052b93f": [
+                    {
+                        "@id": "https://versandhandel.dimdi.de/websearch/servlet/Gate?accessid=dimdi_var&term=3c387956690121ccc8763184f052b93f"
+                    }
+                ]
+            },
+            {
+                "@id": "#site-navigation",
+                "http://www.w3.org/1999/xhtml/vocab#role": [
+                    {
+                        "@id": "http://www.w3.org/1999/xhtml/vocab#navigation"
+                    }
+                ]
+            },
+            {
+                "@id": "#tab-description",
+                "http://www.w3.org/1999/xhtml/vocab#role": [
+                    {
+                        "@id": "http://www.w3.org/1999/xhtml/vocab#tabpanel"
+                    }
+                ]
+            },
+            {
+                "@id": "_:Nbef6d1bda68c49078eac7cf77894b0ae",
+                "http://www.w3.org/1999/xhtml/vocab#role": [
+                    {
+                        "@id": "http://www.w3.org/1999/xhtml/vocab#search"
+                    }
+                ]
+            },
+            {
+                "@id": "#tab-title-description",
+                "http://www.w3.org/1999/xhtml/vocab#role": [
+                    {
+                        "@id": "http://www.w3.org/1999/xhtml/vocab#tab"
+                    }
+                ]
+            },
+            {
+                "@id": "#masthead",
+                "http://www.w3.org/1999/xhtml/vocab#role": [
+                    {
+                        "@id": "http://www.w3.org/1999/xhtml/vocab#banner"
+                    }
+                ]
+            },
+            {
+                "@id": "_:Nb78068d56ca641dd80d683ae3b54b4bd",
+                "http://www.w3.org/1999/xhtml/vocab#role": [
+                    {
+                        "@id": "http://www.w3.org/1999/xhtml/vocab#tablist"
+                    }
+                ]
+            },
+            {
+                "@id": "#colophon",
+                "http://www.w3.org/1999/xhtml/vocab#role": [
+                    {
+                        "@id": "http://www.w3.org/1999/xhtml/vocab#contentinfo"
+                    }
+                ]
+            },
+            {
+                "@id": "#main",
+                "http://www.w3.org/1999/xhtml/vocab#role": [
+                    {
+                        "@id": "http://www.w3.org/1999/xhtml/vocab#main"
+                    }
+                ]
+            }
+        ]
+    },
+    "elapsed": 0.3986704349517822
+}

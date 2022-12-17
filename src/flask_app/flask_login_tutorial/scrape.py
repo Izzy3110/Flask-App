@@ -74,9 +74,10 @@ def get_metadata(html: bytes, url: str):
     metadata = extruct.extract(
         html,
         base_url=get_base_url(url),
-        syntaxes=['json-ld'],
-        uniform=True
-    )['json-ld']
+        syntaxes=['json-ld','microdata', 'opengraph', 'rdfa'],
+        uniform=True,
+        return_html_node=True
+    )
     if bool(metadata) and isinstance(metadata, list):
         metadata = metadata[0]
     return metadata

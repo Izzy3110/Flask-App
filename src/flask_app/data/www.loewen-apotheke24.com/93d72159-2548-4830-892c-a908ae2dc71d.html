@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html lang="en-US">
+ <head>
+  <meta charset="utf-8"/>
+  <script>
+   if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}
+  </script>
+  <script>
+   class RocketLazyLoadScripts{constructor(){this.triggerEvents=["keydown","mousedown","mousemove","touchmove","touchstart","touchend","wheel"],this.userEventHandler=this._triggerListener.bind(this),this.touchStartHandler=this._onTouchStart.bind(this),this.touchMoveHandler=this._onTouchMove.bind(this),this.touchEndHandler=this._onTouchEnd.bind(this),this.clickHandler=this._onClick.bind(this),this.interceptedClicks=[],window.addEventListener("pageshow",(e=>{this.persisted=e.persisted})),window.addEventListener("DOMContentLoaded",(()=>{this._preconnect3rdParties()})),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){document.hidden?e._triggerListener():(this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventHandler,{passive:!0}))),window.addEventListener("touchstart",e.touchStartHandler,{passive:!0}),window.addEventListener("mousedown",e.touchStartHandler),document.addEventListener("visibilitychange",e.userEventHandler))}_removeUserInteractionListener(){this.triggerEvents.forEach((e=>window.removeEventListener(e,this.userEventHandler,{passive:!0}))),document.removeEventListener("visibilitychange",this.userEventHandler)}_onTouchStart(e){"HTML"!==e.target.tagName&&(window.addEventListener("touchend",this.touchEndHandler),window.addEventListener("mouseup",this.touchEndHandler),window.addEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.addEventListener("mousemove",this.touchMoveHandler),e.target.addEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"onclick","rocket-onclick"))}_onTouchMove(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler),e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick")}_onTouchEnd(e){window.removeEventListener("touchend",this.touchEndHandler),window.removeEventListener("mouseup",this.touchEndHandler),window.removeEventListener("touchmove",this.touchMoveHandler,{passive:!0}),window.removeEventListener("mousemove",this.touchMoveHandler)}_onClick(e){e.target.removeEventListener("click",this.clickHandler),this._renameDOMAttribute(e.target,"rocket-onclick","onclick"),this.interceptedClicks.push(e),e.preventDefault(),e.stopPropagation(),e.stopImmediatePropagation()}_replayClicks(){window.removeEventListener("touchstart",this.touchStartHandler,{passive:!0}),window.removeEventListener("mousedown",this.touchStartHandler),this.interceptedClicks.forEach((e=>{e.target.dispatchEvent(new MouseEvent("click",{view:e.view,bubbles:!0,cancelable:!0}))}))}_renameDOMAttribute(e,t,n){e.hasAttribute&&e.hasAttribute(t)&&(event.target.setAttribute(n,event.target.getAttribute(t)),event.target.removeAttribute(t))}_triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}_preconnect3rdParties(){let e=[];document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((t=>{if(t.hasAttribute("src")){const n=new URL(t.src).origin;n!==location.origin&&e.push({src:n,crossOrigin:t.crossOrigin||"module"===t.getAttribute("data-rocket-type")})}})),e=[...new Map(e.map((e=>[JSON.stringify(e),e]))).values()],this._batchInjectResourceHints(e,"preconnect")}async _loadEverythingNow(){this.lastBreath=Date.now(),this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async);try{await this._triggerDOMContentLoaded(),await this._triggerWindowLoad()}catch(e){}window.dispatchEvent(new Event("rocket-allScriptsLoaded")),this._replayClicks()}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._littleBreath(),new Promise((t=>{const n=document.createElement("script");[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type"),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t());try{e.parentNode.replaceChild(n,e)}catch(e){t()}}))}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){this._batchInjectResourceHints([...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async],"preload")}_batchInjectResourceHints(e,t){var n=document.createDocumentFragment();e.forEach((e=>{if(e.src){const i=document.createElement("link");i.href=e.src,i.rel=t,"preconnect"!==t&&(i.as="script"),e.getAttribute&&"module"===e.getAttribute("data-rocket-type")&&(i.crossOrigin=!0),e.crossOrigin&&(i.crossOrigin=e.crossOrigin),n.appendChild(i)}})),document.head.appendChild(n)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._littleBreath(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._littleBreath(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._littleBreath(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._littleBreath(),window.dispatchEvent(new Event("rocket-load")),await this._littleBreath(),window.rocketonload&&window.rocketonload(),await this._littleBreath(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),await this._littleBreath();const e=new Event("rocket-pageshow");e.persisted=this.persisted,window.dispatchEvent(e),await this._littleBreath(),window.rocketonpageshow&&window.rocketonpageshow({persisted:this.persisted})}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript,i=document.createRange(),r=n.parentElement;let o=e.get(n);void 0===o&&(o=n.nextSibling,e.set(n,o));const s=document.createDocumentFragment();i.setStart(s,0),s.appendChild(i.createContextualFragment(t)),r.insertBefore(s,o)}}async _littleBreath(){Date.now()-this.lastBreath>45&&(await this._requestAnimFrame(),this.lastBreath=Date.now())}async _requestAnimFrame(){return document.hidden?new Promise((e=>setTimeout(e))):new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts;e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+  </script>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <link href="http://gmpg.org/xfn/11" rel="profile"/>
+  <link href="https://www.loewen-apotheke24.com/xmlrpc.php" rel="pingback"/>
+  <meta content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" name="robots"/>
+  <link href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-alerg-capsules-3x30/" hreflang="en" rel="alternate"/>
+  <link href="https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/" hreflang="de" rel="alternate"/>
+  <link href="https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/" hreflang="x-default" rel="alternate"/>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="cookieyes" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/client_data/d70d4294940158a7009457a0/script.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <!-- This site is optimized with the Yoast SEO Premium plugin v19.6 (Yoast SEO v19.12) - https://yoast.com/wordpress/plugins/seo/ -->
+  <title>
+   Labo Life 2L ALERG capsules value pack - Löwen Apotheke24
+  </title>
+  <link as="font" crossorigin="" href="https://www.loewen-apotheke24.com/wp-content/plugins/woocommerce/assets/fonts/WooCommerce.woff" rel="preload"/>
+  <link as="font" crossorigin="" href="https://fonts.gstatic.com/s/raleway/v28/1Ptug8zYS_SKggPNyC0ITw.woff2" rel="preload"/>
+  <link as="font" crossorigin="" href="https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk8ZkWVAewA.woff2" rel="preload"/>
+  <link as="font" crossorigin="" href="https://fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2" rel="preload"/>
+  <link as="font" crossorigin="" href="https://www.loewen-apotheke24.com/wp-content/themes/exchange_mt/fonts/fontawesome-webfont.woff2?v=4.7.0" rel="preload"/>
+  <style id="wpr-usedcss">
+   :where(.wp-block-button__link){box-shadow:none;text-decoration:none;border-radius:9999px;padding:calc(.667em + 2px) calc(1.333em + 2px)}:where(.wp-block-columns.has-background){padding:1.25em 2.375em}:where(.wp-block-post-comments input[type=submit]){border:none}:where(.wp-block-file__button){border-radius:2em;padding:.5em 1em}:where(.wp-block-file__button):is(a):active,:where(.wp-block-file__button):is(a):focus,:where(.wp-block-file__button):is(a):hover,:where(.wp-block-file__button):is(a):visited{box-shadow:none;color:#fff;opacity:.85;text-decoration:none}ul{box-sizing:border-box;margin:0 0 1.5em 3em;list-style:disc}:where(.wp-block-navigation.has-background .wp-block-navigation-item a:not(.wp-element-button)),:where(.wp-block-navigation.has-background .wp-block-navigation-submenu a:not(.wp-element-button)){padding:.5em 1em}:where(.wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-item a:not(.wp-element-button)),:where(.wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation-submenu a:not(.wp-element-button)){padding:.5em 1em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}:where(.wp-block-search__button){border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-search__button-inside .wp-block-search__inside-wrapper){padding:4px;border:1px solid #949494}:where(.wp-block-search__button-inside .wp-block-search__inside-wrapper) .wp-block-search__input{border-radius:0;border:none;padding:0 0 0 .25em}:where(.wp-block-search__button-inside .wp-block-search__inside-wrapper) .wp-block-search__input:focus{outline:0}:where(.wp-block-search__button-inside .wp-block-search__inside-wrapper) :where(.wp-block-search__button){padding:.125em .5em}.wp-element-button{cursor:pointer}:root{--wp--preset--font-size--normal:16px;--wp--preset--font-size--huge:42px;--woocommerce:#a46497;--wc-green:#7ad03a;--wc-red:#a00;--wc-orange:#ffba00;--wc-blue:#2ea2cc;--wc-primary:#a46497;--wc-primary-text:white;--wc-secondary:#ebe9eb;--wc-secondary-text:#515151;--wc-highlight:#77a464;--wc-highligh-text:white;--wc-content-bg:#fff;--wc-subtext:#767676}.screen-reader-text{border:0;clip:rect(1px,1px,1px,1px);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;word-wrap:normal!important}.screen-reader-text:focus{background-color:#ddd;clip:auto!important;clip-path:none;color:#444;display:block;font-size:1em;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}html :where(.has-border-color){border-style:solid}html :where([style*=border-top-color]){border-top-style:solid}html :where([style*=border-right-color]){border-right-style:solid}html :where([style*=border-bottom-color]){border-bottom-style:solid}html :where([style*=border-left-color]){border-left-style:solid}html :where([style*=border-width]){border-style:solid}html :where([style*=border-top-width]){border-top-style:solid}html :where([style*=border-right-width]){border-right-style:solid}html :where([style*=border-bottom-width]){border-bottom-style:solid}html :where([style*=border-left-width]){border-left-style:solid}html :where(img[class*=wp-image-]){height:auto;max-width:100%}figure{margin:0 0 1em;margin:1em 40px}.screen-reader-text{clip:rect(1px,1px,1px,1px);word-wrap:normal!important;border:0;-webkit-clip-path:inset(50%);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;overflow-wrap:normal!important;padding:0;position:absolute!important;width:1px}.screen-reader-text:focus{clip:auto!important;background-color:#fff;border-radius:3px;box-shadow:0 0 2px 2px rgba(0,0,0,.6);-webkit-clip-path:none;clip-path:none;color:#2b2d2f;display:block;font-size:.875rem;font-weight:700;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}@keyframes spin{0%{transform:rotate(0)}to{transform:rotate(1turn)}}:where(.wp-block-woocommerce-mini-cart-contents){background:#fff}:where(div[data-block-name="woocommerce/legacy-template"]){margin-left:auto;margin-right:auto;max-width:1000px}.smaller{font-size:.95rem;line-height:1.25}body{--wp--preset--color--black:#000000;--wp--preset--color--cyan-bluish-gray:#abb8c3;--wp--preset--color--white:#ffffff;--wp--preset--color--pale-pink:#f78da7;--wp--preset--color--vivid-red:#cf2e2e;--wp--preset--color--luminous-vivid-orange:#ff6900;--wp--preset--color--luminous-vivid-amber:#fcb900;--wp--preset--color--light-green-cyan:#7bdcb5;--wp--preset--color--vivid-green-cyan:#00d084;--wp--preset--color--pale-cyan-blue:#8ed1fc;--wp--preset--color--vivid-cyan-blue:#0693e3;--wp--preset--color--vivid-purple:#9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple:linear-gradient(135deg,rgba(6, 147, 227, 1) 0%,rgb(155, 81, 224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan:linear-gradient(135deg,rgb(122, 220, 180) 0%,rgb(0, 208, 130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange:linear-gradient(135deg,rgba(252, 185, 0, 1) 0%,rgba(255, 105, 0, 1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red:linear-gradient(135deg,rgba(255, 105, 0, 1) 0%,rgb(207, 46, 46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray:linear-gradient(135deg,rgb(238, 238, 238) 0%,rgb(169, 184, 195) 100%);--wp--preset--gradient--cool-to-warm-spectrum:linear-gradient(135deg,rgb(74, 234, 220) 0%,rgb(151, 120, 209) 20%,rgb(207, 42, 186) 40%,rgb(238, 44, 130) 60%,rgb(251, 105, 98) 80%,rgb(254, 248, 76) 100%);--wp--preset--gradient--blush-light-purple:linear-gradient(135deg,rgb(255, 206, 236) 0%,rgb(152, 150, 240) 100%);--wp--preset--gradient--blush-bordeaux:linear-gradient(135deg,rgb(254, 205, 165) 0%,rgb(254, 45, 45) 50%,rgb(107, 0, 62) 100%);--wp--preset--gradient--luminous-dusk:linear-gradient(135deg,rgb(255, 203, 112) 0%,rgb(199, 81, 192) 50%,rgb(65, 88, 208) 100%);--wp--preset--gradient--pale-ocean:linear-gradient(135deg,rgb(255, 245, 203) 0%,rgb(182, 227, 212) 50%,rgb(51, 167, 181) 100%);--wp--preset--gradient--electric-grass:linear-gradient(135deg,rgb(202, 248, 128) 0%,rgb(113, 206, 126) 100%);--wp--preset--gradient--midnight:linear-gradient(135deg,rgb(2, 3, 129) 0%,rgb(40, 116, 252) 100%);--wp--preset--duotone--dark-grayscale:url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale:url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow:url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red:url('#wp-duotone-blue-red');--wp--preset--duotone--midnight:url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow:url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green:url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange:url('#wp-duotone-blue-orange');--wp--preset--font-size--small:13px;--wp--preset--font-size--medium:20px;--wp--preset--font-size--large:36px;--wp--preset--font-size--x-large:42px;--wp--preset--spacing--20:0.44rem;--wp--preset--spacing--30:0.67rem;--wp--preset--spacing--40:1rem;--wp--preset--spacing--50:1.5rem;--wp--preset--spacing--60:2.25rem;--wp--preset--spacing--70:3.38rem;--wp--preset--spacing--80:5.06rem;background:#fff;margin:0}:where(.is-layout-flex){gap:.5em}:where(.wp-block-columns.is-layout-flex){gap:2em}.woocommerce img,.woocommerce-page img{height:auto;max-width:100%}.woocommerce #content div.product div.images,.woocommerce div.product div.images,.woocommerce-page #content div.product div.images,.woocommerce-page div.product div.images{float:left;width:48%}.woocommerce #content div.product div.thumbnails::after,.woocommerce #content div.product div.thumbnails::before,.woocommerce div.product div.thumbnails::after,.woocommerce div.product div.thumbnails::before,.woocommerce-page #content div.product div.thumbnails::after,.woocommerce-page #content div.product div.thumbnails::before,.woocommerce-page div.product div.thumbnails::after,.woocommerce-page div.product div.thumbnails::before{content:" ";display:table}.woocommerce #content div.product div.thumbnails::after,.woocommerce div.product div.thumbnails::after,.woocommerce-page #content div.product div.thumbnails::after,.woocommerce-page div.product div.thumbnails::after{clear:both}.woocommerce #content div.product div.thumbnails a,.woocommerce div.product div.thumbnails a,.woocommerce-page #content div.product div.thumbnails a,.woocommerce-page div.product div.thumbnails a{float:left;width:30.75%;margin-right:3.8%;margin-bottom:1em}.woocommerce #content div.product div.thumbnails a.last,.woocommerce div.product div.thumbnails a.last,.woocommerce-page #content div.product div.thumbnails a.last,.woocommerce-page div.product div.thumbnails a.last{margin-right:0}.woocommerce #content div.product div.thumbnails a.first,.woocommerce div.product div.thumbnails a.first,.woocommerce-page #content div.product div.thumbnails a.first,.woocommerce-page div.product div.thumbnails a.first{clear:both}.woocommerce #content div.product div.thumbnails.columns-4 a,.woocommerce div.product div.thumbnails.columns-4 a,.woocommerce-page #content div.product div.thumbnails.columns-4 a,.woocommerce-page div.product div.thumbnails.columns-4 a{width:22.05%}.woocommerce #content div.product div.summary,.woocommerce div.product div.summary,.woocommerce-page #content div.product div.summary,.woocommerce-page div.product div.summary{float:right;width:48%;clear:none}.woocommerce #content div.product .woocommerce-tabs,.woocommerce div.product .woocommerce-tabs,.woocommerce-page #content div.product .woocommerce-tabs,.woocommerce-page div.product .woocommerce-tabs{clear:both}.woocommerce #content div.product .woocommerce-tabs ul.tabs::after,.woocommerce #content div.product .woocommerce-tabs ul.tabs::before,.woocommerce div.product .woocommerce-tabs ul.tabs::after,.woocommerce div.product .woocommerce-tabs ul.tabs::before,.woocommerce-page #content div.product .woocommerce-tabs ul.tabs::after,.woocommerce-page #content div.product .woocommerce-tabs ul.tabs::before,.woocommerce-page div.product .woocommerce-tabs ul.tabs::after,.woocommerce-page div.product .woocommerce-tabs ul.tabs::before{content:" ";display:table}.woocommerce #content div.product .woocommerce-tabs ul.tabs::after,.woocommerce div.product .woocommerce-tabs ul.tabs::after,.woocommerce-page #content div.product .woocommerce-tabs ul.tabs::after,.woocommerce-page div.product .woocommerce-tabs ul.tabs::after{clear:both}.woocommerce #content div.product .woocommerce-tabs ul.tabs li,.woocommerce div.product .woocommerce-tabs ul.tabs li,.woocommerce-page #content div.product .woocommerce-tabs ul.tabs li,.woocommerce-page div.product .woocommerce-tabs ul.tabs li{display:inline-block}.woocommerce ul.products,.woocommerce-page ul.products{clear:both}.woocommerce ul.products::after,.woocommerce ul.products::before,.woocommerce-page ul.products::after,.woocommerce-page ul.products::before{content:" ";display:table}.woocommerce ul.products::after,.woocommerce-page ul.products::after{clear:both}.woocommerce ul.products li.product,.woocommerce-page ul.products li.product{float:left;margin:0 3.8% 2.992em 0;padding:0;position:relative;width:22.05%;margin-left:0}.woocommerce ul.products li.first,.woocommerce-page ul.products li.first{clear:both}.woocommerce ul.products li.last,.woocommerce-page ul.products li.last{margin-right:0}.woocommerce .woocommerce-ordering,.woocommerce-page .woocommerce-ordering{float:right}.woocommerce #content table.cart img,.woocommerce table.cart img,.woocommerce-page #content table.cart img,.woocommerce-page table.cart img{height:auto}.woocommerce form .password-input,.woocommerce-page form .password-input{display:flex;flex-direction:column;justify-content:center;position:relative}.woocommerce form .password-input input[type=password],.woocommerce-page form .password-input input[type=password]{padding-right:2.5rem}.woocommerce form .password-input input::-ms-reveal,.woocommerce-page form .password-input input::-ms-reveal{display:none}.woocommerce form .show-password-input,.woocommerce-page form .show-password-input{position:absolute;right:.7em;top:.7em;cursor:pointer}.woocommerce form .show-password-input::after,.woocommerce-page form .show-password-input::after{font-family:WooCommerce;speak:never;font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;margin-left:.618em;content:"\e010";text-decoration:none}.woocommerce form .show-password-input.display-password::after,.woocommerce-page form .show-password-input.display-password::after{color:#585858}@-webkit-keyframes spin{0%{transform:rotate(0)}to{transform:rotate(1turn)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes spin{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@font-face{font-display:swap;font-family:WooCommerce;src:url(https://www.loewen-apotheke24.com/wp-content/plugins/woocommerce/assets/fonts/WooCommerce.eot);src:url(https://www.loewen-apotheke24.com/wp-content/plugins/woocommerce/assets/fonts/WooCommerce.eot?#iefix) format("embedded-opentype"),url(https://www.loewen-apotheke24.com/wp-content/plugins/woocommerce/assets/fonts/WooCommerce.woff) format("woff"),url(https://www.loewen-apotheke24.com/wp-content/plugins/woocommerce/assets/fonts/WooCommerce.ttf) format("truetype"),url(https://www.loewen-apotheke24.com/wp-content/plugins/woocommerce/assets/fonts/WooCommerce.svg#WooCommerce) format("svg");font-weight:400;font-style:normal}.woocommerce-store-notice{position:absolute;top:0;left:0;right:0;margin:0;width:100%;font-size:1em;padding:1em 0;text-align:center;background-color:#a46497;color:#fff;z-index:99998;box-shadow:0 1px 1em rgba(0,0,0,.2);display:none}.woocommerce-store-notice a{color:#fff;text-decoration:underline}.screen-reader-text{clip:rect(1px,1px,1px,1px);height:1px;overflow:hidden;position:absolute!important;width:1px;word-wrap:normal!important}.clear{clear:both}.woocommerce .blockUI.blockOverlay{position:relative}.woocommerce .blockUI.blockOverlay::before{height:1em;width:1em;display:block;position:absolute;top:50%;left:50%;margin-left:-.5em;margin-top:-.5em;content:"";-webkit-animation:1s ease-in-out infinite spin;animation:1s ease-in-out infinite spin;background:url(https://www.loewen-apotheke24.com/wp-content/plugins/woocommerce/assets/images/icons/loader.svg) center center;background-size:cover;line-height:1;text-align:center;font-size:2em;color:rgba(0,0,0,.75)}.woocommerce a.remove{display:block;font-size:1.5em;height:1em;width:1em;text-align:center;line-height:1;border-radius:100%;color:red!important;text-decoration:none;font-weight:700;border:0}.woocommerce a.remove:hover{color:#fff!important;background:red}.woocommerce .woocommerce-breadcrumb{margin:0 0 1em;padding:0;font-size:.92em;color:#767676}.woocommerce .woocommerce-breadcrumb::after,.woocommerce .woocommerce-breadcrumb::before{content:" ";display:table}.woocommerce .woocommerce-breadcrumb::after{clear:both}.woocommerce .woocommerce-breadcrumb a{color:#767676}.woocommerce .quantity .qty{width:3.631em;text-align:center}.woocommerce div.product{margin-bottom:0;position:relative}.woocommerce div.product .product_title{clear:none;margin-top:0;padding:0}.woocommerce div.product p.price,.woocommerce div.product span.price{color:#77a464;font-size:1.25em}.woocommerce div.product p.price ins,.woocommerce div.product span.price ins{background:inherit;font-weight:700;display:inline-block}.woocommerce div.product p.price del,.woocommerce div.product span.price del{opacity:.5;display:inline-block}.woocommerce div.product div.images{margin-bottom:2em}.woocommerce div.product div.images img{display:block;width:100%;height:auto;box-shadow:none}.woocommerce div.product div.images div.thumbnails{padding-top:1em}.woocommerce div.product div.images.woocommerce-product-gallery{position:relative}.woocommerce div.product div.images .woocommerce-product-gallery__wrapper{transition:all cubic-bezier(.795,-.035,0,1) .5s;margin:0;padding:0}.woocommerce div.product div.images .woocommerce-product-gallery__image:nth-child(n+2){width:25%;display:inline-block}.woocommerce div.product div.images .woocommerce-product-gallery__trigger{position:absolute;top:.5em;right:.5em;font-size:2em;z-index:9;width:36px;height:36px;background:#fff;text-indent:-9999px;border-radius:100%;box-sizing:content-box}.woocommerce div.product div.images .woocommerce-product-gallery__trigger::before{content:"";display:block;width:10px;height:10px;border:2px solid #000;border-radius:100%;position:absolute;top:9px;left:9px;box-sizing:content-box}.woocommerce div.product div.images .woocommerce-product-gallery__trigger::after{content:"";display:block;width:2px;height:8px;background:#000;border-radius:6px;position:absolute;top:19px;left:22px;-webkit-transform:rotate(-45deg);-ms-transform:rotate(-45deg);transform:rotate(-45deg);box-sizing:content-box}.woocommerce div.product div.summary{margin-bottom:2em}.woocommerce div.product .woocommerce-tabs ul.tabs{list-style:none;padding:0 0 0 1em;margin:0 0 1.618em;overflow:hidden;position:relative}.woocommerce div.product .woocommerce-tabs ul.tabs li{border:1px solid #d3ced2;background-color:#ebe9eb;color:#515151;display:inline-block;position:relative;z-index:0;border-radius:4px 4px 0 0;margin:0 -5px;padding:0 1em}.woocommerce div.product .woocommerce-tabs ul.tabs li a{display:inline-block;padding:.5em 0;font-weight:700;color:#515151;text-decoration:none}.woocommerce div.product .woocommerce-tabs ul.tabs li a:hover{text-decoration:none;color:#6b6b6b}.woocommerce div.product .woocommerce-tabs ul.tabs li.active{background:#fff;color:#515151;z-index:2;border-bottom-color:#fff}.woocommerce div.product .woocommerce-tabs ul.tabs li.active a{color:inherit;text-shadow:inherit}.woocommerce div.product .woocommerce-tabs ul.tabs li.active::before{box-shadow:2px 2px 0 #fff}.woocommerce div.product .woocommerce-tabs ul.tabs li.active::after{box-shadow:-2px 2px 0 #fff}.woocommerce div.product .woocommerce-tabs ul.tabs li::after,.woocommerce div.product .woocommerce-tabs ul.tabs li::before{border:1px solid #d3ced2;position:absolute;bottom:-1px;width:5px;height:5px;content:" ";box-sizing:border-box}.woocommerce div.product .woocommerce-tabs ul.tabs li::before{left:-5px;border-bottom-right-radius:4px;border-width:0 1px 1px 0;box-shadow:2px 2px 0 #ebe9eb}.woocommerce div.product .woocommerce-tabs ul.tabs li::after{right:-5px;border-bottom-left-radius:4px;border-width:0 0 1px 1px;box-shadow:-2px 2px 0 #ebe9eb}.woocommerce div.product .woocommerce-tabs ul.tabs::before{position:absolute;content:" ";width:100%;bottom:0;left:0;border-bottom:1px solid #d3ced2;z-index:1}.woocommerce div.product .woocommerce-tabs .panel{margin:0 0 2em;padding:0}.woocommerce div.product p.cart{margin-bottom:2em}.woocommerce div.product p.cart::after,.woocommerce div.product p.cart::before{content:" ";display:table}.woocommerce div.product p.cart::after{clear:both}.woocommerce div.product form.cart{margin-bottom:2em}.woocommerce div.product form.cart::after,.woocommerce div.product form.cart::before{content:" ";display:table}.woocommerce div.product form.cart::after{clear:both}.woocommerce div.product form.cart div.quantity{float:left;margin:0 4px 0 0}.woocommerce div.product form.cart table{border-width:0 0 1px}.woocommerce div.product form.cart table td{padding-left:0}.woocommerce div.product form.cart table div.quantity{float:none;margin:0}.woocommerce div.product form.cart .button{vertical-align:middle;float:left}.woocommerce span.onsale{min-height:3.236em;min-width:3.236em;padding:.202em;font-size:1em;font-weight:700;position:absolute;text-align:center;line-height:3.236;top:-.5em;left:-.5em;margin:0;border-radius:100%;background-color:#77a464;color:#fff;font-size:.857em;z-index:9}.woocommerce .products ul,.woocommerce ul.products{margin:0 0 1em;padding:0;list-style:none;clear:both}.woocommerce .products ul::after,.woocommerce .products ul::before,.woocommerce ul.products::after,.woocommerce ul.products::before{content:" ";display:table}.woocommerce .products ul::after,.woocommerce ul.products::after{clear:both}.woocommerce .products ul li,.woocommerce ul.products li{list-style:none}.woocommerce ul.products li.product .onsale{top:0;right:0;left:auto;margin:-.5em -.5em 0 0}.woocommerce ul.products li.product h3{padding:.5em 0;margin:0;font-size:1em}.woocommerce ul.products li.product a{text-decoration:none}.woocommerce ul.products li.product a img{width:100%;height:auto;display:block;margin:0 0 1em;box-shadow:none}.woocommerce ul.products li.product strong{display:block}.woocommerce ul.products li.product .button{margin-top:1em}.woocommerce ul.products li.product .price{color:#77a464;display:block;font-weight:400;margin-bottom:.5em;font-size:.857em}.woocommerce ul.products li.product .price del{color:inherit;opacity:.5;display:inline-block}.woocommerce ul.products li.product .price ins{background:0 0;font-weight:700;display:inline-block}.woocommerce ul.products li.product .price .from{font-size:.67em;margin:-2px 0 0;text-transform:uppercase;color:rgba(132,132,132,.5)}.woocommerce .woocommerce-ordering{margin:0 0 1em}.woocommerce .woocommerce-ordering select{vertical-align:top}.woocommerce #respond input#submit,.woocommerce a.button,.woocommerce button.button,.woocommerce input.button{font-size:100%;margin:0;line-height:1;cursor:pointer;position:relative;text-decoration:none;overflow:visible;padding:.618em 1em;font-weight:700;border-radius:3px;left:auto;color:#515151;background-color:#ebe9eb;border:0;display:inline-block;background-image:none;box-shadow:none;text-shadow:none}.woocommerce #respond input#submit.loading,.woocommerce a.button.loading,.woocommerce button.button.loading,.woocommerce input.button.loading{opacity:.25;padding-right:2.618em}.woocommerce #respond input#submit.loading::after,.woocommerce a.button.loading::after,.woocommerce button.button.loading::after,.woocommerce input.button.loading::after{font-family:WooCommerce;content:"\e01c";vertical-align:top;font-weight:400;position:absolute;top:.618em;right:1em;-webkit-animation:2s linear infinite spin;animation:2s linear infinite spin}.woocommerce #respond input#submit.added::after,.woocommerce a.button.added::after,.woocommerce button.button.added::after,.woocommerce input.button.added::after{font-family:WooCommerce;content:"\e017";margin-left:.53em;vertical-align:bottom}.woocommerce #respond input#submit:hover,.woocommerce a.button:hover,.woocommerce button.button:hover,.woocommerce input.button:hover{background-color:#dfdcde;text-decoration:none;background-image:none;color:#515151}.woocommerce #respond input#submit.alt,.woocommerce a.button.alt,.woocommerce button.button.alt,.woocommerce input.button.alt{background-color:#a46497;color:#fff;-webkit-font-smoothing:antialiased}.woocommerce #respond input#submit.alt:hover,.woocommerce a.button.alt:hover,.woocommerce button.button.alt:hover,.woocommerce input.button.alt:hover{background-color:#96588a;color:#fff}.woocommerce #respond input#submit.alt.disabled,.woocommerce #respond input#submit.alt.disabled:hover,.woocommerce #respond input#submit.alt:disabled,.woocommerce #respond input#submit.alt:disabled:hover,.woocommerce #respond input#submit.alt:disabled[disabled],.woocommerce #respond input#submit.alt:disabled[disabled]:hover,.woocommerce a.button.alt.disabled,.woocommerce a.button.alt.disabled:hover,.woocommerce a.button.alt:disabled,.woocommerce a.button.alt:disabled:hover,.woocommerce a.button.alt:disabled[disabled],.woocommerce a.button.alt:disabled[disabled]:hover,.woocommerce button.button.alt.disabled,.woocommerce button.button.alt.disabled:hover,.woocommerce button.button.alt:disabled,.woocommerce button.button.alt:disabled:hover,.woocommerce button.button.alt:disabled[disabled],.woocommerce button.button.alt:disabled[disabled]:hover,.woocommerce input.button.alt.disabled,.woocommerce input.button.alt.disabled:hover,.woocommerce input.button.alt:disabled,.woocommerce input.button.alt:disabled:hover,.woocommerce input.button.alt:disabled[disabled],.woocommerce input.button.alt:disabled[disabled]:hover{background-color:#a46497;color:#fff}.woocommerce #respond input#submit.disabled,.woocommerce #respond input#submit:disabled,.woocommerce #respond input#submit:disabled[disabled],.woocommerce a.button.disabled,.woocommerce a.button:disabled,.woocommerce a.button:disabled[disabled],.woocommerce button.button.disabled,.woocommerce button.button:disabled,.woocommerce button.button:disabled[disabled],.woocommerce input.button.disabled,.woocommerce input.button:disabled,.woocommerce input.button:disabled[disabled]{color:inherit;cursor:not-allowed;opacity:.5;padding:.618em 1em}.woocommerce #respond input#submit.disabled:hover,.woocommerce #respond input#submit:disabled:hover,.woocommerce #respond input#submit:disabled[disabled]:hover,.woocommerce a.button.disabled:hover,.woocommerce a.button:disabled:hover,.woocommerce a.button:disabled[disabled]:hover,.woocommerce button.button.disabled:hover,.woocommerce button.button:disabled:hover,.woocommerce button.button:disabled[disabled]:hover,.woocommerce input.button.disabled:hover,.woocommerce input.button:disabled:hover,.woocommerce input.button:disabled[disabled]:hover{color:inherit;background-color:#ebe9eb}.woocommerce .cart .button,.woocommerce .cart input.button{float:none}.woocommerce a.added_to_cart{padding-top:.5em;display:inline-block}.woocommerce #reviews h3{margin:0}.woocommerce #reviews #respond{margin:0;border:0;padding:0}.woocommerce p.stars a{position:relative;height:1em;width:1em;text-indent:-999em;display:inline-block;text-decoration:none}.woocommerce p.stars a::before{display:block;position:absolute;top:0;left:0;width:1em;height:1em;line-height:1;font-family:WooCommerce;content:"\e021";text-indent:0}.woocommerce p.stars a:hover~a::before{content:"\e021"}.woocommerce p.stars.selected a.active::before,.woocommerce p.stars:hover a::before{content:"\e020"}.woocommerce p.stars.selected a.active~a::before{content:"\e021"}.woocommerce p.stars.selected a:not(.active)::before{content:"\e020"}.woocommerce-checkout table.cart img{width:32px;box-shadow:none}.woocommerce-checkout table.cart td{vertical-align:middle}.woocommerce-checkout table.cart input{margin:0;vertical-align:middle}.wpml-ls-legacy-list-horizontal{border:1px solid transparent;padding:7px;clear:both}.wpml-ls-legacy-list-horizontal>ul{padding:0;margin:0!important;list-style-type:none}.wpml-ls-legacy-list-horizontal .wpml-ls-item{padding:0;margin:0;list-style-type:none;display:inline-block}.wpml-ls-legacy-list-horizontal a{display:block;text-decoration:none;padding:5px 10px 6px;line-height:1}.wpml-ls-legacy-list-horizontal a span{vertical-align:middle}.wpml-ls-legacy-list-horizontal a span.wpml-ls-bracket{vertical-align:unset}.wpml-ls-legacy-list-horizontal .wpml-ls-flag{display:inline;vertical-align:middle}.wpml-ls-legacy-list-horizontal .wpml-ls-flag+span{margin-left:.4em}.rtl .wpml-ls-legacy-list-horizontal .wpml-ls-flag+span{margin-left:0;margin-right:.4em}.wpml-ls-legacy-list-horizontal.wpml-ls-statics-footer{margin-bottom:30px}.wpml-ls-legacy-list-horizontal.wpml-ls-statics-footer>ul{text-align:center}.wpml-ls-statics-footer a{color:#444;background-color:#fff}.wpml-ls-statics-footer a:focus,.wpml-ls-statics-footer a:hover{color:#000;background-color:#eee}.wpml-ls-statics-footer .wpml-ls-current-language>a{color:#444;background-color:#fff}.wpml-ls-statics-footer .wpml-ls-current-language:hover>a,.wpml-ls-statics-footer .wpml-ls-current-language>a:focus{color:#000;background-color:#eee}.dgwt-wcas-block-scroll{overflow:hidden}.dgwt-wcas-search-wrapp{position:relative;line-height:100%;display:block;color:#444;min-width:230px;width:100%;text-align:left;margin:0 auto;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.dgwt-wcas-preloader-wrapp img{margin:10px auto 0;display:block;max-width:200px}.dgwt-wcas-suggestions-wrapp{background:#fff;border:1px solid #ddd;border-top:none;padding:0;margin:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;overflow-y:auto}.dgwt-wcas-details-wrapp *,.dgwt-wcas-search-wrapp *,.dgwt-wcas-suggestions-wrapp *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.dgwt-wcas-details-wrapp a:focus,.dgwt-wcas-suggestions-wrapp a:focus{outline:0}.dgwt-wcas-suggestions-wrapp.dgwt-wcas-suggestions-wrapp--top{border:1px solid #ddd;border-bottom:none}.dgwt-wcas-details-left .dgwt-wcas-suggestions-wrapp{border-radius:0 0 5px 0;border-left-color:#eee}.dgwt-wcas-details-right .dgwt-wcas-suggestions-wrapp{border-radius:0 0 0 5px;border-right-color:#eee}.dgwt-wcas-suggestion{cursor:pointer;font-size:12px;line-height:110%;text-align:left;padding:7px 10px;position:relative;border-bottom:1px solid #dfdfdf;display:flex;flex-direction:row;justify-content:space-between;align-items:center;resize:vertical;width:100%}.dgwt-wcas-suggestion.dgwt-wcas-suggestion-more{justify-content:center;color:#6d6d6d}.dgwt-wcas-suggestion.dgwt-wcas-suggestion-no-border-bottom{border-bottom:none}.dgwt-wcas-suggestion:after{clear:both;display:block;content:''}.dgwt-wcas-suggestion.dgwt-wcas-nores{cursor:default;opacity:.5}.dgwt-wcas-has-img .dgwt-wcas-suggestion.dgwt-wcas-suggestion-product{padding-top:8px;padding-bottom:8px;min-height:60px}.dgwt-wcas-is-details .dgwt-wcas-has-img .dgwt-wcas-suggestion.dgwt-wcas-suggestion-more,.dgwt-wcas-suggestion.dgwt-wcas-suggestion-more{min-height:30px;text-transform:uppercase}.dgwt-wcas-suggestion.dgwt-wcas-suggestion-more .dgwt-wcas-st-more{padding:0 10px;text-align:center}.dgwt-wcas-st{display:block;color:#444;font-size:15px;width:100%;line-height:110%}.dgwt-wcas-st>span{display:inline-block;vertical-align:middle}.dgwt-wcas-has-sku .dgwt-wcas-st-title{margin-right:6px}.dgwt-wcas-st>span.dgwt-wcas-st--direct-headline{display:block;font-style:italic;font-size:10px;text-transform:uppercase;opacity:.4;line-height:10px;margin-bottom:1px;letter-spacing:2px}.dgwt-wcas-st-breadcrumbs{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:80%;text-align:left;opacity:.6;width:100%;padding-right:10px}.rtl .dgwt-wcas-st-breadcrumbs{padding-right:0;padding-left:10px;text-align:right}.dgwt-wcas-sku{font-size:80%}.dgwt-wcas-si{width:50px;display:block;height:100%}.dgwt-wcas-si img{background:#fff;border:1px solid #e8e8e8;border-radius:3px;display:block;margin:auto;padding:2px;height:auto;width:auto;max-height:90%;max-width:100%}.dgwt-wcas-content-wrapp{display:flex;height:100%;width:100%;justify-content:space-between;align-items:center;resize:vertical;padding-left:10px}.rtl .dgwt-wcas-content-wrapp{padding-left:0;padding-right:10px}.dgwt-wcas-sp{color:#555;font-size:14px;line-height:120%;text-align:right;line-height:4px;padding-left:10px}.dgwt-wcas-sp *{line-height:130%}.dgwt-wcas-search-form{margin:0;padding:0;width:100%}.dgwt-wcas-sp del{opacity:.5;font-size:12px}.dgwt-wcas-sd{color:#777;display:block;line-height:14px;width:100%;margin-top:5px;font-size:.8em}.dgwt-wcas-vendor-city{margin-left:5px;font-size:.8em}.dgwt-wcas-st>.dgwt-wcas-product-vendor{font-size:12px;margin-top:5px;display:block}.dgwt-wcas-suggestion-selected{background-color:#eee}.dgwt-wcas-suggestion-selected:first-child{border-top:none}.rtl .dgwt-wcas-suggestion{padding-left:0;padding-right:15px;text-align:right}.dgwt-wcas-details-wrapp{background:#fff;border:1px solid #ddd;border-top:none;border-left:none;padding:0;width:300px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;z-index:100;min-height:340px}.rtl .dgwt-wcas-details-wrapp{border-left:1px solid #ddd;border-right:none}.dgwt-wcas-details-outside .dgwt-wcas-details-wrapp,.dgwt-wcas-details-outside.dgwt-wcas-is-details .dgwt-wcas-suggestions-wrapp{margin-top:-1px;border-top:1px solid #ddd}.dgwt-wcas-details-right .dgwt-wcas-details-wrapp{border-left:none;border-right:1px solid #ddd;border-radius:0 5px 5px 0}.dgwt-wcas-details-left .dgwt-wcas-details-wrapp{border-right:none;border-left:1px solid #ddd;border-radius:5px 0 0 5px}.dgwt-wcas-details-notfit .dgwt-wcas-details-wrapp{display:none}.dgwt-wcas-full-width .dgwt-wcas-suggestions-wrapp{border-radius:0 0 0 5px}.dgwt-wcas-full-width .dgwt-wcas-details-wrapp,.rtl.dgwt-wcas-full-width .dgwt-wcas-suggestions-wrapp{border-radius:0 0 5px 0}.rtl.dgwt-wcas-full-width .dgwt-wcas-details-wrapp{border-radius:0 0 0 5px}.dgwt-wcas-details-inner{display:none}.dgwt-wcas-details-inner.dgwt-wcas-details-inner-active{display:block}.dgwt-wcas-suggestion-nores{pointer-events:none;opacity:.45}.rtl input[type=search].dgwt-wcas-search-input{text-align:right}input[type=search].dgwt-wcas-search-input{-webkit-transition:none;-moz-transition:none;-ms-transition:none;-o-transition:none;transition:none;-webkit-box-shadow:none;box-shadow:none;margin:0;-webkit-appearance:textfield;text-align:left}[type=search].dgwt-wcas-search-input::-ms-clear{display:none}[type=search].dgwt-wcas-search-input::-webkit-search-decoration{-webkit-appearance:none}[type=search].dgwt-wcas-search-input::-webkit-search-cancel-button{display:none}button.dgwt-wcas-search-submit,input[type=submit].dgwt-wcas-search-submit{position:relative}.dgwt-wcas-ico-magnifier{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;height:65%;display:block}.dgwt-wcas-preloader{height:100%;position:absolute;right:0;top:0;width:40px;z-index:-1;background-repeat:no-repeat;background-position:right 15px center;background-size:auto 44%}.dgwt-wcas-voice-search{position:absolute;right:0;top:0;height:100%;width:40px;z-index:1;opacity:.5;cursor:pointer;align-items:center;justify-content:center;display:none;-webkit-transition:160ms ease-in-out;-moz-transition:160ms ease-in-out;-ms-transition:160ms ease-in-out;-o-transition:160ms ease-in-out;transition:all 160ms ease-in-out}.dgwt-wcas-voice-search:hover{opacity:.3}.dgwt-wcas-voice-search path{fill:#444}.dgwt-wcas-voice-search-supported .dgwt-wcas-voice-search{display:flex}.dgwt-wcas-voice-search-supported .dgwt-wcas-preloader{right:40px}.rtl .dgwt-wcas-voice-search{right:auto;left:5px}.dgwt-wcas-mobile-overlay-trigger-active .dgwt-wcas-voice-search{z-index:105}.rtl .dgwt-wcas-preloader{right:auto;left:5px}.rtl .dgwt-wcas-voice-search-supported .dgwt-wcas-preloader{right:auto;left:45px}.dgwt-wcas-inner-preloader{background-repeat:no-repeat;background-position:right 8px center;background-size:auto 22px;display:flex;align-items:center;justify-content:center;z-index:1}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.dgwt-wcas-inner-preloader{background-image:url('https://www.loewen-apotheke24.com/wp-content/plugins/ajax-search-for-woocommerce/assets/img/preloader.gif')}}.dgwt-wcas-close:not(.dgwt-wcas-inner-preloader){cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-transition:160ms ease-in-out;-moz-transition:160ms ease-in-out;-ms-transition:160ms ease-in-out;-o-transition:160ms ease-in-out;transition:all 160ms ease-in-out;z-index:1}.dgwt-wcas-close:not(.dgwt-wcas-inner-preloader):before{content:'';display:block;position:absolute;background:0 0;height:100%;width:100%;left:0;bottom:0;top:0;right:0;margin:auto}.dgwt-wcas-close:hover{opacity:.3}.dgwt-wcas-close path{fill:#ccc}.dgwt-wcas-suggestion strong{font-weight:700}.screen-reader-text{clip:rect(1px,1px,1px,1px);height:1px;overflow:hidden;position:absolute!important;width:1px}.dgwt-wcas-sf-wrapp:after,.dgwt-wcas-sf-wrapp:before{content:"";display:table}.dgwt-wcas-sf-wrapp:after{clear:both}.dgwt-wcas-sf-wrapp{zoom:1;width:100%;max-width:100vw;margin:0;position:relative;background:0 0}.dgwt-wcas-sf-wrapp input[type=search].dgwt-wcas-search-input{width:100%;height:40px;font-size:14px;line-height:100%;padding:10px 15px;margin:0;background:#fff;border:1px solid #ddd;border-radius:3px;-webkit-border-radius:3px;-webkit-appearance:none;box-sizing:border-box}.dgwt-wcas-open .dgwt-wcas-sf-wrapp input[type=search].dgwt-wcas-search-input{border-radius:3px 3px 0 0}.dgwt-wcas-open.dgwt-wcas-nores.dgwt-wcas-details-outside .dgwt-wcas-details-wrapp{display:none!important}.dgwt-wcas-open.dgwt-wcas-nores.dgwt-wcas-details-outside .dgwt-wcas-suggestions-wrapp{min-height:0!important;border-radius:0 0 5px 5px;border-right-color:#ddd}.dgwt-wcas-open.dgwt-wcas-nores.dgwt-wcas-full-width .dgwt-wcas-details-wrapp,.dgwt-wcas-open.dgwt-wcas-nores.dgwt-wcas-full-width .dgwt-wcas-suggestions-wrapp{min-height:41px!important}.dgwt-wcas-open.dgwt-wcas-nores.dgwt-wcas-full-width:not(.rtl):not(.dgwt-wcas-details-outside) .dgwt-wcas-suggestions-wrapp{border-right-color:transparent}.dgwt-wcas-open.dgwt-wcas-nores .dgwt-wcas-details-wrapp .dgwt-wcas-preloader-wrapp{display:none!important}.dgwt-wcas-open.dgwt-wcas-nores.dgwt-wcas-is-details:not(.dgwt-wcas-details-outside) .dgwt-wcas-suggestion-nores{margin-top:5px}.rtl.dgwt-wcas-open.dgwt-wcas-nores.dgwt-wcas-full-width:not(.dgwt-wcas-details-outside) .dgwt-wcas-suggestions-wrapp{border-left-color:transparent}.dgwt-wcas-sf-wrapp input[type=search].dgwt-wcas-search-input:focus{outline:0;background:#fff;box-shadow:0 0 9px 1px rgba(0,0,0,.06);-webkit-transition:150ms ease-in;-moz-transition:150ms ease-in;-ms-transition:150ms ease-in;-o-transition:150ms ease-in;transition:all 150ms ease-in}.dgwt-wcas-sf-wrapp input[type=search].dgwt-wcas-search-input::placeholder{color:#999;font-weight:400;font-style:italic;line-height:normal}.dgwt-wcas-sf-wrapp input[type=search].dgwt-wcas-search-input::-webkit-input-placeholder{color:#999;font-weight:400;font-style:italic;line-height:normal}.dgwt-wcas-sf-wrapp input[type=search].dgwt-wcas-search-input:-moz-placeholder{color:#999;font-weight:400;font-style:italic;line-height:normal}.dgwt-wcas-sf-wrapp input[type=search].dgwt-wcas-search-input::-moz-placeholder{color:#999;font-weight:400;font-style:italic;line-height:normal}.dgwt-wcas-sf-wrapp input[type=search].dgwt-wcas-search-input:-ms-input-placeholder{color:#999;font-weight:400;font-style:italic;line-height:normal}.dgwt-wcas-sf-wrapp button.dgwt-wcas-search-submit{overflow:visible;position:absolute;border:0;padding:0;margin:0;cursor:pointer;height:40px;min-width:50px;width:auto;line-height:100%;min-height:100%;right:0;left:auto;top:0;bottom:auto;padding:0 15px;color:#fff;-webkit-transition:250ms ease-in-out;-moz-transition:250ms ease-in-out;-ms-transition:250ms ease-in-out;-o-transition:250ms ease-in-out;transition:all 250ms ease-in-out;text-transform:uppercase;background-color:#333;border-radius:0 2px 2px 0;-webkit-border-radius:0 2px 2px 0;text-shadow:0 -1px 0 rgba(0,0,0,.3);-webkit-box-shadow:none;box-shadow:none;-webkit-appearance:none}.rtl .dgwt-wcas-sf-wrapp button.dgwt-wcas-search-submit{left:0;right:auto}.dgwt-wcas-open .dgwt-wcas-sf-wrapp .dgwt-wcas-search-submit{border-radius:0 2px 0 0}.dgwt-wcas-sf-wrapp .dgwt-wcas-search-submit:hover{opacity:.7}.dgwt-wcas-sf-wrapp .dgwt-wcas-search-submit:active,.dgwt-wcas-sf-wrapp .dgwt-wcas-search-submit:focus{opacity:.7;outline:0}.dgwt-wcas-sf-wrapp .dgwt-wcas-search-submit:before{content:'';position:absolute;border-width:8px 8px 8px 0;border-style:solid solid solid none;border-color:transparent #333;top:12px;left:-6px;-webkit-transition:250ms ease-in-out;-moz-transition:250ms ease-in-out;-ms-transition:250ms ease-in-out;-o-transition:250ms ease-in-out;transition:all 250ms ease-in-out}.rtl .dgwt-wcas-sf-wrapp .dgwt-wcas-search-submit:before{left:auto;right:-6px;border-width:8px 0 8px 8px;border-style:solid none solid solid}.dgwt-wcas-sf-wrapp .dgwt-wcas-search-submit:active:before,.dgwt-wcas-sf-wrapp .dgwt-wcas-search-submit:focus:before,.dgwt-wcas-sf-wrapp .dgwt-wcas-search-submit:hover:before{border-right-color:#333}.dgwt-wcas-sf-wrapp .dgwt-wcas-search-submit::-moz-focus-inner{border:0;padding:0}.dgwt-wcas-details-wrapp .added_to_cart,.dgwt-wcas-has-desc .dgwt-wcas-sp>*,.dgwt-wcas-has-img .dgwt-wcas-sp>*{display:block}.dgwt-wcas-is-details .dgwt-wcas-suggestions-wrapp{min-height:340px;overflow:visible}body:not(.dgwt-wcas-is-details) .dgwt-wcas-suggestion:last-child{border-bottom:none}.dgwt-wcas-is-details .dgwt-wcas-has-img .dgwt-wcas-suggestion.dgwt-wcas-suggestion-product{min-height:40px}.dgwt-wcas-is-details .dgwt-wcas-si{width:30px;max-width:100%;box-sizing:border-box}.dgwt-wcas-is-details .dgwt-wcas-sp{display:flex;top:0;flex-direction:column;height:100%;justify-content:center;resize:vertical}.dgwt-wcas-is-details .dgwt-wcas-sd{font-size:11px;line-height:100%}.dgwt-wcas-no-submit .dgwt-wcas-ico-magnifier{height:50%;margin:auto;max-height:20px;width:100%;max-width:20px;left:12px;right:auto;opacity:.5;fill:#444}.rtl .dgwt-wcas-no-submit .dgwt-wcas-ico-magnifier{left:auto;right:12px}.dgwt-wcas-no-submit .dgwt-wcas-sf-wrapp input[type=search].dgwt-wcas-search-input{padding:10px 15px 10px 40px}.rtl .dgwt-wcas-no-submit .dgwt-wcas-sf-wrapp input[type=search].dgwt-wcas-search-input{padding:10px 40px 10px 15px}.dgwt-wcas-overlay-mobile-on,.dgwt-wcas-overlay-mobile-on body{overflow:hidden;min-width:100vw;min-height:100vh}html.dgwt-wcas-overlay-mobile-on{scroll-behavior:unset}.dgwt-wcas-om-bar{display:flex;height:45px;width:100%}.dgwt-wcas-om-bar button.dgwt-wcas-om-return,.dgwt-wcas-om-bar button.dgwt-wcas-om-return:active,.dgwt-wcas-om-bar button.dgwt-wcas-om-return:focus,.dgwt-wcas-om-bar button.dgwt-wcas-om-return:hover{width:45px;height:100%;display:block;background:#ccc;cursor:pointer;position:relative;margin:0;padding:0;box-shadow:none;outline:0;border:none;border-spacing:0;border-radius:0}.dgwt-wcas-om-bar .dgwt-wcas-om-return svg{width:23px;height:23px;position:absolute;left:12px;top:12px;fill:#fff}.rtl .dgwt-wcas-om-bar .dgwt-wcas-om-return svg{left:11px;top:9px;-moz-transform:rotate(180deg);-webkit-transform:rotate(180deg);-o-transform:rotate(180deg);-ms-transform:rotate(180deg);transform:rotate(180deg)}.dgwt-wcas-has-submit .dgwt-wcas-search-submit svg path{fill:#fff}.dgwt-wcas-om-bar .dgwt-wcas-has-submit-off .dgwt-wcas-preloader{right:0!important}.rtl .dgwt-wcas-om-bar .dgwt-wcas-has-submit-off .dgwt-wcas-preloader{left:4px!important;right:auto!important}@keyframes dgwt-wcas-preloader-price-anim{0%,100%{background:rgba(128,128,128,.03)}50%{background:rgba(128,128,128,.1)}}.dgwt-wcas-preloader-price-inner div:first-child{left:0;animation-delay:-.1s}.dgwt-wcas-preloader-price-inner div:nth-child(2){left:13px;animation-delay:-.2s}.dgwt-wcas-preloader-price-inner div:nth-child(3){left:26px;animation-delay:-.3s}.dgwt-wcas-preloader-price{width:34px;height:10px;display:inline-block;overflow:hidden;background:0 0}.dgwt-wcas-preloader-price-inner{width:100%;height:100%;position:relative;transform:translateZ(0) scale(1);backface-visibility:hidden;transform-origin:0 0}.dgwt-wcas-preloader-price-inner div{position:absolute;width:8px;height:8px;background:rgba(128,128,128,.05);animation:.8s cubic-bezier(0,.5,.5,1) infinite dgwt-wcas-preloader-price-anim;-webkit-transition:.2s ease-in-out;-moz-transition:.2s ease-in-out;-ms-transition:.2s ease-in-out;-o-transition:.2s ease-in-out;transition:all .2s ease-in-out}.dgwt-wcas-om-bar .dgwt-wcas-sf-wrapp button.dgwt-wcas-search-submit{display:none}.dgwt-wcas-om-bar .dgwt-wcas-search-wrapp-mobile{width:calc(100% - 45px);max-width:none;margin:0}.dgwt-wcas-overlay-mobile .dgwt-wcas-search-form{width:100%}.dgwt-wcas-overlay-mobile{position:absolute;left:0;right:0;top:0;bottom:0;width:100%;background:#fff}.dgwt-wcas-overlay-mobile *{box-sizing:border-box}.dgwt-wcas-search-wrapp-mobile input[type=search].dgwt-wcas-search-input{height:45px!important;border-top:none;border-right:none;border-left:none;border-radius:0;font-size:16px!important}.dgwt-wcas-search-wrapp-mobile input[type=search].dgwt-wcas-search-input:focus{font-size:16px!important}.dgwt-wcas-overlay-mobile-on .dgwt-wcas-suggestions-wrapp{left:0!important;top:45px!important;width:100%!important;height:calc(100% - 45px)!important;position:absolute;overflow-y:auto;border:none;margin:0;display:block}.dgwt-wcas-overlay-mobile-on .dgwt-wcas-suggestion{width:100%}.dgwt-wcas-overlay-mobile-on .dgwt-wcas-enable-mobile-form{display:none}.dgwt-wcas-enable-mobile-form{position:absolute;z-index:100;left:0;top:0;width:100%;height:100%;cursor:pointer}.dgwt-wcas-overlay-mobile-on.dgwt-wcas-is-ios .dgwt-wcas-suggestions-wrapp{height:calc(100% - 45px)!important;max-height:none!important;height:auto!important}.dgwt-wcas-overlay-mobile-on.dgwt-wcas-is-ios{overflow:visible}.dgwt-wcas-overlay-mobile-on.dgwt-wcas-is-ios body:not(.dgwt-wcas-theme-flatsome)>:not(.dgwt-wcas-overlay-mobile){display:none}.dgwt-wcas-search-wrapp.dgwt-wcas-layout-icon{min-width:unset}html:not(.dgwt-wcas-overlay-mobile-on) .dgwt-wcas-search-wrapp.dgwt-wcas-layout-icon{max-width:20px}.dgwt-wcas-layout-icon-flexible-loaded .dgwt-wcas-search-form{opacity:1}.dgwt-wcas-search-icon-arrow{display:none}html:not(.dgwt-wcas-overlay-mobile-on) .dgwt-wcas-search-wrapp.dgwt-wcas-layout-icon .dgwt-wcas-search-form{opacity:0;display:none;position:absolute;left:0;top:calc(100% + 8px);min-width:500px;z-index:1000}.dgwt-wcas-overlay-mobile .dgwt-wcas-search-icon,.dgwt-wcas-overlay-mobile .dgwt-wcas-search-icon-arrow{display:none}html:not(.dgwt-wcas-overlay-mobile-on) .dgwt-wcas-search-wrapp.dgwt-wcas-layout-icon.dgwt-wcas-layout-icon-open .dgwt-wcas-search-form{display:block;opacity:1}.dgwt-wcas-search-icon{width:20px;height:auto;cursor:pointer}.dgwt-wcas-ico-magnifier-handler{margin-bottom:-.2em;width:100%}.dgwt-wcas-search-wrapp.dgwt-wcas-layout-icon.dgwt-wcas-layout-icon-open .dgwt-wcas-search-icon{opacity:.6}.dgwt-wcas-search-wrapp.dgwt-wcas-layout-icon.dgwt-wcas-layout-icon-open:not(.dgwt-wcas-has-submit) .dgwt-wcas-sf-wrapp .dgwt-wcas-ico-magnifier{display:none}.dgwt-wcas-search-wrapp.dgwt-wcas-layout-icon.dgwt-wcas-layout-icon-open.dgwt-wcas-no-submit .dgwt-wcas-sf-wrapp input[type=search].dgwt-wcas-search-input{padding-left:15px}.dgwt-wcas-layout-icon-open .dgwt-wcas-search-icon-arrow{display:block;position:absolute;top:calc(100% + 2px);left:0;z-index:5;width:15px;height:15px;background:#fff;border:1px solid #ddd;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}.dgwt-wcas-has-headings .dgwt-wcas-suggestion{border-bottom:none}.dgwt-wcas-has-headings .dgwt-wcas-st>span.dgwt-wcas-st--direct-headline{display:none}.dgwt-wcas-has-headings .dgwt-wcas-suggestion-headline{pointer-events:none;display:block;font-weight:500;white-space:nowrap}.dgwt-wcas-has-headings .dgwt-wcas-suggestion-headline .dgwt-wcas-st{border-bottom:1px solid #ddd;padding-bottom:3px;text-transform:uppercase;margin-top:16px;font-size:12px}.dgwt-wcas-has-headings .dgwt-wcas-suggestion.dgwt-wcas-suggestion-headline,.dgwt-wcas-has-headings .dgwt-wcas-suggestion.dgwt-wcas-suggestion-tax{border-bottom:none}.dgwt-wcas-has-headings .dgwt-wcas-suggestion-tax .dgwt-wcas-st{padding:0}.dgwt-wcas-has-headings .dgwt-wcas-suggestion.dgwt-wcas-suggestion-tax.dgwt-wcas-suggestion-selected,.dgwt-wcas-has-headings .dgwt-wcas-suggestion.dgwt-wcas-suggestion-tax:hover{background:0 0;text-decoration:underline}.dgwt-wcas-is-details .dgwt-wcas-has-headings .dgwt-wcas-suggestion.dgwt-wcas-suggestion-tax{min-height:30px}.dgwt-wcas-darkened-overlay{display:block;position:absolute;opacity:.15;z-index:100000;left:0;top:0}.dgwt-wcas-darkened-overlay>div{background:#111;position:absolute}.dgwt-wcas-search-wrapp.dgwt-wcas-search-darkoverl-on .dgwt-wcas-search-form{background-color:rgba(17,17,17,.15);border:none;border-radius:0}.dgwt-wcas-suggestions-wrapp-fixed{position:fixed!important}html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;box-sizing:border-box}aside,details,figure,footer,header,main,nav,section{display:block}progress{display:inline-block;vertical-align:baseline}[hidden],template{display:none}a{background-color:transparent;color:#535353;text-decoration:none;color:#b59767}optgroup,strong{font-weight:700}h1{font-size:2em;margin:.67em 0}img{border:0;height:auto;max-width:100%}svg:not(:root){overflow:hidden}code{font-family:monospace,monospace;font-size:1em}button,input,optgroup,select,textarea{color:inherit;font:inherit;margin:0}button{overflow:visible}button,select{text-transform:none}button,html input[type=button],input[type=submit]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}input{line-height:normal}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{height:auto}input[type=search]{-webkit-appearance:textfield;box-sizing:content-box}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}textarea{overflow:auto;padding-left:3px;width:100%}table{border-collapse:collapse;border-spacing:0;margin:0 0 1.5em;width:100%}td{padding:0}body,button,input,select,textarea{font-family:'Open Sans',Helvetica,Arial,sans-serif;color:#404040;font-size:15px;line-height:1.6}h1,h2,h3,h5{font-family:Raleway,Helvetica,Arial,sans-serif;text-transform:uppercase;letter-spacing:.2em;clear:both}h1{font-size:36px;line-height:40px}h2{font-size:32px;line-height:36px}h3{font-size:28px;line-height:32px}h5{font-size:20px;line-height:24px}h1.entry-title{margin-top:0}p{margin-bottom:1.5em}i{font-style:italic}code,var{font-family:Monaco,Consolas,"Andale Mono","DejaVu Sans Mono",monospace;font-size:15px;font-size:.9375rem}ins{background:#fff9c0;text-decoration:none;background:0 0!important}*,:after,:before{box-sizing:inherit;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}li>ul{margin-bottom:0;margin-left:1.5em}button,input[type=button],input[type=submit]{border:1px solid;border-color:#181818;background:#181818;box-shadow:none;color:#fff;font-size:12px;font-size:.75rem;line-height:1;padding:.6em 1em .4em}button:active,button:focus,button:hover,input[type=button]:active,input[type=button]:focus,input[type=button]:hover,input[type=submit]:active,input[type=submit]:focus,input[type=submit]:hover{border-color:#181818}input[type=password],input[type=search],input[type=text],input[type=url],textarea{color:#666;border:1px solid #ccc;border-radius:3px}input[type=password]:focus,input[type=search]:focus,input[type=text]:focus,input[type=url]:focus,textarea:focus{color:#111}input[type=password],input[type=search],input[type=text],input[type=url]{padding:3px}a:hover{color:#000}a:active,a:focus,a:hover{outline:0}.main-navigation{clear:both;display:block;float:left;width:100%}.main-navigation ul{list-style:none;margin:0;padding-left:0;text-align:center}.main-navigation li{display:inline-block;position:relative}.main-navigation a{font-family:Raleway,Helvetica,Arial,sans-serif;text-transform:uppercase;color:#222;font-weight:600;font-size:13px;letter-spacing:.2em;display:block;text-decoration:none;padding:11px 20px 10px;-webkit-transition:.2s ease-in-out;-moz-transition:.2s ease-in-out;-ms-transition:.2s ease-in-out;-o-transition:.2s ease-in-out;transition:ease-in-out .2s}.main-navigation a:hover{background:#181818;color:#fff;-webkit-transition:.2s ease-in-out;-moz-transition:.2s ease-in-out;-ms-transition:.2s ease-in-out;-o-transition:.2s ease-in-out;transition:ease-in-out .2s}.main-navigation ul ul{background:#222;box-shadow:0 3px 3px rgba(0,0,0,.2);text-align:left;padding:6px;float:left;position:absolute;top:2.5em;left:-999em;z-index:99999;background:#c2a26d}.main-navigation ul ul ul{left:-999em;top:0}.main-navigation ul ul a{color:#fff;font-size:13px;text-transform:none;letter-spacing:.075em;font-weight:400;width:200px}.main-navigation ul li:hover>ul{left:auto}.main-navigation ul ul li:hover>ul{left:100%}.menu-toggle,.toggle-menu{display:none}@media screen and (max-width:800px){.toggle-menu{display:block}.main-navigation ul{display:none}.menu-toggle{width:85%;margin:0 auto;border-radius:3px;padding:6px 10px 7px}}.screen-reader-text{clip:rect(1px,1px,1px,1px);position:absolute!important;height:1px;width:1px;overflow:hidden}.screen-reader-text:active,.screen-reader-text:focus,.screen-reader-text:hover{background-color:#f1f1f1;border-radius:3px;box-shadow:0 0 2px 2px rgba(0,0,0,.6);clip:auto!important;color:#21759b;display:block;font-size:14px;font-size:.875rem;font-weight:700;height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}.alignleft{display:inline;float:left;margin-right:1.5em}.clear:after,.clear:before,.entry-content:after,.entry-content:before,.site-content:after,.site-content:before,.site-footer:after,.site-footer:before,.site-header:after,.site-header:before{content:"";display:table}.clear:after,.entry-content:after,.site-content:after,.site-footer:after,.site-header:after{clear:both}.widget{margin:0 0 1.5em;font-size:14px}.widget select{max-width:100%}.widget-title{font-size:14px;letter-spacing:.075em}.widget ul{margin:0;padding:0;list-style:none}.widget input[type=search]{background:#f1f1f1;border-color:#f1f1f1;width:90%;padding:10px 5%;font-size:13px}.widget input[type=submit]{display:none}.site-branding{text-align:center;margin-top:3rem}#footer-cta{color:#535353;width:100%;background:#181818;text-align:center;padding-bottom:20px;background:#c2a26d}#footer-cta .widget-title{color:#666}#footer-cta span{color:#fff;text-transform:uppercase;font-size:13px;letter-spacing:.2em}.site-footer{background:#1f2023;padding:40px 0 20px;color:#535353;font-size:13px}.site-footer ul{margin:0;padding:0;list-style:none}.site-footer ul li{margin-bottom:5px}.site-footer a{color:#f0f0f0}.site-footer a:hover{color:#999}.site-footer .widget .fa{color:#f0f0f0;font-size:22px;display:inline-block;margin-right:15px}.site-footer .widget-title{font-size:14px;line-height:16px;color:#666}.site-info{font-size:12px;text-transform:uppercase;letter-spacing:.2em;padding-top:20px}.site-header{padding-top:15px}.sticky{display:block}.entry-content,.entry-summary{margin:1.5em 0 0}#shop-page{margin:20px 0;padding:20px 0;border-top:1px solid #ccc}#shop-page h3{text-transform:none;font-size:14px;line-height:16px;text-align:center;letter-spacing:.075em;padding:0 0 2px;color:#404040}#shop-page .woocommerce-breadcrumb{font-size:12px;font-style:italic}#shop-page span.price{text-align:center;color:#999}#shop-page .price del{display:inline-block}#shop-page span.onsale{border-radius:0!important;margin:0!important;font-size:.75em!important;color:#fff!important;padding:.1em 1em!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;background-color:#bf1522!important}.shop-single-product .woocommerce-breadcrumb{max-width:1280px;margin:0 auto;padding-left:40px}.shop-single-product div.images,.shop-single-product div.summary{width:100%!important;float:none!important}.shop-single-product .product_title{text-transform:none;font-size:28px;line-height:30px;letter-spacing:.075em}.shop-single-product h2{font-size:16px;line-height:18px;margin-bottom:20px}.shop-single-product p{font-size:13px;color:#999}.shop-single-product ul.tabs{font-size:13px}.shop-single-product .single_add_to_cart_button{color:#fff!important;font-size:13px!important;line-height:17px!important;border-radius:0!important;padding:.618em 2em!important;text-transform:uppercase;letter-spacing:.15em}ul.social-media-icons{margin:0;padding:0;float:right}.social-media-icons li{display:inline-block;list-style:none}.social-media-icons li .fa{color:#f0f0f0;font-size:18px;padding:0 0 0 15px;-webkit-transition:.2s ease-in-out;-moz-transition:.2s ease-in-out;-ms-transition:.2s ease-in-out;-o-transition:.2s ease-in-out;transition:ease-in-out .2s}.social-media-icons li .fa:hover{color:#999}header .social-media-icons li .fa{color:#222;font-size:16px}header .social-media-icons li .fa:hover{color:#999}iframe,object{max-width:100%}.border--bottom,.border--left,.border--right,.border--top{background-color:#1f2023;position:fixed;z-index:999}.border--bottom,.border--top{height:1em;left:0;right:0}.border--left,.border--right{bottom:0;top:0;width:1em}.border--top{top:0}.border--right{right:0}.border--bottom{bottom:0}.border--left{left:0}[class*=col-]{float:left;padding-right:40px}.grid{width:100%;max-width:1280px;min-width:755px;margin:0 auto;overflow:hidden}.grid:after{content:"";display:table;clear:both}.grid-pad{padding-top:20px;padding-left:40px;padding-right:0}.menu-overflow{overflow:visible}.col-1-1{width:100%}.col-1-2{width:50%}.col-1-4{width:25%}.col-5-12{width:41.66%}.col-7-12{width:58.33%}@media handheld,only screen and (max-width:767px){.grid{width:100%;min-width:0;margin-left:0;margin-right:0;padding-left:30px;padding-right:20px}[class*=col-]{width:auto;float:none;margin-left:0;margin-right:0;margin-top:10px;margin-bottom:10px;padding-left:0;padding-right:10px}.border--bottom,.border--top{height:.5em}.border--left,.border--right{width:.5em}.site-header{padding-top:0}.site-header [class*=col-]{text-align:center}ul.social-media-icons{float:none;margin-top:20px}.social-media-icons li .fa{padding:0 10px}.site-branding{margin-top:0}}.product>div>div.col-5-12>div.summary.entry-summary>p.price.price-unit.smaller.wc-gzd-additional-info,.product>div>div.col-5-12>div.summary.entry-summary>p:nth-child(2)>span{color:#353535!important;font-size:.9em}.woocommerce div[id^=product] p.price:nth-child(2)>del>span>bdi,.woocommerce div[id^=product]>div>div>div>p>ins>span,span.woocommerce-Price-amount.amount{color:#bf1522}.woocommerce div[id^=product] span.onsale,.woocommerce span.onsale,span.onsale{background-color:#bf1522!important}.woocommerce span.onsale{background-color:#bf1522!important}.woocommerce div[id^=product-]>div>div>div.summary.entry-summary>form>button{background-color:#222121!important}@font-face{font-display:swap;font-family:Raleway;font-style:normal;font-weight:400;src:url(https://fonts.gstatic.com/s/raleway/v28/1Ptug8zYS_SKggPNyC0ITw.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-display:swap;font-family:Raleway;font-style:normal;font-weight:600;src:url(https://fonts.gstatic.com/s/raleway/v28/1Ptug8zYS_SKggPNyC0ITw.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-display:swap;font-family:'Open Sans';font-style:italic;font-weight:400;font-stretch:100%;src:url(https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk8ZkWVAewA.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-display:swap;font-family:'Open Sans';font-style:normal;font-weight:400;font-stretch:100%;src:url(https://fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-display:swap;font-family:'Open Sans';font-style:normal;font-weight:600;font-stretch:100%;src:url(https://fonts.gstatic.com/s/opensans/v34/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-display:swap;font-family:FontAwesome;src:url('https://www.loewen-apotheke24.com/wp-content/themes/exchange_mt/fonts/fontawesome-webfont.eot?v=4.7.0');src:url('https://www.loewen-apotheke24.com/wp-content/themes/exchange_mt/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'),url('https://www.loewen-apotheke24.com/wp-content/themes/exchange_mt/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),url('https://www.loewen-apotheke24.com/wp-content/themes/exchange_mt/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'),url('https://www.loewen-apotheke24.com/wp-content/themes/exchange_mt/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'),url('https://www.loewen-apotheke24.com/wp-content/themes/exchange_mt/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');font-weight:400;font-style:normal}.fa{display:inline-block;font:14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.fa-phone:before{content:"\f095"}.fa-bars:before{content:"\f0c9"}.fa-google-plus:before{content:"\f0d5"}.fa-envelope:before{content:"\f0e0"}.fa-instagram:before{content:"\f16d"}.cbp-spmenu{background:#181818;position:fixed}.cbp-spmenu ul{margin:0;padding:0;list-style:none}.cbp-spmenu a{font-family:Raleway,Helvetica,Arial,sans-serif;letter-spacing:.2em;display:block;color:#ededed;font-size:.9em;text-transform:uppercase}.cbp-spmenu ul ul a{font-size:.75em;padding:.45em 1em .45em 2.5em;color:#888;text-transform:none;letter-spacing:.05em}.cbp-spmenu a:hover{background:#1f2023}.cbp-spmenu-vertical{width:240px;height:100%;top:0;z-index:1000;overflow-y:scroll}.cbp-spmenu-vertical a{padding:.65em 1em}.cbp-spmenu-left{left:-240px}.cbp-spmenu-right{right:-240px}.cbp-spmenu-left.menu-open{left:0}.cbp-spmenu-right.menu-open{right:0}.cbp-spmenu-top{top:-150px}.cbp-spmenu-bottom{bottom:-150px}.cbp-spmenu-top.menu-open{top:0}.cbp-spmenu-bottom.menu-open{bottom:0}.push-body{overflow-x:hidden;position:relative;left:0}.cbp-spmenu,.push-body{-webkit-transition:.3s;-moz-transition:.3s;transition:all .3s ease}@media screen and (max-width:55.1875em){.cbp-spmenu-top{top:-110px}.cbp-spmenu-bottom{bottom:-110px}}@media screen and (max-height:26.375em){.cbp-spmenu-vertical{font-size:90%;width:190px}.cbp-spmenu-left{left:-190px}.cbp-spmenu-right{right:-190px}}.animated{-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-fill-mode:both;animation-fill-mode:both}.delay{-webkit-animation-delay:.4s;animation-delay:.4s}@-webkit-keyframes swing{20%{-webkit-transform:rotate3d(0,0,1,15deg);transform:rotate3d(0,0,1,15deg)}40%{-webkit-transform:rotate3d(0,0,1,-10deg);transform:rotate3d(0,0,1,-10deg)}60%{-webkit-transform:rotate3d(0,0,1,5deg);transform:rotate3d(0,0,1,5deg)}80%{-webkit-transform:rotate3d(0,0,1,-5deg);transform:rotate3d(0,0,1,-5deg)}100%{-webkit-transform:rotate3d(0,0,1,0deg);transform:rotate3d(0,0,1,0deg)}}@keyframes swing{20%{-webkit-transform:rotate3d(0,0,1,15deg);transform:rotate3d(0,0,1,15deg)}40%{-webkit-transform:rotate3d(0,0,1,-10deg);transform:rotate3d(0,0,1,-10deg)}60%{-webkit-transform:rotate3d(0,0,1,5deg);transform:rotate3d(0,0,1,5deg)}80%{-webkit-transform:rotate3d(0,0,1,-5deg);transform:rotate3d(0,0,1,-5deg)}100%{-webkit-transform:rotate3d(0,0,1,0deg);transform:rotate3d(0,0,1,0deg)}}.swing{-webkit-transform-origin:top center;transform-origin:top center;-webkit-animation-name:swing;animation-name:swing}@-webkit-keyframes fadeIn{0%{opacity:0}100%{opacity:1}}@keyframes fadeIn{0%{opacity:0}100%{opacity:1}}.fadeIn{-webkit-animation-name:fadeIn;animation-name:fadeIn}p.wc-gzd-additional-info:empty{display:none}.products .wc-gzd-additional-info{font-size:.8em;margin:.7rem 0;padding:0}.products .product .price-unit{font-size:.8em}.product p.wc-gzd-additional-info{margin-bottom:.5rem;font-size:.9em;clear:left}.product .product_meta{margin-top:1rem}p.footer-info{text-align:center;font-size:.9em;padding-bottom:.5rem}.wc-gzd-placeholder-loading{position:relative;display:flex;flex:0 0 100%;flex-flow:column;overflow:hidden}.wc-gzd-placeholder-loading *{box-sizing:border-box}.wc-gzd-placeholder-loading::before{position:absolute;top:0;right:0;bottom:0;left:50%;z-index:1;width:500%;margin-left:-250%;background:linear-gradient(to right,rgba(255,255,255,0) 46%,rgba(255,255,255,.35) 50%,rgba(255,255,255,0) 54%) 50% 50%;-webkit-animation:.8s linear infinite phAnimation;animation:.8s linear infinite phAnimation;content:" ";pointer-events:none}.wc-gzd-placeholder-loading .wc-gzd-placeholder-row{display:flex;vertical-align:middle;align-items:center}.wc-gzd-placeholder-loading .wc-gzd-placeholder-row>*{height:10px;background-color:#e7e7e7;display:block}@-webkit-keyframes phAnimation{0%{transform:translate3d(-30%,0,0)}100%{transform:translate3d(30%,0,0)}}@keyframes phAnimation{0%{transform:translate3d(-30%,0,0)}100%{transform:translate3d(30%,0,0)}}.no-js img.lazyload{display:none}.lazyload,.lazyloading{opacity:0}.lazyloaded{opacity:1;transition:opacity .4s;transition-delay:0s}.dgwt-wcas-ico-magnifier,.dgwt-wcas-ico-magnifier-handler{max-width:20px}.dgwt-wcas-search-wrapp{max-width:600px}.main-navigation a:hover{background-color:#222}.cbp-spmenu a,.main-navigation a{font-size:14px}.site-footer{background:#fff}.site-footer,.site-footer .widget-title,.site-footer a,.site-footer h1,.site-footer h2,.site-footer h3,.site-footer h5,.site-footer p{color:#454343}.site-footer button{background:#535353;border-color:#535353}#footer-cta button,#footer-cta button:hover{background:#535353;border-color:#535353}button:hover,input[type=button]:hover,input[type=submit]:hover{background:#191919;border-color:#191919}.social-media-icons li .fa{color:#222;font-size:16px}#shop-page span.onsale{background-color:#bf1522!important}.woocommerce div[id^=product-] form button{background-color:#222121!important}.woocommerce div[id^=product-] div.summary>p.price.price-unit,.woocommerce p.price.price-unit,.woocommerce p.price:nth-child(3){color:#222121}.woocommerce div.product p.price,.woocommerce div.product span.price{color:#bf1522}
+  </style>
+  <meta content="Online Order 24/7/365 | German Pharmacy | Fast international Shipping | PayPal | Labo Life 2L ALERG capsules - save 10€ with value pack" name="description"/>
+  <link href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-alerg-capsules-3x30/" rel="canonical"/>
+  <meta content="en_US" property="og:locale"/>
+  <meta content="article" property="og:type"/>
+  <meta content="Labo Life 2L ALERG capsules 3x 30 p. value pack" property="og:title"/>
+  <meta content="Löwen Apotheke24 - Spezialist für Naturheilkunde - Weltweiter Versand - kurze Lieferzeit - gratis Lieferung ab 30 € -" property="og:description"/>
+  <meta content="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-alerg-capsules-3x30/" property="og:url"/>
+  <meta content="Löwen Apotheke24" property="og:site_name"/>
+  <meta content="2022-12-05T07:14:30+00:00" property="article:modified_time"/>
+  <meta content="https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke.jpg" property="og:image"/>
+  <meta content="600" property="og:image:width"/>
+  <meta content="600" property="og:image:height"/>
+  <meta content="image/jpeg" property="og:image:type"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="Est. reading time" name="twitter:label1"/>
+  <meta content="1 minute" name="twitter:data1"/>
+  <script class="yoast-schema-graph" type="application/ld+json">
+   {"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-alerg-capsules-3x30/","url":"https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-alerg-capsules-3x30/","name":"Labo Life 2L ALERG capsules value pack - Löwen Apotheke24","isPartOf":{"@id":"https://www.loewen-apotheke24.com/en/#website"},"primaryImageOfPage":{"@id":"https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-alerg-capsules-3x30/#primaryimage"},"image":{"@id":"https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-alerg-capsules-3x30/#primaryimage"},"thumbnailUrl":"https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke.jpg","datePublished":"2021-01-17T14:12:29+00:00","dateModified":"2022-12-05T07:14:30+00:00","description":"Online Order 24/7/365 | German Pharmacy | Fast international Shipping | PayPal | Labo Life 2L ALERG capsules - save 10€ with value pack","breadcrumb":{"@id":"https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-alerg-capsules-3x30/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-alerg-capsules-3x30/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-alerg-capsules-3x30/#primaryimage","url":"https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke.jpg","contentUrl":"https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke.jpg","width":600,"height":600},{"@type":"BreadcrumbList","@id":"https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-alerg-capsules-3x30/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.loewen-apotheke24.com/en/home/"},{"@type":"ListItem","position":2,"name":"Shop","item":"https://www.loewen-apotheke24.com/en/shop-3/"},{"@type":"ListItem","position":3,"name":"Labo Life 2L ALERG capsules 3x 30 p. value pack"}]},{"@type":"WebSite","@id":"https://www.loewen-apotheke24.com/en/#website","url":"https://www.loewen-apotheke24.com/en/","name":"Löwen Apotheke24","description":"Specialist for Natural Medicine - Mail order pharmacy Baden-Baden[:en]Your Specialist for Natural Medicine - Experts from Baden-Baden, Germany","publisher":{"@id":"https://www.loewen-apotheke24.com/en/#organization"},"alternateName":"Löwen Apotheke","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.loewen-apotheke24.com/en/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://www.loewen-apotheke24.com/en/#organization","name":"Löwen Apotheke","alternateName":"Löwen Apotheke24","url":"https://www.loewen-apotheke24.com/en/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://www.loewen-apotheke24.com/en/#/schema/logo/image/","url":"https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/logo-loewen-apotheke24.png","contentUrl":"https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/logo-loewen-apotheke24.png","width":242,"height":70,"caption":"Löwen Apotheke"},"image":{"@id":"https://www.loewen-apotheke24.com/en/#/schema/logo/image/"}}]}
+  </script>
+  <!-- / Yoast SEO Premium plugin. -->
+  <link href="//www.loewen-apotheke24.com" rel="dns-prefetch"/>
+  <link href="https://www.loewen-apotheke24.com/en/feed/" rel="alternate" title="Löwen Apotheke24 » Feed" type="application/rss+xml"/>
+  <link href="https://www.loewen-apotheke24.com/en/comments/feed/" rel="alternate" title="Löwen Apotheke24 » Comments Feed" type="application/rss+xml"/>
+  <style type="text/css">
+  </style>
+  <style id="global-styles-inline-css" type="text/css">
+  </style>
+  <style id="woocommerce-inline-inline-css" type="text/css">
+  </style>
+  <style id="wpml-legacy-horizontal-list-0-inline-css" type="text/css">
+  </style>
+  <style id="woocommerce-gzd-layout-inline-css" type="text/css">
+  </style>
+  <script defer="" id="jquery-core-js" src="https://www.loewen-apotheke24.com/wp-includes/js/jquery/jquery.js?ver=3.6.1" type="text/javascript">
+  </script>
+  <script data-minify="1" defer="" id="jquery-migrate-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-includes/js/jquery/jquery-migrate.js?ver=1671204107" type="text/javascript">
+  </script>
+  <script id="wpml-cookie-js-extra" type="text/javascript">
+   /* <![CDATA[ */
+var wpml_cookies = {"wp-wpml_current_language":{"value":"en","expires":1,"path":"\/"}};
+var wpml_cookies = {"wp-wpml_current_language":{"value":"en","expires":1,"path":"\/"}};
+/* ]]> */
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="wpml-cookie-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/plugins/sitepress-multilingual-cms/res/js/cookies/language-cookie.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <link href="https://www.loewen-apotheke24.com/en/wp-json/" rel="https://api.w.org/"/>
+  <link href="https://www.loewen-apotheke24.com/en/wp-json/wp/v2/product/52754" rel="alternate" type="application/json"/>
+  <link href="https://www.loewen-apotheke24.com/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+  <link href="https://www.loewen-apotheke24.com/wp-includes/wlwmanifest.xml" rel="wlwmanifest" type="application/wlwmanifest+xml"/>
+  <meta content="WordPress 6.1.1" name="generator"/>
+  <meta content="WooCommerce 7.2.0" name="generator"/>
+  <link href="https://www.loewen-apotheke24.com/en/?p=52754" rel="shortlink"/>
+  <link href="https://www.loewen-apotheke24.com/en/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.loewen-apotheke24.com%2Fen%2Fshop%2Flabo-life-en%2Flabo-life-2l-alerg-capsules-3x30%2F" rel="alternate" type="application/json+oembed"/>
+  <link href="https://www.loewen-apotheke24.com/en/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.loewen-apotheke24.com%2Fen%2Fshop%2Flabo-life-en%2Flabo-life-2l-alerg-capsules-3x30%2F&amp;format=xml" rel="alternate" type="text/xml+oembed"/>
+  <meta content="WPML ver:4.5.14 stt:1,3;" name="generator"/>
+  <!-- GA Google Analytics @ https://m0n.co/ga -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-LZ9Y5PGLLY" type="rocketlazyloadscript">
+  </script>
+  <script type="rocketlazyloadscript">
+   window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-LZ9Y5PGLLY');
+  </script>
+  <style>
+  </style>
+  <style>
+  </style>
+  <script>
+   document.documentElement.className = document.documentElement.className.replace( 'no-js', 'js' );
+  </script>
+  <style>
+  </style>
+  <style>
+  </style>
+  <!--[if lt IE 9]>
+<script src="https://www.loewen-apotheke24.com/wp-content/themes/exchange_mt/js/html5shiv.js"></script>
+<![endif]-->
+  <!-- exchange customizer CSS -->
+  <style>
+  </style>
+  <noscript>
+   <style>
+   </style>
+  </noscript>
+  <link href="https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/cropped-Icon-loewen-apotheke24-1-32x32.png" rel="icon" sizes="32x32"/>
+  <link href="https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/cropped-Icon-loewen-apotheke24-1-192x192.png" rel="icon" sizes="192x192"/>
+  <link href="https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/cropped-Icon-loewen-apotheke24-1-180x180.png" rel="apple-touch-icon"/>
+  <meta content="https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/cropped-Icon-loewen-apotheke24-1-270x270.png" name="msapplication-TileImage"/>
+  <style id="wp-custom-css" type="text/css">
+  </style>
+  <style id="sccss">
+  </style>
+ </head>
+ <body class="product-template-default single single-product postid-52754 theme-exchange_mt woocommerce woocommerce-page woocommerce-no-js">
+  <div class="hfeed site" id="page">
+   <a class="skip-link screen-reader-text" href="#content">
+    Skip to content
+   </a>
+   <header class="site-header" id="masthead" role="banner">
+    <div class="grid grid-pad">
+     <div class="col-1-2">
+      <ul class="social-media-icons">
+       <li>
+        <a href="https://www.google.com/search?q=L%C3%B6wen+Apotheke&amp;stick=H4sIAAAAAAAA_-NgU1I1qDAxtzQ3TDMxTko1SkxMMk2yMqhIS0wyMkoyMbI0NU1JSjJOW8TK73N4W3lqnoJjQX5JRmp2KgC_aNbvOwAAAA&amp;hl=de&amp;mat=CYTMSQGOeUmWElcBNqvzOl67uzohh0pr5E5lkfzGBJfqzcorHpVpUEZDFnAFYoc7b0nU8SiOEfSqJJ6EvD-tVj_9c6M35Kawrx0UvPQW0rHRdHcHEVbGAuQeyZiITLzOasg&amp;authuser=0" target="_blank">
+         <i class="fa fa-google-plus">
+         </i>
+        </a>
+       </li>
+       <li>
+        <a href="https://www.instagram.com/loewen_apotheke_24/" target="_blank">
+         <i class="fa fa-instagram">
+         </i>
+        </a>
+       </li>
+       <li>
+        <a href="mailto:info@loewen-apotheke24.de" target="_blank">
+         <i class="fa fa-envelope">
+         </i>
+        </a>
+       </li>
+       <li>
+        <a href="tel:00 49 7221 395 374" target="_blank">
+         <i class="fa fa-phone">
+         </i>
+        </a>
+       </li>
+      </ul>
+      <div class="dgwt-wcas-search-wrapp dgwt-wcas-no-submit woocommerce dgwt-wcas-style-solaris js-dgwt-wcas-layout-icon dgwt-wcas-layout-icon js-dgwt-wcas-mobile-overlay-enabled">
+       <div class="dgwt-wcas-search-icon js-dgwt-wcas-search-icon-handler">
+        <svg class="dgwt-wcas-ico-magnifier-handler" viewbox="0 0 51.539 51.361" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+         <path d="M51.539,49.356L37.247,35.065c3.273-3.74,5.272-8.623,5.272-13.983c0-11.742-9.518-21.26-21.26-21.26 S0,9.339,0,21.082s9.518,21.26,21.26,21.26c5.361,0,10.244-1.999,13.983-5.272l14.292,14.292L51.539,49.356z M2.835,21.082 c0-10.176,8.249-18.425,18.425-18.425s18.425,8.249,18.425,18.425S31.436,39.507,21.26,39.507S2.835,31.258,2.835,21.082z">
+         </path>
+        </svg>
+       </div>
+       <div class="dgwt-wcas-search-icon-arrow">
+       </div>
+       <form action="https://www.loewen-apotheke24.com/en/" class="dgwt-wcas-search-form" method="get" role="search">
+        <div class="dgwt-wcas-sf-wrapp">
+         <svg class="dgwt-wcas-ico-magnifier" viewbox="0 0 51.539 51.361" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+          <path d="M51.539,49.356L37.247,35.065c3.273-3.74,5.272-8.623,5.272-13.983c0-11.742-9.518-21.26-21.26-21.26 S0,9.339,0,21.082s9.518,21.26,21.26,21.26c5.361,0,10.244-1.999,13.983-5.272l14.292,14.292L51.539,49.356z M2.835,21.082 c0-10.176,8.249-18.425,18.425-18.425s18.425,8.249,18.425,18.425S31.436,39.507,21.26,39.507S2.835,31.258,2.835,21.082z">
+          </path>
+         </svg>
+         <br/>
+         <label class="screen-reader-text" for="dgwt-wcas-search-input-1">
+          Products search
+         </label>
+         <p>
+          <input autocomplete="off" class="dgwt-wcas-search-input" id="dgwt-wcas-search-input-1" name="s" placeholder="Search products or PZN..." type="search" value=""/>
+         </p>
+         <div class="dgwt-wcas-preloader">
+         </div>
+         <div class="dgwt-wcas-voice-search">
+         </div>
+         <p>
+          <input name="post_type" type="hidden" value="product"/>
+          <br/>
+          <input name="dgwt_wcas" type="hidden" value="1"/>
+         </p>
+         <p>
+          <input name="lang" type="hidden" value="en"/>
+         </p>
+        </div>
+       </form>
+      </div>
+     </div>
+    </div>
+    <div class="grid grid-pad">
+     <div class="col-1-1">
+      <div class="site-branding">
+       <div class="site-logo">
+        <a href="https://www.loewen-apotheke24.com/en/" rel="home" title="Löwen Apotheke24">
+         <img alt="Löwen Apotheke24" class="lazyload" data-src="https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/logo-loewen-apotheke24.png" height="70" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="242"/>
+         <noscript>
+          <img alt="Löwen Apotheke24" height="70" src="https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/logo-loewen-apotheke24.png" width="242"/>
+         </noscript>
+        </a>
+       </div>
+       <!-- site-logo -->
+      </div>
+      <!-- .site-branding -->
+     </div>
+    </div>
+    <div class="grid grid-pad menu-overflow">
+     <div class="col-1-1">
+      <nav class="main-navigation" id="site-navigation" role="navigation">
+       <button aria-controls="menu" aria-expanded="false" class="menu-toggle toggle-menu menu-left push-body">
+        <i class="fa fa-bars">
+        </i>
+       </button>
+       <div class="menu-main-menu-englisch-container">
+        <ul class="menu" id="menu-main-menu-englisch">
+         <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-51985" id="menu-item-51985">
+          <a href="https://www.loewen-apotheke24.com/en/product_cat/sale/">
+           Sale
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-51986" id="menu-item-51986">
+          <a href="https://www.loewen-apotheke24.com/en/">
+           Products
+          </a>
+          <ul class="sub-menu">
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51987" id="menu-item-51987">
+            <a href="https://www.loewen-apotheke24.com/en/product_tag/weight-loss-fitness/">
+             Weight Loss &amp; Fitness
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51988" id="menu-item-51988">
+            <a href="https://www.loewen-apotheke24.com/en/product_tag/allergy/">
+             Allergy
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51989" id="menu-item-51989">
+            <a href="https://www.loewen-apotheke24.com/en/product_tag/corona-immune-defense/">
+             Corona &amp; immune defense
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51990" id="menu-item-51990">
+            <a href="https://www.loewen-apotheke24.com/en/product_tag/flu-cold/">
+             Flu cold
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51991" id="menu-item-51991">
+            <a href="https://www.loewen-apotheke24.com/en/product_tag/cosmetics/">
+             Cosmetics
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51992" id="menu-item-51992">
+            <a href="https://www.loewen-apotheke24.com/en/product_tag/muscles-bones-joints/">
+             Muscles, Bones &amp; Joints
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51993" id="menu-item-51993">
+            <a href="https://www.loewen-apotheke24.com/en/product_tag/travel-pharmacy/">
+             Travel pharmacy
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51994" id="menu-item-51994">
+            <a href="https://www.loewen-apotheke24.com/en/product_tag/vitamins-minerals/">
+             Vitamins &amp; Minerals
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-51995" id="menu-item-51995">
+          <a href="https://www.loewen-apotheke24.com/en/product_cat/brand/">
+           Brand
+          </a>
+          <ul class="sub-menu">
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-51996" id="menu-item-51996">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/dhu-en/">
+             DHU
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-51997" id="menu-item-51997">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/dr-schwabe/">
+             Dr. Schwabe
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-51998" id="menu-item-51998">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/eucerin-en/">
+             Eucerin
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-51999" id="menu-item-51999">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/heel-en/">
+             Heel
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52000" id="menu-item-52000">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/hevert-en/">
+             Hevert
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat current-product-ancestor current-menu-parent current-product-parent menu-item-52001" id="menu-item-52001">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/labo-life-en/">
+             Labo Life
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52002" id="menu-item-52002">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/loewen-apotheke-en/">
+             Löwen Apotheke
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52003" id="menu-item-52003">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/mein-schuessler-salz-en/">
+             Mein Schüssler Salz
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52004" id="menu-item-52004">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/natugena-en/">
+             NatuGena
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52005" id="menu-item-52005">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/orthomol-en/">
+             Orthomol
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52006" id="menu-item-52006">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/pekana-en/">
+             Pekana
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52007" id="menu-item-52007">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/pflueger-en/">
+             Pflüger
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52008" id="menu-item-52008">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/stada-en/">
+             Stada
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52009" id="menu-item-52009">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/vitorgan-en/">
+             vitOrgan
+            </a>
+           </li>
+           <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52010" id="menu-item-52010">
+            <a href="https://www.loewen-apotheke24.com/en/product_cat/wala-arzneimittel-en/">
+             Wala Arzneimittel
+            </a>
+           </li>
+          </ul>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-51968" id="menu-item-51968">
+          <a href="https://www.loewen-apotheke24.com/en/cart-3/">
+           Shopping cart
+          </a>
+         </li>
+        </ul>
+       </div>
+      </nav>
+      <!-- #site-navigation -->
+     </div>
+    </div>
+   </header>
+   <!-- #masthead -->
+   <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left">
+    <div class="menu-main-menu-englisch-container">
+     <ul class="menu" id="menu-main-menu-englisch-1">
+      <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-51985">
+       <a href="https://www.loewen-apotheke24.com/en/product_cat/sale/">
+        Sale
+       </a>
+      </li>
+      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-51986">
+       <a href="https://www.loewen-apotheke24.com/en/">
+        Products
+       </a>
+       <ul class="sub-menu">
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51987">
+         <a href="https://www.loewen-apotheke24.com/en/product_tag/weight-loss-fitness/">
+          Weight Loss &amp; Fitness
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51988">
+         <a href="https://www.loewen-apotheke24.com/en/product_tag/allergy/">
+          Allergy
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51989">
+         <a href="https://www.loewen-apotheke24.com/en/product_tag/corona-immune-defense/">
+          Corona &amp; immune defense
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51990">
+         <a href="https://www.loewen-apotheke24.com/en/product_tag/flu-cold/">
+          Flu cold
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51991">
+         <a href="https://www.loewen-apotheke24.com/en/product_tag/cosmetics/">
+          Cosmetics
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51992">
+         <a href="https://www.loewen-apotheke24.com/en/product_tag/muscles-bones-joints/">
+          Muscles, Bones &amp; Joints
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51993">
+         <a href="https://www.loewen-apotheke24.com/en/product_tag/travel-pharmacy/">
+          Travel pharmacy
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_tag menu-item-51994">
+         <a href="https://www.loewen-apotheke24.com/en/product_tag/vitamins-minerals/">
+          Vitamins &amp; Minerals
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-51995">
+       <a href="https://www.loewen-apotheke24.com/en/product_cat/brand/">
+        Brand
+       </a>
+       <ul class="sub-menu">
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-51996">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/dhu-en/">
+          DHU
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-51997">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/dr-schwabe/">
+          Dr. Schwabe
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-51998">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/eucerin-en/">
+          Eucerin
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-51999">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/heel-en/">
+          Heel
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52000">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/hevert-en/">
+          Hevert
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat current-product-ancestor current-menu-parent current-product-parent menu-item-52001">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/labo-life-en/">
+          Labo Life
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52002">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/loewen-apotheke-en/">
+          Löwen Apotheke
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52003">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/mein-schuessler-salz-en/">
+          Mein Schüssler Salz
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52004">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/natugena-en/">
+          NatuGena
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52005">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/orthomol-en/">
+          Orthomol
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52006">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/pekana-en/">
+          Pekana
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52007">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/pflueger-en/">
+          Pflüger
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52008">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/stada-en/">
+          Stada
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52009">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/vitorgan-en/">
+          vitOrgan
+         </a>
+        </li>
+        <li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-52010">
+         <a href="https://www.loewen-apotheke24.com/en/product_cat/wala-arzneimittel-en/">
+          Wala Arzneimittel
+         </a>
+        </li>
+       </ul>
+      </li>
+      <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-51968">
+       <a href="https://www.loewen-apotheke24.com/en/cart-3/">
+        Shopping cart
+       </a>
+      </li>
+     </ul>
+    </div>
+   </nav>
+   <div class="site-content animated fadeIn delay" id="content">
+    <section class="shop-single-product" id="shop-page">
+     <div class="content-area" id="primary">
+      <main class="site-main" id="main" role="main">
+       <nav class="woocommerce-breadcrumb">
+        <a href="https://www.loewen-apotheke24.com/en/">
+         Home
+        </a>
+        /
+        <a href="https://www.loewen-apotheke24.com/en/product_cat/labo-life-en/">
+         Labo Life
+        </a>
+        / Labo Life 2L ALERG capsules 3x 30 p. value pack
+       </nav>
+       <div class="woocommerce-notices-wrapper">
+       </div>
+       <div class="post-52754 product type-product status-publish has-post-thumbnail product_cat-labo-life-en product_tag-allergy product_tag-microimmunotherapy-en product_tag-2lalerg-en product_tag-labo-life-en product_tag-megemit-en first instock sale taxable shipping-taxable purchasable product-type-simple" id="product-52754">
+        <div class="grid grid-pad">
+         <div class="col-7-12" style="position: relative;">
+          <span class="onsale">
+           Sale!
+          </span>
+          <div class="woocommerce-product-gallery woocommerce-product-gallery--with-images woocommerce-product-gallery--columns-4 images" data-columns="4" style="opacity: 0; transition: opacity .25s ease-in-out;">
+           <figure class="woocommerce-product-gallery__wrapper">
+            <div class="woocommerce-product-gallery__image" data-thumb="https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke-100x100.jpg" data-thumb-alt="">
+             <a href="https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke.jpg">
+              <img alt="" class="wp-post-image" data-caption="" data-large_image="https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke.jpg" data-large_image_height="600" data-large_image_width="600" data-src="https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke.jpg" decoding="async" height="600" sizes="(max-width: 600px) 100vw, 600px" src="https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke-600x600.jpg" srcset="https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke.jpg 600w, https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke-150x150.jpg 150w, https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke-300x300.jpg 300w, https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke-100x100.jpg 100w, https://www.loewen-apotheke24.com/wp-content/uploads/2021/01/labo-life-2l-alerg-kapseln-produkt-angebot-löwen-apotheke-64x64.jpg 64w" title="labo life 2l alerg kapseln produkt angebot löwen apotheke" width="600"/>
+             </a>
+            </div>
+           </figure>
+          </div>
+         </div>
+         <!-- .col-7-12 -->
+         <div class="col-5-12">
+          <div class="summary entry-summary">
+           <h1 class="product_title entry-title">
+            Labo Life 2L ALERG capsules 3x 30 p. value pack
+           </h1>
+           <p class="price">
+            <del aria-hidden="true">
+             <span class="woocommerce-Price-amount amount">
+              <bdi>
+               147,00
+               <span class="woocommerce-Price-currencySymbol">
+                €
+               </span>
+              </bdi>
+             </span>
+            </del>
+            <span class="wc-gzd-sale-price-label wc-gzd-sale-price-regular-label">
+             new price
+            </span>
+            <ins>
+             <span class="woocommerce-Price-amount amount">
+              <bdi>
+               137,00
+               <span class="woocommerce-Price-currencySymbol">
+                €
+               </span>
+              </bdi>
+             </span>
+            </ins>
+           </p>
+           <p class="price price-unit smaller wc-gzd-additional-info">
+            Base price:
+            <del>
+             <span class="woocommerce-Price-amount amount">
+              1,63
+              <span class="woocommerce-Price-currencySymbol">
+               €
+              </span>
+             </span>
+            </del>
+            <ins>
+             <span class="woocommerce-Price-amount amount">
+              1,52
+              <span class="woocommerce-Price-currencySymbol">
+               €
+              </span>
+             </span>
+            </ins>
+            /
+            <span class="unit">
+             pc.
+            </span>
+           </p>
+           <div class="legal-price-info">
+            <p class="wc-gzd-additional-info">
+             <span class="wc-gzd-additional-info tax-info">
+              incl. 19% VAT
+             </span>
+            </p>
+           </div>
+           <div class="woocommerce-product-details__short-description">
+            <h2 style="text-align: left;">
+             Labo Life 2L ALERG capsules 3x 30 p. – value pack
+            </h2>
+            <div class="rating__wrap">
+             <p>
+              Löwen Apotheke imports Labo Life 2L ALERG and all products from Labo Life Belgium for you at your request.
+             </p>
+             <p>
+              <strong>
+               PZN
+              </strong>
+              : – (Pharmazentralnummer)
+             </p>
+             <p>
+              <strong>
+               Dosage form
+              </strong>
+              : capsules – 90 pieces
+             </p>
+             <p>
+              <strong>
+               Prescription type
+              </strong>
+              : prescription-free
+             </p>
+             <p>
+              <strong>
+               Brand
+              </strong>
+              : Labo Life
+             </p>
+             <p>
+              <strong>
+               Manufactorer
+              </strong>
+              :
+              <a href="https://www.labolife.com/de" rel="noopener noreferrer" target="_blank">
+               Labo Life
+              </a>
+             </p>
+            </div>
+           </div>
+           <form action="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-alerg-capsules-3x30/" class="cart" enctype="multipart/form-data" method="post">
+            <div class="quantity">
+             <label class="screen-reader-text" for="quantity_639de5ad3891e">
+              Labo Life 2L ALERG capsules 3x 30 p. value pack quantity
+             </label>
+             <input autocomplete="off" class="input-text qty text" id="quantity_639de5ad3891e" inputmode="numeric" max="" min="1" name="quantity" placeholder="" size="4" step="1" title="Qty" type="number" value="1"/>
+            </div>
+            <button class="single_add_to_cart_button button alt wp-element-button" name="add-to-cart" type="submit" value="52754">
+             Add to cart
+            </button>
+           </form>
+           <div class="product_meta">
+            <p class="wc-gzd-additional-info product-units-wrapper product-units">
+             Product contains: 90
+             <span class="unit">
+              pc.
+             </span>
+            </p>
+            <span class="sku_wrapper">
+             SKU:
+             <span class="sku">
+              ALERG3
+             </span>
+            </span>
+            <span class="posted_in">
+             Category:
+             <a href="https://www.loewen-apotheke24.com/en/product_cat/labo-life-en/" rel="tag">
+              Labo Life
+             </a>
+            </span>
+            <span class="tagged_as">
+             Tags:
+             <a href="https://www.loewen-apotheke24.com/en/product_tag/allergy/" rel="tag">
+              allergy
+             </a>
+             ,
+             <a href="https://www.loewen-apotheke24.com/en/product_tag/microimmunotherapy-en/" rel="tag">
+              microimmunotherapy
+             </a>
+             ,
+             <a href="https://www.loewen-apotheke24.com/en/product_tag/2lalerg-en/" rel="tag">
+              2lalerg
+             </a>
+             ,
+             <a href="https://www.loewen-apotheke24.com/en/product_tag/labo-life-en/" rel="tag">
+              Labo Life
+             </a>
+             ,
+             <a href="https://www.loewen-apotheke24.com/en/product_tag/megemit-en/" rel="tag">
+              Megemit
+             </a>
+            </span>
+           </div>
+          </div>
+          <!-- .summary -->
+          <div class="woocommerce-tabs wc-tabs-wrapper">
+           <ul class="tabs wc-tabs" role="tablist">
+            <li aria-controls="tab-description" class="description_tab" id="tab-title-description" role="tab">
+             <a href="#tab-description">
+              Description
+             </a>
+            </li>
+           </ul>
+           <div aria-labelledby="tab-title-description" class="woocommerce-Tabs-panel woocommerce-Tabs-panel--description panel entry-content wc-tab" id="tab-description" role="tabpanel">
+            <h2>
+             Description
+            </h2>
+            <h3 style="text-align: left;">
+             Labo Life 2L ALERG capsules 3x 30 p. value pack
+            </h3>
+            <p>
+             Löwen Apotheke imports Labo Life 2L ALERG and all products from
+             <a href="https://www.labolife.com/de" rel="noopener noreferrer" target="_blank">
+              Labo Life
+             </a>
+             Belgium for you at your request.
+            </p>
+            <p>
+             Micro-immunotherapy is an immunomodulation therapy that uses the same messengers as the immune system (for example, cytokines, hormones, growth factors, nucleic acids) to transmit information to the body and “readjust” the immune response. In other words, its objective is to restore correct communication between the immune system cells to help them recover their innate capacity to defend us against aggressors or to limit their response when it is exaggerated. In contrast to classic immunotherapy, micro-immunotherapy formulas use a broad range of immune substances (the so-called “messengers”). These are prepared in low concentrations (low and ultra-low doses) through a process of dilution-dynamisation, thereby guaranteeing high tolerance. Furthermore, depending on whether stimulation, modulation or inhibition on the organism is desired, the levels of concentration used can vary within the same formula. Just as occurs naturally within the body, the substances are administered following a specific sequence, a precise order. Just as occurs naturally within the body, the substances are administered following a specific sequence, a precise order.
+            </p>
+            <p>
+             Additional product designation: Labo Life 2LALERG
+            </p>
+            <p>
+             Other Products from
+             <a href="https://www.labolife.com/de" rel="noopener noreferrer" target="_blank">
+              Labo Life
+             </a>
+             <a href="https://www.loewen-apotheke24.com/en/product_cat/labo-life-en/">
+              here
+             </a>
+             .
+            </p>
+            <p>
+             For risks and side effects, read the leaflet and ask your doctor or pharmacist.
+            </p>
+            <h5>
+             <strong>
+              <span style="color: #ff0000;">
+               Our nature bonus here
+              </span>
+              –
+             </strong>
+             <span style="color: #ff0000;">
+              save 10,- Euro
+             </span>
+            </h5>
+            <p>
+             10, – Euro discount per order for our customers. Because not every packaging and every single shipment is absolutely necessary. Bulk orders protect the environment, reduce expenses, delivery costs, CO2 emissions, packaging and waste. When you buy this Labo Life savings pack, we pass our benefit on to you. Special discount for you. Already covered in pricing. As a special advantage.
+            </p>
+           </div>
+          </div>
+          <section class="up-sells upsells products">
+           <h2>
+            You may also like…
+           </h2>
+           <ul class="products columns-4">
+            <li class="post-52760 product type-product status-publish has-post-thumbnail product_cat-labo-life-en product_tag-microimmunotherapy-en product_tag-2l-misen-en product_tag-labo-life-en product_tag-megemit-en first instock taxable shipping-taxable purchasable product-type-simple">
+             <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-misen/">
+             </a>
+             <a href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-misen/">
+              <img alt="" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail lazyload" data-sizes="(max-width: 300px) 100vw, 300px" data-src="https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/1591288-2LMISEN-300x300.jpg" data-srcset="https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/1591288-2LMISEN-300x300.jpg 300w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/1591288-2LMISEN-150x150.jpg 150w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/1591288-2LMISEN.jpg 600w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/1591288-2LMISEN-100x100.jpg 100w" decoding="async" height="300" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="300"/>
+              <noscript>
+               <img alt="" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" decoding="async" height="300" sizes="(max-width: 300px) 100vw, 300px" src="https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/1591288-2LMISEN-300x300.jpg" srcset="https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/1591288-2LMISEN-300x300.jpg 300w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/1591288-2LMISEN-150x150.jpg 150w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/1591288-2LMISEN.jpg 600w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/1591288-2LMISEN-100x100.jpg 100w" width="300"/>
+              </noscript>
+              <h3>
+               Labo Life 2L MISEN capulses 30 p.
+              </h3>
+              <span class="price">
+               <span class="woocommerce-Price-amount amount">
+                <bdi>
+                 44,90
+                 <span class="woocommerce-Price-currencySymbol">
+                  €
+                 </span>
+                </bdi>
+               </span>
+              </span>
+             </a>
+            </li>
+            <li class="post-52805 product type-product status-publish has-post-thumbnail product_cat-labo-life-en product_tag-microimmunotherapy-en product_tag-labo-life-en product_tag-megemit-en instock taxable shipping-taxable purchasable product-type-simple">
+             <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-dep/">
+             </a>
+             <a href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-dep/">
+              <img alt="" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail lazyload" data-sizes="(max-width: 300px) 100vw, 300px" data-src="https://www.loewen-apotheke24.com/wp-content/uploads/2020/05/2601227-2LDEP-300x300.jpg" data-srcset="https://www.loewen-apotheke24.com/wp-content/uploads/2020/05/2601227-2LDEP-300x300.jpg 300w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/05/2601227-2LDEP-150x150.jpg 150w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/05/2601227-2LDEP.jpg 600w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/05/2601227-2LDEP-100x100.jpg 100w" decoding="async" height="300" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="300"/>
+              <noscript>
+               <img alt="" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" decoding="async" height="300" sizes="(max-width: 300px) 100vw, 300px" src="https://www.loewen-apotheke24.com/wp-content/uploads/2020/05/2601227-2LDEP-300x300.jpg" srcset="https://www.loewen-apotheke24.com/wp-content/uploads/2020/05/2601227-2LDEP-300x300.jpg 300w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/05/2601227-2LDEP-150x150.jpg 150w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/05/2601227-2LDEP.jpg 600w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/05/2601227-2LDEP-100x100.jpg 100w" width="300"/>
+              </noscript>
+              <h3>
+               Labo Life 2L DEP capsules 30 p.
+              </h3>
+              <span class="price">
+               <span class="woocommerce-Price-amount amount">
+                <bdi>
+                 68,50
+                 <span class="woocommerce-Price-currencySymbol">
+                  €
+                 </span>
+                </bdi>
+               </span>
+              </span>
+             </a>
+            </li>
+           </ul>
+          </section>
+          <section class="related products">
+           <h2>
+            Related products
+           </h2>
+           <ul class="products columns-4">
+            <li class="post-52012 product type-product status-publish has-post-thumbnail product_cat-labo-life-en product_tag-corona-infection product_tag-microimmunotherapy-en product_tag-labo-life-en product_tag-megemit-en product_tag-long-covid-en first instock taxable shipping-taxable purchasable product-type-simple">
+             <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-mireg-capsules/">
+             </a>
+             <a href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-mireg-capsules/">
+              <img alt="" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail lazyload" data-sizes="(max-width: 300px) 100vw, 300px" data-src="https://www.loewen-apotheke24.com/wp-content/uploads/2017/08/Labo-Life-2L-MIREG-Kapseln-30-St-300x300.jpg" data-srcset="https://www.loewen-apotheke24.com/wp-content/uploads/2017/08/Labo-Life-2L-MIREG-Kapseln-30-St-300x300.jpg 300w, https://www.loewen-apotheke24.com/wp-content/uploads/2017/08/Labo-Life-2L-MIREG-Kapseln-30-St-150x150.jpg 150w, https://www.loewen-apotheke24.com/wp-content/uploads/2017/08/Labo-Life-2L-MIREG-Kapseln-30-St-100x100.jpg 100w, https://www.loewen-apotheke24.com/wp-content/uploads/2017/08/Labo-Life-2L-MIREG-Kapseln-30-St-64x64.jpg 64w, https://www.loewen-apotheke24.com/wp-content/uploads/2017/08/Labo-Life-2L-MIREG-Kapseln-30-St.jpg 600w" decoding="async" height="300" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="300"/>
+              <noscript>
+               <img alt="" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" decoding="async" height="300" sizes="(max-width: 300px) 100vw, 300px" src="https://www.loewen-apotheke24.com/wp-content/uploads/2017/08/Labo-Life-2L-MIREG-Kapseln-30-St-300x300.jpg" srcset="https://www.loewen-apotheke24.com/wp-content/uploads/2017/08/Labo-Life-2L-MIREG-Kapseln-30-St-300x300.jpg 300w, https://www.loewen-apotheke24.com/wp-content/uploads/2017/08/Labo-Life-2L-MIREG-Kapseln-30-St-150x150.jpg 150w, https://www.loewen-apotheke24.com/wp-content/uploads/2017/08/Labo-Life-2L-MIREG-Kapseln-30-St-100x100.jpg 100w, https://www.loewen-apotheke24.com/wp-content/uploads/2017/08/Labo-Life-2L-MIREG-Kapseln-30-St-64x64.jpg 64w, https://www.loewen-apotheke24.com/wp-content/uploads/2017/08/Labo-Life-2L-MIREG-Kapseln-30-St.jpg 600w" width="300"/>
+              </noscript>
+              <h3>
+               Labo Life 2L MIREG Capsules 30 p.
+              </h3>
+              <span class="price">
+               <span class="woocommerce-Price-amount amount">
+                <bdi>
+                 57,00
+                 <span class="woocommerce-Price-currencySymbol">
+                  €
+                 </span>
+                </bdi>
+               </span>
+              </span>
+             </a>
+            </li>
+            <li class="post-52017 product type-product status-publish has-post-thumbnail product_cat-labo-life-en product_tag-offer product_tag-microimmunotherapy-en product_tag-labo-life-en product_tag-megemit-en product_tag-labo-life-2l-ebv-en instock sale taxable shipping-taxable purchasable product-type-simple">
+             <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-ebv-sparpack-kapseln-3x30-st-set/">
+             </a>
+             <a href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-ebv-sparpack-kapseln-3x30-st-set/">
+              <span class="onsale">
+               Sale!
+              </span>
+              <img alt="" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail lazyload" data-sizes="(max-width: 300px) 100vw, 300px" data-src="https://www.loewen-apotheke24.com/wp-content/uploads/2020/11/1591163-2LEBV-300x300.jpg" data-srcset="https://www.loewen-apotheke24.com/wp-content/uploads/2020/11/1591163-2LEBV-300x300.jpg 300w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/11/1591163-2LEBV-150x150.jpg 150w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/11/1591163-2LEBV.jpg 600w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/11/1591163-2LEBV-100x100.jpg 100w" decoding="async" height="300" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="300"/>
+              <noscript>
+               <img alt="" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" decoding="async" height="300" sizes="(max-width: 300px) 100vw, 300px" src="https://www.loewen-apotheke24.com/wp-content/uploads/2020/11/1591163-2LEBV-300x300.jpg" srcset="https://www.loewen-apotheke24.com/wp-content/uploads/2020/11/1591163-2LEBV-300x300.jpg 300w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/11/1591163-2LEBV-150x150.jpg 150w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/11/1591163-2LEBV.jpg 600w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/11/1591163-2LEBV-100x100.jpg 100w" width="300"/>
+              </noscript>
+              <h3>
+               Labo Life 2L EBV capsules volume pack 3x 30 p.
+              </h3>
+              <span class="price">
+               <del aria-hidden="true">
+                <span class="woocommerce-Price-amount amount">
+                 <bdi>
+                  149,70
+                  <span class="woocommerce-Price-currencySymbol">
+                   €
+                  </span>
+                 </bdi>
+                </span>
+               </del>
+               <span class="wc-gzd-sale-price-label wc-gzd-sale-price-regular-label">
+                new price
+               </span>
+               <ins>
+                <span class="woocommerce-Price-amount amount">
+                 <bdi>
+                  139,70
+                  <span class="woocommerce-Price-currencySymbol">
+                   €
+                  </span>
+                 </bdi>
+                </span>
+               </ins>
+              </span>
+             </a>
+            </li>
+            <li class="post-52736 product type-product status-publish has-post-thumbnail product_cat-labo-life-en product_tag-microimmunotherapy-en product_tag-labo-life-en product_tag-megemit-en instock sale taxable shipping-taxable purchasable product-type-simple">
+             <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-arth-capsules-90-p-value-pack/">
+             </a>
+             <a href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-arth-capsules-90-p-value-pack/">
+              <span class="onsale">
+               Sale!
+              </span>
+              <img alt="" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail lazyload" data-sizes="(max-width: 300px) 100vw, 300px" data-src="https://www.loewen-apotheke24.com/wp-content/uploads/2021/07/Labo-Life-2L-ARTH-3x-Loewen-Apotheke24-300x300.jpg" data-srcset="https://www.loewen-apotheke24.com/wp-content/uploads/2021/07/Labo-Life-2L-ARTH-3x-Loewen-Apotheke24-300x300.jpg 300w, https://www.loewen-apotheke24.com/wp-content/uploads/2021/07/Labo-Life-2L-ARTH-3x-Loewen-Apotheke24-150x150.jpg 150w, https://www.loewen-apotheke24.com/wp-content/uploads/2021/07/Labo-Life-2L-ARTH-3x-Loewen-Apotheke24-100x100.jpg 100w, https://www.loewen-apotheke24.com/wp-content/uploads/2021/07/Labo-Life-2L-ARTH-3x-Loewen-Apotheke24-64x64.jpg 64w, https://www.loewen-apotheke24.com/wp-content/uploads/2021/07/Labo-Life-2L-ARTH-3x-Loewen-Apotheke24.jpg 600w" decoding="async" height="300" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="300"/>
+              <noscript>
+               <img alt="" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" decoding="async" height="300" sizes="(max-width: 300px) 100vw, 300px" src="https://www.loewen-apotheke24.com/wp-content/uploads/2021/07/Labo-Life-2L-ARTH-3x-Loewen-Apotheke24-300x300.jpg" srcset="https://www.loewen-apotheke24.com/wp-content/uploads/2021/07/Labo-Life-2L-ARTH-3x-Loewen-Apotheke24-300x300.jpg 300w, https://www.loewen-apotheke24.com/wp-content/uploads/2021/07/Labo-Life-2L-ARTH-3x-Loewen-Apotheke24-150x150.jpg 150w, https://www.loewen-apotheke24.com/wp-content/uploads/2021/07/Labo-Life-2L-ARTH-3x-Loewen-Apotheke24-100x100.jpg 100w, https://www.loewen-apotheke24.com/wp-content/uploads/2021/07/Labo-Life-2L-ARTH-3x-Loewen-Apotheke24-64x64.jpg 64w, https://www.loewen-apotheke24.com/wp-content/uploads/2021/07/Labo-Life-2L-ARTH-3x-Loewen-Apotheke24.jpg 600w" width="300"/>
+              </noscript>
+              <h3>
+               Labo Life 2L ARTH capsules 3×30 p. value pack
+              </h3>
+              <span class="price">
+               <del aria-hidden="true">
+                <span class="woocommerce-Price-amount amount">
+                 <bdi>
+                  117,00
+                  <span class="woocommerce-Price-currencySymbol">
+                   €
+                  </span>
+                 </bdi>
+                </span>
+               </del>
+               <span class="wc-gzd-sale-price-label wc-gzd-sale-price-regular-label">
+                new price
+               </span>
+               <ins>
+                <span class="woocommerce-Price-amount amount">
+                 <bdi>
+                  107,00
+                  <span class="woocommerce-Price-currencySymbol">
+                   €
+                  </span>
+                 </bdi>
+                </span>
+               </ins>
+              </span>
+             </a>
+            </li>
+            <li class="post-52753 product type-product status-publish has-post-thumbnail product_cat-labo-life-en product_tag-microimmunotherapy-en product_tag-labo-life-en product_tag-megemit-en last instock taxable shipping-taxable purchasable product-type-simple">
+             <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-dmla-2/">
+             </a>
+             <a href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-dmla-2/">
+              <img alt="" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail lazyload" data-sizes="(max-width: 300px) 100vw, 300px" data-src="https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/2230837-2LDMLA-300x300.jpg" data-srcset="https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/2230837-2LDMLA-300x300.jpg 300w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/2230837-2LDMLA-150x150.jpg 150w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/2230837-2LDMLA.jpg 600w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/2230837-2LDMLA-100x100.jpg 100w" decoding="async" height="300" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="300"/>
+              <noscript>
+               <img alt="" class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail" decoding="async" height="300" sizes="(max-width: 300px) 100vw, 300px" src="https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/2230837-2LDMLA-300x300.jpg" srcset="https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/2230837-2LDMLA-300x300.jpg 300w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/2230837-2LDMLA-150x150.jpg 150w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/2230837-2LDMLA.jpg 600w, https://www.loewen-apotheke24.com/wp-content/uploads/2020/01/2230837-2LDMLA-100x100.jpg 100w" width="300"/>
+              </noscript>
+              <h3>
+               Labo Life 2L DMLA capsules 30 p.
+              </h3>
+              <span class="price">
+               <span class="woocommerce-Price-amount amount">
+                <bdi>
+                 68,50
+                 <span class="woocommerce-Price-currencySymbol">
+                  €
+                 </span>
+                </bdi>
+               </span>
+              </span>
+             </a>
+            </li>
+           </ul>
+          </section>
+         </div>
+         <!-- .col-5-12 -->
+        </div>
+        <!-- .grid -->
+       </div>
+       <!-- #product-52754 -->
+      </main>
+     </div>
+    </section>
+   </div>
+   <!-- #content -->
+   <div id="footer-cta">
+    <div class="grid grid-pad">
+     <div class="col-1-1">
+      <aside class="widget widget_black_studio_tinymce" id="black-studio-tinymce-26">
+       <div class="textwidget">
+       </div>
+      </aside>
+     </div>
+    </div>
+   </div>
+   <footer class="site-footer" id="colophon" role="contentinfo">
+    <div class="grid grid-pad">
+     <div class="col-1-4">
+      <aside class="widget widget_text" id="text-13">
+       <h1 class="widget-title">
+        Contact
+       </h1>
+       <div class="textwidget">
+        <p>
+         Owner: Sandra Hoff, Apothekerin
+         <br/>
+         Address: Lichtentaler Str.3,
+         <br/>
+         76530 Baden-Baden, Deutschland
+         <br/>
+         Fax: 07221 23875
+         <br/>
+         E-Mail: info@loewen-apotheke24.de
+        </p>
+       </div>
+      </aside>
+      <aside class="widget widget_text" id="text-14">
+       <h1 class="widget-title">
+        Order hotline
+       </h1>
+       <div class="textwidget">
+        <p>
+         We are here for you.
+         <br/>
+         Phone:
+         <span style="color: #ff0000;">
+          07221 395 374
+         </span>
+         <br/>
+         Mo-Do. 08.30 - 17.00 &amp; Fr. 08.30 - 13.00
+         <br/>
+        </p>
+       </div>
+      </aside>
+      <aside class="widget widget_black_studio_tinymce" id="black-studio-tinymce-18">
+       <div class="textwidget">
+        <p>
+         <a href="https://www.loewen-apotheke24.com/de/arzneimittel-lieferservice-rezepte/">
+          Click &amp; Collect
+         </a>
+        </p>
+       </div>
+      </aside>
+     </div>
+     <div class="col-1-4">
+      <aside class="widget widget_nav_menu" id="nav_menu-5">
+       <h1 class="widget-title">
+        Service
+       </h1>
+       <div class="menu-service-container">
+        <ul class="menu" id="menu-service">
+         <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-52431" id="menu-item-52431">
+          <a href="https://www.loewen-apotheke24.com/en/my-account-2/">
+           My Account – Sign In
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52432" id="menu-item-52432">
+          <a href="https://www.loewen-apotheke24.com/en/enterms-of-sale-use/">
+           Terms and Conditions
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52428" id="menu-item-52428">
+          <a href="https://www.loewen-apotheke24.com/en/enprivacy-policyenprivacy-security-and-web-info/">
+           Privacy policy
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52423" id="menu-item-52423">
+          <a href="https://www.loewen-apotheke24.com/en/terms-of-payment/">
+           Terms of payment
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52429" id="menu-item-52429">
+          <a href="https://www.loewen-apotheke24.com/en/enpayment-and-payment-methodsenpayment/">
+           Payment methods
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52427" id="menu-item-52427">
+          <a href="https://www.loewen-apotheke24.com/en/enright-of-withdrawalenrescission/">
+           Right of withdrawal
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52424" id="menu-item-52424">
+          <a href="https://www.loewen-apotheke24.com/en/enyour-online-pharmacy-loewen-apotheke24enyour-online-pharmacy/">
+           Online Pharmacy – Löwen Apotheke24
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52425" id="menu-item-52425">
+          <a href="https://www.loewen-apotheke24.com/en/enmedicines-delivery-service-prescriptionsenmedicines-delivery-service/">
+           Local delivery – Click &amp; Collect
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52426" id="menu-item-52426">
+          <a href="https://www.loewen-apotheke24.com/en/enmy-schuessler-salt-mixerenmy-schuessler-salt/">
+           My Schuessler Salt Mixer
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52430" id="menu-item-52430">
+          <a href="https://www.loewen-apotheke24.com/en/labo-life-micro-immunotherapy/">
+           Microimmunotherapy – Labo Life
+          </a>
+         </li>
+        </ul>
+       </div>
+      </aside>
+      <aside class="widget widget_text" id="text-7">
+       <div class="textwidget">
+        <p>
+         <a href="https://www.loewen-apotheke24.com/my-account-2/">
+          Sign In / Anmelden
+         </a>
+        </p>
+       </div>
+      </aside>
+     </div>
+     <div class="col-1-4">
+      <aside class="widget widget_black_studio_tinymce" id="black-studio-tinymce-20">
+       <h1 class="widget-title">
+        About us
+       </h1>
+       <div class="textwidget">
+        <p>
+         <a href="https://www.loewen-apotheke24.com/en/lions-pharmacy/">
+          About us
+         </a>
+         <br/>
+         <a href="https://www.loewen-apotheke24.com/de/jobs-karriere/">
+          Career
+         </a>
+         <a href="https://www.loewen-apotheke24.com/en/encontact/">
+          <br/>
+          Contact
+         </a>
+        </p>
+       </div>
+      </aside>
+      <aside class="widget widget_black_studio_tinymce" id="black-studio-tinymce-19">
+       <h1 class="widget-title">
+        Info
+       </h1>
+       <div class="textwidget">
+        <p>
+         <a href="https://www.loewen-apotheke24.com/en/encontact/">
+          Contact
+         </a>
+         <br/>
+         <a href="https://www.loewen-apotheke24.com/en/enimprintenlegal-info/">
+          Legal notice
+         </a>
+         <br/>
+         <a href="https://www.loewen-apotheke24.com/en/enprivacy-policyenprivacy-security-and-web-info/">
+          Data privacy
+         </a>
+         <br/>
+         <a href="https://www.loewen-apotheke24.com/en/enterms-of-sale-use/">
+          Terms &amp; Conditions
+         </a>
+        </p>
+       </div>
+      </aside>
+      <aside class="widget widget_black_studio_tinymce" id="black-studio-tinymce-2">
+       <h1 class="widget-title">
+        Partner
+       </h1>
+       <div class="textwidget">
+        <p>
+         <a href="http://www.meinschuesslersalz.de" rel="noopener noreferrer" target="_blank">
+          Mein Schüssler Salz
+          <br/>
+         </a>
+         <a href="https://www.labolife.com/de">
+          Labo Life
+         </a>
+         <br/>
+         <a href="http://www.vitorgan.de/" rel="noopener noreferrer" target="_blank">
+          VitOrgan
+         </a>
+         <a href="https://www.bboost.de">
+          <br/>
+         </a>
+         <a href="https://praxis-sandra-hoff.de">
+          Praxis Sandra Hoff
+         </a>
+         <br/>
+         <a href="https://www.medvergleich.de" rel="noopener" target="_blank" title="Das aktuelle Gesundheitsportal">
+          medvergleich.de
+         </a>
+        </p>
+       </div>
+      </aside>
+     </div>
+     <div class="col-1-4">
+      <aside class="widget widget_nav_menu" id="nav_menu-4">
+       <h1 class="widget-title">
+        Counselation
+       </h1>
+       <div class="menu-ratgeber-container">
+        <ul class="menu" id="menu-ratgeber">
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-460" id="menu-item-460">
+          <a href="https://www.loewen-apotheke24.com/de/schuessler-salz-mixer/">
+           My Schuessler Salt Mixer
+          </a>
+         </li>
+         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-462" id="menu-item-462">
+          <a href="https://www.loewen-apotheke24.com/de/herstellungen/">
+           My individual preparation
+          </a>
+         </li>
+        </ul>
+       </div>
+      </aside>
+      <aside class="widget widget_black_studio_tinymce" id="black-studio-tinymce-21">
+       <h1 class="widget-title">
+        QUALITY
+       </h1>
+       <div class="textwidget">
+        <p style="text-align: left;">
+         Löwen Apotheke, Baden-Baden is
+         <br/>
+         a verified and registered Pharmacy.
+        </p>
+        <table style="width: 174px; height: 166px;">
+         <tbody>
+          <tr>
+           <td style="width: 82px;">
+            <img alt="Löwen Apotheke Baden-Baden, Deutschland" class="alignleft wp-image-416 lazyload" data-src="https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/large.1.default-150x150.png" height="60" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="58"/>
+            <noscript>
+             <img alt="Löwen Apotheke Baden-Baden, Deutschland" class="alignleft wp-image-416" height="60" src="https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/large.1.default-150x150.png" width="58"/>
+            </noscript>
+           </td>
+           <td style="width: 80px;">
+            <a href="https://versandhandel.dimdi.de/websearch/servlet/Gate?accessid=dimdi_var&amp;term=3c387956690121ccc8763184f052b93f" rel="https://versandhandel.dimdi.de/websearch/servlet/Gate?accessid=dimdi_var&amp;term=3c387956690121ccc8763184f052b93f noopener noreferrer" target="_blank">
+             <img alt="DIMDI Logo Löwen Apotheke, Baden-Baden" class="alignleft wp-image-466 lazyload" data-src="https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/Neues-DIMDI-Logo_2.jpg" height="60" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" title="DIMDI" width="70"/>
+             <noscript>
+              <img alt="DIMDI Logo Löwen Apotheke, Baden-Baden" class="alignleft wp-image-466" height="60" src="https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/Neues-DIMDI-Logo_2.jpg" title="DIMDI" width="70"/>
+             </noscript>
+            </a>
+           </td>
+          </tr>
+          <tr>
+           <td style="width: 82px;">
+            <img alt="Löwen Apotheke, Bio Zertifikat Öko 007" class="wp-image-3560 alignleft lazyload" data-src="https://www.loewen-apotheke24.com/wp-content/uploads/2018/03/logo-_-bio_-isa-1.png" height="66" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="66"/>
+            <noscript>
+             <img alt="Löwen Apotheke, Bio Zertifikat Öko 007" class="wp-image-3560 alignleft" height="66" src="https://www.loewen-apotheke24.com/wp-content/uploads/2018/03/logo-_-bio_-isa-1.png" width="66"/>
+            </noscript>
+           </td>
+           <td style="width: 80px;">
+            <img alt="Guten Tag Apotheken Logo Löwen Apotheke" class="alignleft wp-image-465 lazyload" data-src="https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/guten_tag_logo.png" height="60" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="60"/>
+            <noscript>
+             <img alt="Guten Tag Apotheken Logo Löwen Apotheke" class="alignleft wp-image-465" height="60" src="https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/guten_tag_logo.png" width="60"/>
+            </noscript>
+           </td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </aside>
+     </div>
+    </div>
+    <div class="col-1-1">
+     <div class="grid grid-pad">
+      <div class="site-info">
+       <ul class="social-media-icons">
+        <li>
+         <a href="https://www.google.com/search?q=L%C3%B6wen+Apotheke&amp;stick=H4sIAAAAAAAA_-NgU1I1qDAxtzQ3TDMxTko1SkxMMk2yMqhIS0wyMkoyMbI0NU1JSjJOW8TK73N4W3lqnoJjQX5JRmp2KgC_aNbvOwAAAA&amp;hl=de&amp;mat=CYTMSQGOeUmWElcBNqvzOl67uzohh0pr5E5lkfzGBJfqzcorHpVpUEZDFnAFYoc7b0nU8SiOEfSqJJ6EvD-tVj_9c6M35Kawrx0UvPQW0rHRdHcHEVbGAuQeyZiITLzOasg&amp;authuser=0" target="_blank">
+          <i class="fa fa-google-plus">
+          </i>
+         </a>
+        </li>
+        <li>
+         <a href="https://www.instagram.com/loewen_apotheke_24/" target="_blank">
+          <i class="fa fa-instagram">
+          </i>
+         </a>
+        </li>
+        <li>
+         <a href="mailto:info@loewen-apotheke24.de" target="_blank">
+          <i class="fa fa-envelope">
+          </i>
+         </a>
+        </li>
+        <li>
+         <a href="tel:00 49 7221 395 374" target="_blank">
+          <i class="fa fa-phone">
+          </i>
+         </a>
+        </li>
+       </ul>
+      </div>
+      <!-- .site-info -->
+     </div>
+    </div>
+   </footer>
+   <!-- #colophon -->
+   <div class="border--top">
+   </div>
+   <div class="border--right">
+   </div>
+   <div class="border--bottom">
+   </div>
+   <div class="border--left">
+   </div>
+  </div>
+  <!-- #page -->
+  <p class="footer-info vat-info">
+   All prices incl. VAT.
+  </p>
+  <p class="footer-info sale-info">
+   All striked out prices refer to prices used to be charged at this shop.
+  </p>
+  <script data-rocket-type="text/javascript" type="rocketlazyloadscript">
+   var _paq = _paq || [];
+					_paq.push(['setCustomDimension', 1, '{"ID":1,"name":"Lars","avatar":"b3d55c2e40ddfd44090cec44311741a7"}']);
+				_paq.push(['trackPageView']);
+								(function () {
+					var u = "https://stats1.wpmudev.com/";
+					_paq.push(['setTrackerUrl', u + 'track/']);
+					_paq.push(['setSiteId', '127998']);
+					var d   = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+					g.type  = 'text/javascript';
+					g.async = true;
+					g.defer = true;
+					g.src   = 'https://stats.wpmucdn.com/analytics.js';
+					s.parentNode.insertBefore(g, s);
+				})();
+  </script>
+  <script type="application/ld+json">
+   {"@context":"https:\/\/schema.org\/","@graph":[{"@context":"https:\/\/schema.org\/","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"name":"Home","@id":"https:\/\/www.loewen-apotheke24.com\/en\/"}},{"@type":"ListItem","position":2,"item":{"name":"Labo Life","@id":"https:\/\/www.loewen-apotheke24.com\/en\/product_cat\/labo-life-en\/"}},{"@type":"ListItem","position":3,"item":{"name":"Labo Life 2L ALERG capsules 3x 30 p. value pack","@id":"https:\/\/www.loewen-apotheke24.com\/en\/shop\/labo-life-en\/labo-life-2l-alerg-capsules-3x30\/"}}]},{"@context":"https:\/\/schema.org\/","@type":"Product","@id":"https:\/\/www.loewen-apotheke24.com\/en\/shop\/labo-life-en\/labo-life-2l-alerg-capsules-3x30\/#product","name":"Labo Life 2L ALERG capsules 3x 30 p. value pack","url":"https:\/\/www.loewen-apotheke24.com\/en\/shop\/labo-life-en\/labo-life-2l-alerg-capsules-3x30\/","description":"Labo Life 2L ALERG capsules 3x 30 p. - value pack\n\n\nL\u00f6wen Apotheke imports Labo Life 2L ALERG and all products from Labo Life Belgium for you at your request.\n\nPZN: - (Pharmazentralnummer)\n\nDosage form: capsules \u2013 90 pieces\n\nPrescription type: prescription-free\n\nBrand: Labo Life\n\nManufactorer: Labo Life","image":"https:\/\/www.loewen-apotheke24.com\/wp-content\/uploads\/2021\/01\/labo-life-2l-alerg-kapseln-produkt-angebot-l\u00f6wen-apotheke.jpg","sku":"ALERG3","offers":[{"@type":"Offer","price":"115.13","priceValidUntil":"2023-12-31","priceSpecification":{"price":"115.13","priceCurrency":"EUR","valueAddedTaxIncluded":"false"},"priceCurrency":"EUR","availability":"http:\/\/schema.org\/InStock","url":"https:\/\/www.loewen-apotheke24.com\/en\/shop\/labo-life-en\/labo-life-2l-alerg-capsules-3x30\/","seller":{"@type":"Organization","name":"L\u00f6wen Apotheke24","url":"https:\/\/www.loewen-apotheke24.com\/en\/"}}]}]}
+  </script>
+  <script data-rocket-type="text/javascript" type="rocketlazyloadscript">
+   (function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+  </script>
+  <div class="wpml-ls-statics-footer wpml-ls wpml-ls-legacy-list-horizontal">
+   <ul>
+    <li class="wpml-ls-slot-footer wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-first-item wpml-ls-item-legacy-list-horizontal">
+     <a class="wpml-ls-link" href="https://www.loewen-apotheke24.com/en/shop/labo-life-en/labo-life-2l-alerg-capsules-3x30/">
+      <img alt="" class="wpml-ls-flag lazyload" data-src="https://www.loewen-apotheke24.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/en.png" height="12" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="18"/>
+      <noscript>
+       <img alt="" class="wpml-ls-flag" height="12" src="https://www.loewen-apotheke24.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/en.png" width="18"/>
+      </noscript>
+      <span class="wpml-ls-native">
+       English
+      </span>
+     </a>
+    </li>
+    <li class="wpml-ls-slot-footer wpml-ls-item wpml-ls-item-de wpml-ls-last-item wpml-ls-item-legacy-list-horizontal">
+     <a class="wpml-ls-link" href="https://www.loewen-apotheke24.com/de/shop/labo-life/labo-life-2l-alerg-kapseln-3x30/">
+      <img alt="" class="wpml-ls-flag lazyload" data-src="https://www.loewen-apotheke24.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/de.png" height="12" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="18"/>
+      <noscript>
+       <img alt="" class="wpml-ls-flag" height="12" src="https://www.loewen-apotheke24.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/de.png" width="18"/>
+      </noscript>
+      <span class="wpml-ls-native" lang="de">
+       Deutsch
+      </span>
+      <span class="wpml-ls-display">
+       <span class="wpml-ls-bracket">
+        (
+       </span>
+       German
+       <span class="wpml-ls-bracket">
+        )
+       </span>
+      </span>
+     </a>
+    </li>
+   </ul>
+  </div>
+  <style id="core-block-supports-inline-css" type="text/css">
+  </style>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="jquery-blockui-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <script id="wc-add-to-cart-js-extra" type="text/javascript">
+   /* <![CDATA[ */
+var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php?lang=en","wc_ajax_url":"\/en\/?wc-ajax=%%endpoint%%","i18n_view_cart":"View cart","cart_url":"https:\/\/www.loewen-apotheke24.com\/en\/cart-3\/","is_cart":"","cart_redirect_after_add":"no"};
+/* ]]> */
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="wc-add-to-cart-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <script id="wc-single-product-js-extra" type="text/javascript">
+   /* <![CDATA[ */
+var wc_single_product_params = {"i18n_required_rating_text":"Please select a rating","review_rating_required":"yes","flexslider":{"rtl":false,"animation":"slide","smoothHeight":true,"directionNav":false,"controlNav":"thumbnails","slideshow":false,"animationSpeed":500,"animationLoop":false,"allowOneSlide":false},"zoom_enabled":"","zoom_options":[],"photoswipe_enabled":"","photoswipe_options":{"shareEl":false,"closeOnScroll":false,"history":false,"hideAnimationDuration":0,"showAnimationDuration":0},"flexslider_enabled":""};
+/* ]]> */
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="wc-single-product-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/plugins/woocommerce/assets/js/frontend/single-product.js?ver=1671204117" type="rocketlazyloadscript">
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="js-cookie-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <script id="woocommerce-js-extra" type="text/javascript">
+   /* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php?lang=en","wc_ajax_url":"\/en\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="woocommerce-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <script id="wc-cart-fragments-js-extra" type="text/javascript">
+   /* <![CDATA[ */
+var wc_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php?lang=en","wc_ajax_url":"\/en\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_4093c60ba04d2b7e56399986e8718eb1-en","fragment_name":"wc_fragments_4093c60ba04d2b7e56399986e8718eb1","request_timeout":"5000"};
+/* ]]> */
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="wc-cart-fragments-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <script data-rocket-type="text/javascript" defer="" id="underscore-js" src="https://www.loewen-apotheke24.com/wp-includes/js/underscore.min.js?ver=1.13.4" type="rocketlazyloadscript">
+  </script>
+  <script id="paypalplus-woocommerce-front-js-extra" type="text/javascript">
+   /* <![CDATA[ */
+var pppFrontDataCollection = {"pageinfo":{"isCheckout":false,"isCheckoutPayPage":false},"isConflictVersion":"1"};
+/* ]]> */
+  </script>
+  <script data-rocket-type="text/javascript" defer="" id="paypalplus-woocommerce-front-js" src="https://www.loewen-apotheke24.com/wp-content/plugins/woo-paypalplus/public/js/front.min.js?ver=1668383599" type="rocketlazyloadscript">
+  </script>
+  <script data-rocket-type="text/javascript" id="rocket-browser-checker-js-after" type="rocketlazyloadscript">
+   class RocketBrowserCompatibilityChecker {
+
+	constructor( options ) {
+		this.passiveSupported = false;
+
+		this._checkPassiveOption( this );
+		this.options = this.passiveSupported ? options : false;
+	}
+
+	/**
+	 * Initializes browser check for addEventListener passive option.
+	 *
+	 * @link https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Safely_detecting_option_support
+	 * @private
+	 *
+	 * @param self Instance of this object.
+	 * @returns {boolean}
+	 */
+	_checkPassiveOption( self ) {
+		try {
+			const options = {
+				// This function will be called when the browser attempts to access the passive property.
+				get passive() {
+					self.passiveSupported = true;
+					return false;
+				}
+			};
+
+			window.addEventListener( 'test', null, options );
+			window.removeEventListener( 'test', null, options );
+		} catch ( err ) {
+			self.passiveSupported = false;
+		}
+	}
+
+	/**
+	 * Checks if the browser supports requestIdleCallback and cancelIdleCallback. If no, shims its behavior with a polyfills.
+	 *
+	 * @link @link https://developers.google.com/web/updates/2015/08/using-requestidlecallback
+	 */
+	initRequestIdleCallback() {
+		if ( ! 'requestIdleCallback' in window ) {
+			window.requestIdleCallback = ( cb ) => {
+				const start = Date.now();
+				return setTimeout( () => {
+					cb( {
+						didTimeout: false,
+						timeRemaining: function timeRemaining() {
+							return Math.max( 0, 50 - ( Date.now() - start ) );
+						}
+					} );
+				}, 1 );
+			};
+		}
+
+		if ( ! 'cancelIdleCallback' in window ) {
+			window.cancelIdleCallback = ( id ) => clearTimeout( id );
+		}
+	}
+
+	/**
+	 * Detects if data saver mode is on.
+	 *
+	 * @link https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/save-data/#detecting_the_save-data_setting
+	 *
+	 * @returns {boolean|boolean}
+	 */
+	isDataSaverModeOn() {
+		return (
+			'connection' in navigator
+			&&
+			true === navigator.connection.saveData
+		);
+	}
+
+	/**
+	 * Checks if the browser supports link prefetch.
+	 *
+	 * @returns {boolean|boolean}
+	 */
+	supportsLinkPrefetch() {
+		const elem = document.createElement( 'link' );
+		return (
+			elem.relList
+			&&
+			elem.relList.supports
+			&&
+			elem.relList.supports( 'prefetch' )
+			&&
+			window.IntersectionObserver
+			&&
+			'isIntersecting' in IntersectionObserverEntry.prototype
+		);
+	}
+
+	isSlowConnection() {
+		return (
+			'connection' in navigator
+			&&
+			'effectiveType' in navigator.connection
+			&&
+			(
+				'2g' === navigator.connection.effectiveType
+				||
+				'slow-2g' === navigator.connection.effectiveType
+			)
+		)
+	}
+}
+  </script>
+  <script id="rocket-preload-links-js-extra" type="text/javascript">
+   /* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/de\/cart\/|\/de\/checkout\/|\/de\/my-account-2\/|\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/en\/checkout-3\/|\/de\/checkout\/|\/en\/cart-3\/|\/de\/cart\/|\/en\/my-account-3\/|\/de\/my-account\/|\/en\/wc-api\/v(.*)|\/(index\\.php\/)?wp\\-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"1","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"https:\/\/www.loewen-apotheke24.com\/en\/","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+  </script>
+  <script data-rocket-type="text/javascript" id="rocket-preload-links-js-after" type="rocketlazyloadscript">
+   class RocketPreloadLinks {
+
+	constructor( browser, config ) {
+		this.browser = browser;
+		this.config  = config;
+		this.options = this.browser.options;
+
+		this.prefetched = new Set;
+		this.eventTime  = null;
+		this.threshold  = 1111;
+		this.numOnHover = 0;
+	}
+
+	/**
+	 * Initializes the handler.
+	 */
+	init() {
+		if (
+			! this.browser.supportsLinkPrefetch()
+			||
+			this.browser.isDataSaverModeOn()
+			||
+			this.browser.isSlowConnection()
+		) {
+			return;
+		}
+
+		this.regex = {
+			excludeUris: RegExp( this.config.excludeUris, 'i' ),
+			images: RegExp( '.(' + this.config.imageExt + ')$', 'i' ),
+			fileExt: RegExp( '.(' + this.config.fileExt + ')$', 'i' )
+		};
+
+		this._initListeners( this );
+	}
+
+	/**
+	 * Initializes the event listeners.
+	 *
+	 * @private
+	 *
+	 * @param self instance of this object, used for binding "this" to the listeners.
+	 */
+	_initListeners( self ) {
+		// Setting onHoverDelay to -1 disables the "on-hover" feature.
+		if ( this.config.onHoverDelay > -1 ) {
+			document.addEventListener( 'mouseover', self.listener.bind( self ), self.listenerOptions );
+		}
+
+		document.addEventListener( 'mousedown', self.listener.bind( self ), self.listenerOptions );
+		document.addEventListener( 'touchstart', self.listener.bind( self ), self.listenerOptions );
+	}
+
+	/**
+	 * Event listener. Processes when near or on a valid <a> hyperlink.
+	 *
+	 * @param Event event Event instance.
+	 */
+	listener( event ) {
+		const linkElem = event.target.closest( 'a' );
+		const url      = this._prepareUrl( linkElem );
+		if ( null === url ) {
+			return;
+		}
+
+		switch ( event.type ) {
+			case 'mousedown':
+			case 'touchstart':
+				this._addPrefetchLink( url );
+				break;
+			case 'mouseover':
+				this._earlyPrefetch( linkElem, url, 'mouseout' );
+		}
+	}
+
+	/**
+	 *
+	 * @private
+	 *
+	 * @param Element|null linkElem
+	 * @param object url
+	 * @param string resetEvent
+	 */
+	_earlyPrefetch( linkElem, url, resetEvent ) {
+		const doPrefetch = () => {
+			falseTrigger = null;
+
+			// Start the rate throttle: 1 sec timeout.
+			if ( 0 === this.numOnHover ) {
+				setTimeout( () => this.numOnHover = 0, 1000 );
+			}
+			// Bail out when exceeding the rate throttle.
+			else if ( this.numOnHover > this.config.rateThrottle ) {
+				return;
+			}
+
+			this.numOnHover++;
+			this._addPrefetchLink( url );
+		};
+
+		// Delay to avoid false triggers for hover/touch/tap.
+		let falseTrigger = setTimeout( doPrefetch, this.config.onHoverDelay );
+
+		// On reset event, reset the false trigger timer.
+		const reset = () => {
+			linkElem.removeEventListener( resetEvent, reset, { passive: true } );
+			if ( null === falseTrigger ) {
+				return;
+			}
+
+			clearTimeout( falseTrigger );
+			falseTrigger = null;
+		};
+		linkElem.addEventListener( resetEvent, reset, { passive: true } );
+	}
+
+	/**
+	 * Adds a <link rel="prefetch" href="<url>"> for the given URL.
+	 *
+	 * @param string url The Given URL to prefetch.
+	 */
+	_addPrefetchLink( url ) {
+		this.prefetched.add( url.href );
+
+		return new Promise( ( resolve, reject ) => {
+			const elem   = document.createElement( 'link' );
+			elem.rel     = 'prefetch';
+			elem.href    = url.href;
+			elem.onload  = resolve;
+			elem.onerror = reject;
+
+			document.head.appendChild( elem );
+		} ).catch(() => {
+			// ignore and continue.
+		});
+	}
+
+	/**
+	 * Prepares the target link's URL.
+	 *
+	 * @private
+	 *
+	 * @param Element|null linkElem Instance of the link element.
+	 * @returns {null|*}
+	 */
+	_prepareUrl( linkElem ) {
+		if (
+			null === linkElem
+			||
+			typeof linkElem !== 'object'
+			||
+			! 'href' in linkElem
+			||
+			// Link prefetching only works on http/https protocol.
+			[ 'http:', 'https:' ].indexOf( linkElem.protocol ) === -1
+		) {
+			return null;
+		}
+
+		const origin   = linkElem.href.substring( 0, this.config.siteUrl.length );
+		const pathname = this._getPathname( linkElem.href, origin );
+		const url      = {
+			original: linkElem.href,
+			protocol: linkElem.protocol,
+			origin: origin,
+			pathname: pathname,
+			href: origin + pathname
+		};
+
+		return this._isLinkOk( url ) ? url : null;
+	}
+
+	/**
+	 * Gets the URL's pathname. Note: ensures the pathname matches the permalink structure.
+	 *
+	 * @private
+	 *
+	 * @param object url Instance of the URL.
+	 * @param string origin The target link href's origin.
+	 * @returns {string}
+	 */
+	_getPathname( url, origin ) {
+		let pathname = origin
+			? url.substring( this.config.siteUrl.length )
+			: url;
+
+		if ( ! pathname.startsWith( '/' ) ) {
+			pathname = '/' + pathname;
+		}
+
+		if ( this._shouldAddTrailingSlash( pathname ) ) {
+			return pathname + '/';
+		}
+
+		return pathname;
+	}
+
+	_shouldAddTrailingSlash( pathname ) {
+		return (
+			this.config.usesTrailingSlash
+			&&
+			! pathname.endsWith( '/' )
+			&&
+			! this.regex.fileExt.test( pathname )
+		);
+	}
+
+	/**
+	 * Checks if the given link element is okay to process.
+	 *
+	 * @private
+	 *
+	 * @param object url URL parts object.
+	 *
+	 * @returns {boolean}
+	 */
+	_isLinkOk( url ) {
+		if ( null === url || typeof url !== 'object' ) {
+			return false;
+		}
+
+		return (
+			! this.prefetched.has( url.href )
+			&&
+			url.origin === this.config.siteUrl // is an internal document.
+			&&
+			url.href.indexOf( '?' ) === -1 // not a query string.
+			&&
+			url.href.indexOf( '#' ) === -1 // not an anchor.
+			&&
+			! this.regex.excludeUris.test( url.href ) // not excluded.
+			&&
+			! this.regex.images.test( url.href ) // not an image.
+		);
+	}
+
+	/**
+	 * Named static constructor to encapsulate how to create the object.
+	 */
+	static run() {
+		// Bail out if the configuration not passed from the server.
+		if ( typeof RocketPreloadLinksConfig === 'undefined' ) {
+			return;
+		}
+
+		const browser  = new RocketBrowserCompatibilityChecker( {
+			capture: true,
+			passive: true
+		} );
+		const instance = new RocketPreloadLinks( browser, RocketPreloadLinksConfig );
+		instance.init();
+	}
+}
+
+RocketPreloadLinks.run();
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="exchange-navigation-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/themes/exchange_mt/js/navigation.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="exchange-skip-link-focus-fix-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/themes/exchange_mt/js/skip-link-focus-fix.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="exchange-menu-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/themes/exchange_mt/js/jPushMenu.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="exchange-menu-script-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/themes/exchange_mt/js/menu.scripts.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="exchange-scripts-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/themes/exchange_mt/js/exchange.scripts.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="wcml-front-scripts-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/plugins/woocommerce-multilingual/res/js/front-scripts.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <script id="cart-widget-js-extra" type="text/javascript">
+   /* <![CDATA[ */
+var actions = {"is_lang_switched":"1","force_reset":"0"};
+/* ]]> */
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="cart-widget-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/plugins/woocommerce-multilingual/res/js/cart_widget.js?ver=1671204107" type="rocketlazyloadscript">
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="accounting-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/plugins/woocommerce/assets/js/accounting/accounting.js?ver=1671204117" type="rocketlazyloadscript">
+  </script>
+  <script id="wc-gzd-unit-price-observer-js-extra" type="text/javascript">
+   /* <![CDATA[ */
+var wc_gzd_unit_price_observer_params = {"wrapper":".product","price_selector":{"p.price":{"is_total_price":false,"is_primary_selector":true,"quantity_selector":""}},"replace_price":"1","ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/en\/?wc-ajax=%%endpoint%%","refresh_unit_price_nonce":"b227535c98","product_id":"52754","price_decimal_sep":",","price_thousand_sep":".","qty_selector":"input.quantity, input.qty","refresh_on_load":""};
+/* ]]> */
+  </script>
+  <script data-minify="1" data-rocket-type="text/javascript" defer="" id="wc-gzd-unit-price-observer-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/plugins/woocommerce-germanized/assets/js/unit-price-observer.js?ver=1671204117" type="rocketlazyloadscript">
+  </script>
+  <script defer="" id="smush-lazy-load-js" src="https://www.loewen-apotheke24.com/wp-content/plugins/wp-smush-pro/app/assets/js/smush-lazy-load.min.js?ver=3.12.3" type="text/javascript">
+  </script>
+  <script id="jquery-dgwt-wcas-js-extra" type="text/javascript">
+   /* <![CDATA[ */
+var dgwt_wcas = {"labels":{"post":"Post","page":"Page","vendor":"Vendor","product_plu":"Products","post_plu":"Posts","page_plu":"Pages","vendor_plu":"Vendors","sku_label":"SKU:","sale_badge":"Sale","vendor_sold_by":"Sold by:","featured_badge":"Featured","in":"in","read_more":"continue reading","no_results":"No results","show_more":"more","show_more_details":"more","search_placeholder":"Search products or PZN...","submit":"Search","tax_product_cat_plu":"Categories","tax_product_cat":"Category","tax_product_tag_plu":"Tags","tax_product_tag":"Tag"},"ajax_search_endpoint":"\/en\/?wc-ajax=dgwt_wcas_ajax_search","ajax_details_endpoint":"\/en\/?wc-ajax=dgwt_wcas_result_details","ajax_prices_endpoint":"\/en\/?wc-ajax=dgwt_wcas_get_prices","action_search":"dgwt_wcas_ajax_search","action_result_details":"dgwt_wcas_result_details","action_get_prices":"dgwt_wcas_get_prices","min_chars":"3","width":"auto","show_details_panel":"","show_images":"1","show_price":"1","show_desc":"","show_sale_badge":"","show_featured_badge":"","dynamic_prices":"","is_rtl":"","show_preloader":"1","show_headings":"1","preloader_url":"","taxonomy_brands":"","img_url":"https:\/\/www.loewen-apotheke24.com\/wp-content\/plugins\/ajax-search-for-woocommerce\/assets\/img\/","is_premium":"","layout_breakpoint":"992","mobile_overlay_breakpoint":"992","mobile_overlay_wrapper":"body","mobile_overlay_delay":"0","debounce_wait_ms":"400","send_ga_events":"1","enable_ga_site_search_module":"","magnifier_icon":"\t\t\t\t<svg class=\"\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\"\n\t\t\t\t\t xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" x=\"0px\" y=\"0px\"\n\t\t\t\t\t viewBox=\"0 0 51.539 51.361\" xml:space=\"preserve\">\n\t\t             <path \t\t\t\t\t\t   d=\"M51.539,49.356L37.247,35.065c3.273-3.74,5.272-8.623,5.272-13.983c0-11.742-9.518-21.26-21.26-21.26 S0,9.339,0,21.082s9.518,21.26,21.26,21.26c5.361,0,10.244-1.999,13.983-5.272l14.292,14.292L51.539,49.356z M2.835,21.082 c0-10.176,8.249-18.425,18.425-18.425s18.425,8.249,18.425,18.425S31.436,39.507,21.26,39.507S2.835,31.258,2.835,21.082z\"\/>\n\t\t\t\t<\/svg>\n\t\t\t\t","close_icon":"\t\t\t\t<svg class=\"\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" height=\"24\" viewBox=\"0 0 24 24\"\n\t\t\t\t\t width=\"24\">\n\t\t\t\t\t<path \t\t\t\t\t\t  d=\"M18.3 5.71c-.39-.39-1.02-.39-1.41 0L12 10.59 7.11 5.7c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 12 5.7 16.89c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 13.41l4.89 4.89c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z\"\/>\n\t\t\t\t<\/svg>\n\t\t\t\t","back_icon":"\t\t\t\t<svg class=\"\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewBox=\"0 0 16 16\">\n\t\t\t\t\t<path \t\t\t\t\t\t  d=\"M14 6.125H3.351l4.891-4.891L7 0 0 7l7 7 1.234-1.234L3.35 7.875H14z\" fill-rule=\"evenodd\"\/>\n\t\t\t\t<\/svg>\n\t\t\t\t","preloader_icon":"\t\t\t\t<svg class=\"dgwt-wcas-loader-circular \" viewBox=\"25 25 50 50\">\n\t\t\t\t\t<circle class=\"dgwt-wcas-loader-circular-path\" cx=\"50\" cy=\"50\" r=\"20\" fill=\"none\"\n\t\t\t\t\t\t\t stroke-miterlimit=\"10\"\/>\n\t\t\t\t<\/svg>\n\t\t\t\t","voice_search_inactive_icon":"\t\t\t\t<svg class=\"dgwt-wcas-voice-search-mic-inactive\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" height=\"24\"\n\t\t\t\t\t width=\"24\">\n\t\t\t\t\t<path \t\t\t\t\t\t  d=\"M12 13Q11.15 13 10.575 12.425Q10 11.85 10 11V5Q10 4.15 10.575 3.575Q11.15 3 12 3Q12.85 3 13.425 3.575Q14 4.15 14 5V11Q14 11.85 13.425 12.425Q12.85 13 12 13ZM12 8Q12 8 12 8Q12 8 12 8Q12 8 12 8Q12 8 12 8Q12 8 12 8Q12 8 12 8Q12 8 12 8Q12 8 12 8ZM11.5 20.5V16.975Q9.15 16.775 7.575 15.062Q6 13.35 6 11H7Q7 13.075 8.463 14.537Q9.925 16 12 16Q14.075 16 15.538 14.537Q17 13.075 17 11H18Q18 13.35 16.425 15.062Q14.85 16.775 12.5 16.975V20.5ZM12 12Q12.425 12 12.713 11.712Q13 11.425 13 11V5Q13 4.575 12.713 4.287Q12.425 4 12 4Q11.575 4 11.288 4.287Q11 4.575 11 5V11Q11 11.425 11.288 11.712Q11.575 12 12 12Z\"\/>\n\t\t\t\t<\/svg>\n\t\t\t\t","voice_search_active_icon":"\t\t\t\t<svg class=\"dgwt-wcas-voice-search-mic-active\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" height=\"24\"\n\t\t\t\t\t width=\"24\">\n\t\t\t\t\t<path \t\t\t\t\t\t  d=\"M12 13Q11.15 13 10.575 12.425Q10 11.85 10 11V5Q10 4.15 10.575 3.575Q11.15 3 12 3Q12.85 3 13.425 3.575Q14 4.15 14 5V11Q14 11.85 13.425 12.425Q12.85 13 12 13ZM11.5 20.5V16.975Q9.15 16.775 7.575 15.062Q6 13.35 6 11H7Q7 13.075 8.463 14.537Q9.925 16 12 16Q14.075 16 15.538 14.537Q17 13.075 17 11H18Q18 13.35 16.425 15.062Q14.85 16.775 12.5 16.975V20.5Z\"\/>\n\t\t\t\t<\/svg>\n\t\t\t\t","voice_search_disabled_icon":"\t\t\t\t<svg class=\"dgwt-wcas-voice-search-mic-disabled\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" height=\"24\" width=\"24\">\n\t\t\t\t\t<path \t\t\t\t\t\t  d=\"M16.725 13.4 15.975 12.625Q16.1 12.325 16.2 11.9Q16.3 11.475 16.3 11H17.3Q17.3 11.75 17.138 12.337Q16.975 12.925 16.725 13.4ZM13.25 9.9 9.3 5.925V5Q9.3 4.15 9.875 3.575Q10.45 3 11.3 3Q12.125 3 12.713 3.575Q13.3 4.15 13.3 5V9.7Q13.3 9.75 13.275 9.8Q13.25 9.85 13.25 9.9ZM10.8 20.5V17.025Q8.45 16.775 6.875 15.062Q5.3 13.35 5.3 11H6.3Q6.3 13.075 7.763 14.537Q9.225 16 11.3 16Q12.375 16 13.312 15.575Q14.25 15.15 14.925 14.4L15.625 15.125Q14.9 15.9 13.913 16.4Q12.925 16.9 11.8 17.025V20.5ZM19.925 20.825 1.95 2.85 2.675 2.15 20.65 20.125Z\"\/>\n\t\t\t\t<\/svg>\n\t\t\t\t","custom_params":{},"convert_html":"1","suggestions_wrapper":"body","show_product_vendor":"","disable_hits":"","disable_submit":"","fixer":{"broken_search_ui":true,"broken_search_ui_ajax":true,"broken_search_ui_hard":false,"broken_search_elementor_popups":true,"broken_search_browsers_back_arrow":true,"force_refresh_checkout":true},"voice_search_enabled":"","voice_search_lang":"en-US","current_lang":"en"};
+/* ]]> */
+  </script>
+  <script data-minify="1" defer="" id="jquery-dgwt-wcas-js" src="https://www.loewen-apotheke24.com/wp-content/cache/min/1/wp-content/plugins/ajax-search-for-woocommerce/assets/js/search.js?ver=1671204107" type="text/javascript">
+  </script>
+ </body>
+</html>
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me -->
