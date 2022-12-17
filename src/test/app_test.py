@@ -8,6 +8,54 @@ import sys
 from importlib import util
 
 
+@pytest.fixture
+def sample_url():
+    """Target URL to scrape metadata."""
+    return 'https://hackersandslackers.com/creating-django-views/'
+
+
+@pytest.fixture
+def expected_json():
+    """Expected metadata to be returned."""
+    return {
+        "@context": "https://schema.org/",
+        "@type": "Article",
+        "author": {
+            "@type": "Person",
+            "name": "Todd Birchard",
+            "image": "https://cdn.hackersandslackers.com/2021/09/avimoji.jpg",
+            "sameAs": "[\"https://toddbirchard.com\", \"https://twitter.com/toddrbirchard\", \"https://www.facebook.com/https://github.com/toddbirchard\"]"
+        },
+        "keywords": "Django, Python, Software",
+        "headline": "Creating Interactive Views in Django",
+        "url": "https://hackersandslackers.com/creating-django-views/",
+        "datePublished": "2020-04-23T12:21:00.000-04:00",
+        "dateModified": "2020-12-25T00:51:36.000-05:00",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://cdn.hackersandslackers.com/2020/11/django-views.jpg",
+            "width": 1000,
+            "height": 523
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Hackers and Slackers",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://cdn.hackersandslackers.com/logo/logo.png",
+                "width": 60,
+                "height": 60
+            }
+        },
+        "description": "Create interactive user experiences by writing Django views to handle dynamic content, submitting forms, and interacting with data.",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hackersandslackers.com"
+        }
+    }
+
+
+
 def lazy_import(name):
     spec = util.find_spec(name)
     loader = util.LazyLoader(spec.loader)
@@ -70,6 +118,15 @@ class FlaskAppTests(unittest.TestCase):
     def test_endpoints_scrape_exists(self):
         r = self.app.get('/scrape/')
         self.assertEqual(r.status_code, 302)
+        
+        
+    def test_post_scrape_url(self):
+        global expected_json
+        url = sample_url()
+        """Match scrape's fetched metadata to known value."""
+        metadata = scrape(url)
+        assert metadata == expected_json
+
 
     def test_endpoints_api_get(self):
         r = self.app.get('/api')
