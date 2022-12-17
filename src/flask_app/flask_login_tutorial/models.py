@@ -20,8 +20,6 @@ import importlib.util
 import sys
 
 print("LAZY")
-<<<<<<< HEAD
-print()
 config_spec = importlib.util.spec_from_file_location("config", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "flask_app", "config.py"))
 loader = importlib.util.LazyLoader(config_spec.loader)
 config_spec.loader = loader
@@ -31,11 +29,6 @@ sys.modules[name] = module
 loader.exec_module(module)
 config = module
 from config import date_filestr, table_prefix
-=======
-print(os.listdir(os.path.join(os.path.dirname(os.path.abspath(__file__)))))
-print(importlib.util.spec_from_file_location("flask_app"))
-print(importlib.util.find_spec("flask_app"))
->>>>>>> f9e4036736fbfb0c0ffc6d4abf547735eafafe4d
 
 print("LAZY")
 
