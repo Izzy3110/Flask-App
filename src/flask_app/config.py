@@ -24,7 +24,7 @@ class Config:
     """Set Flask configuration from environment variables."""
 
     FLASK_APP = environ.get("FLASK_APP", "wsgi.py")
-    FLASK_ENV = environ.get("FLASK_ENV", "development")
+    FLASK_DEBUG = environ.get("FLASK_DEBUG", "development")
     SECRET_KEY = environ.get("SECRET_KEY", os.urandom(32))
 
     # Flask-SQLAlchemy

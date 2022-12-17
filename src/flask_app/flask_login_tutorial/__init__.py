@@ -44,7 +44,7 @@ name = "config"
 sys.modules[name] = module
 loader.exec_module(module)
 config = module
-from config import table_prefix, Config as CurrentConfig
+from config import table_prefix, date_filestr, Config as CurrentConfig
 
 try:
     if Config is not None:
@@ -80,6 +80,9 @@ login_manager = LoginManager()
 def create_app():
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_object(CurrentConfig)
+    if app.config["FLASK_DEBUG"] == "development":
+        app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database_"+date_filestr()+".db"
+    
     db.init_app(app)
     login_manager.init_app(app)
 
@@ -94,7 +97,7 @@ def create_app():
 
         db.create_all()
 
-        if app.config["FLASK_ENV"] == "development":
+        if app.config["FLASK_DEBUG"] == "development":
             print("compiling assets...")
             compile_static_assets(app)
 
