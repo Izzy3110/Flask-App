@@ -55,7 +55,7 @@ soupsieve==2.3.2.post1
 SQLAlchemy==1.4.45
 tomli==2.0.1
 urllib3==1.26.13
-uWSGI==2.0.20
+uwsgi
 w3lib==2.1.1
 wcwidth==0.2.5
 webassets==2.0
