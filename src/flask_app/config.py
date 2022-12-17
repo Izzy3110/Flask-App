@@ -7,7 +7,7 @@ from datetime import datetime
 basedir = path.abspath(path.dirname(__file__))
 load_dotenv(path.join(basedir, ".env"))
 
-db_prefix = "flapp_"
+table_prefix = "flapp_"
 
 
 def date_filestr(timestamp: int = None):

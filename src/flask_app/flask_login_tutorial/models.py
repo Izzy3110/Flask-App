@@ -20,37 +20,24 @@ import importlib.util
 import sys
 
 print("LAZY")
-print(os.listdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")))
-print(importlib.util.spec_from_file_location("flask_app"))
-print(importlib.util.find_spec("flask_app"))
+print()
+config_spec = importlib.util.spec_from_file_location("config", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "flask_app", "config.py"))
+loader = importlib.util.LazyLoader(config_spec.loader)
+config_spec.loader = loader
+module = importlib.util.module_from_spec(config_spec)
+name = "config"
+sys.modules[name] = module
+loader.exec_module(module)
+config = module
+from config import date_filestr, table_prefix
 
 print("LAZY")
-
-def lazy_import(name):
-    spec = importlib.util.find_spec(name)
-    loader = importlib.util.LazyLoader(spec.loader)
-    spec.loader = loader
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[name] = module
-    loader.exec_module(module)
-    return module
-
-
-test_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-src_dir = os.path.join(test_dir, '..', 'flask_app')
-sys.path.append(src_dir)
-
-flask_app = lazy_import("flask_app")
-
-
-
-print(type(flask_app))
 
 
 class User(UserMixin, db.Model):
     """User account model."""
-
-    __tablename__ = "flasklogin-users"
+    
+    __tablename__ = table_prefix+"user"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=False)
     email = db.Column(db.String(40), unique=True, nullable=False)

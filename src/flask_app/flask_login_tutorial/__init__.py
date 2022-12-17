@@ -11,12 +11,12 @@ load_dotenv(os.path.join(basedir, ".env"))
 class Config:
     """Set Flask configuration from environment variables."""
 
-    FLASK_APP = environ.get("FLASK_APP")
-    FLASK_ENV = environ.get("FLASK_ENV")
+    FLASK_APP = environ.get("FLASK_APP", "wsgi.py")
+    FLASK_ENV = environ.get("FLASK_ENV", "production")
     SECRET_KEY = environ.get("SECRET_KEY", os.urandom(32))
 
     # Flask-SQLAlchemy
-    SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI", "sqlite:///database.db")
+    SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI", "mysql+pymysql://flask_app_mysql:myFlaskMysqlPass1@localhost:3306/flask_app")
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -28,7 +28,7 @@ class Config:
     # Static Assets
     STATIC_FOLDER = "static"
     TEMPLATES_FOLDER = "templates"
-    COMPRESSOR_DEBUG = environ.get("COMPRESSOR_DEBUG")
+    COMPRESSOR_DEBUG = environ.get("COMPRESSOR_DEBUG", True)
 
 
 db = SQLAlchemy()
