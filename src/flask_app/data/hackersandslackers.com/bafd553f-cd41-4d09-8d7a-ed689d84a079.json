@@ -1,0 +1,41 @@
+{
+    "uuid": "bafd553f-cd41-4d09-8d7a-ed689d84a079",
+    "url": "https://hackersandslackers.com/creating-django-views/",
+    "scrape_json": {
+        "@context": "https://schema.org/",
+        "@type": "Article",
+        "author": {
+            "@type": "Person",
+            "name": "Todd Birchard",
+            "image": "https://cdn.hackersandslackers.com/2021/09/avimoji.jpg",
+            "sameAs": "[\"https://toddbirchard.com\", \"https://twitter.com/toddrbirchard\", \"https://www.facebook.com/https://github.com/toddbirchard\"]"
+        },
+        "keywords": "Django, Python, Software",
+        "headline": "Creating Interactive Views in Django",
+        "url": "https://hackersandslackers.com/creating-django-views/",
+        "datePublished": "2020-04-23T12:21:00.000-04:00",
+        "dateModified": "2020-12-25T00:51:36.000-05:00",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://cdn.hackersandslackers.com/2020/11/django-views.jpg",
+            "width": 1000,
+            "height": 523
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Hackers and Slackers",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://cdn.hackersandslackers.com/logo/logo.png",
+                "width": 60,
+                "height": 60
+            }
+        },
+        "description": "Create interactive user experiences by writing Django views to handle dynamic content, submitting forms, and interacting with data.",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://hackersandslackers.com"
+        }
+    },
+    "elapsed": 0.17214059829711914
+}

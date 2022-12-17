@@ -64,7 +64,7 @@ def signup():
 
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
-    current_app.logger.debug("CONN: "+request.headers.get('X-Real-Ip'))
+    current_app.logger.debug("CONN: "+str(request.headers.get('X-Real-Ip')))
     """
     Log-in page for registered users.
 

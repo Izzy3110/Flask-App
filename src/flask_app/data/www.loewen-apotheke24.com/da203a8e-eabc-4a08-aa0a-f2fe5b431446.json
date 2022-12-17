@@ -1,0 +1,90 @@
+{
+    "uuid": "da203a8e-eabc-4a08-aa0a-f2fe5b431446",
+    "url": "https://www.loewen-apotheke24.com",
+    "scrape_json": {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebPage",
+                "@id": "https://www.loewen-apotheke24.com/de/",
+                "url": "https://www.loewen-apotheke24.com/de/",
+                "name": "L\u00f6wen Apotheke24 - Versandapotheke, Baden-Baden",
+                "isPartOf": {
+                    "@id": "https://www.loewen-apotheke24.com/de/#website"
+                },
+                "about": {
+                    "@id": "https://www.loewen-apotheke24.com/de/#organization"
+                },
+                "datePublished": "2015-02-12T15:43:18+00:00",
+                "dateModified": "2022-10-01T07:56:20+00:00",
+                "description": "L\u00f6wen Apotheke24 - Ihr Spezialist f\u00fcr Naturheilkunde - Weltweiter Versand - Rezepte - Top-Beratung - Sch\u00fcssler Salze - LaboLife",
+                "breadcrumb": {
+                    "@id": "https://www.loewen-apotheke24.com/de/#breadcrumb"
+                },
+                "inLanguage": "de-DE",
+                "potentialAction": [
+                    {
+                        "@type": "ReadAction",
+                        "target": [
+                            "https://www.loewen-apotheke24.com/de/"
+                        ]
+                    }
+                ]
+            },
+            {
+                "@type": "BreadcrumbList",
+                "@id": "https://www.loewen-apotheke24.com/de/#breadcrumb",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home"
+                    }
+                ]
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://www.loewen-apotheke24.com/de/#website",
+                "url": "https://www.loewen-apotheke24.com/de/",
+                "name": "L\u00f6wen Apotheke24",
+                "description": "Spezialist f\u00fcr Naturmedizin - Versandapotheke Baden-Baden",
+                "publisher": {
+                    "@id": "https://www.loewen-apotheke24.com/de/#organization"
+                },
+                "alternateName": "L\u00f6wen Apotheke",
+                "potentialAction": [
+                    {
+                        "@type": "SearchAction",
+                        "target": {
+                            "@type": "EntryPoint",
+                            "urlTemplate": "https://www.loewen-apotheke24.com/de/?s={search_term_string}"
+                        },
+                        "query-input": "required name=search_term_string"
+                    }
+                ],
+                "inLanguage": "de-DE"
+            },
+            {
+                "@type": "Organization",
+                "@id": "https://www.loewen-apotheke24.com/de/#organization",
+                "name": "L\u00f6wen Apotheke",
+                "alternateName": "L\u00f6wen Apotheke24",
+                "url": "https://www.loewen-apotheke24.com/de/",
+                "logo": {
+                    "@type": "ImageObject",
+                    "inLanguage": "de-DE",
+                    "@id": "https://www.loewen-apotheke24.com/de/#/schema/logo/image/",
+                    "url": "https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/logo-loewen-apotheke24.png",
+                    "contentUrl": "https://www.loewen-apotheke24.com/wp-content/uploads/2017/03/logo-loewen-apotheke24.png",
+                    "width": 242,
+                    "height": 70,
+                    "caption": "L\u00f6wen Apotheke"
+                },
+                "image": {
+                    "@id": "https://www.loewen-apotheke24.com/de/#/schema/logo/image/"
+                }
+            }
+        ]
+    },
+    "elapsed": 9.208121299743652
+}

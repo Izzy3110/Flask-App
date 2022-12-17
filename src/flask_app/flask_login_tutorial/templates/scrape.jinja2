@@ -1,0 +1,25 @@
+{% extends "layout.jinja2" %}
+
+{% block pagestyles %}
+  <link href="{{ url_for('static', filename='dist/css/dashboard.css') }}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.typekit.net/sus7rlu.css">
+{% endblock %}
+
+{% block content %}
+  <h1>{{ body }}</h1>
+
+
+<form action)="" method="POST">
+<input style="min-width: 60vw;" type="text" name="url">
+<input type="submit">
+<br>
+</form>
+<textarea style='min-width: 80vw; min-height: 65vh;'>{{ scrape_json }}</textarea>
+
+
+  {% if current_user.is_authenticated %}
+    <p>Hi {{ current_user.name }}!</p>
+    <a href="{{ url_for('main_bp.logout') }}">Log out</a>
+  {% endif %}
+
+{% endblock %}
