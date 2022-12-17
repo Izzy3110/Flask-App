@@ -125,7 +125,7 @@ class FlaskAppTests(unittest.TestCase):
         # assert metadata == expected_json
         r = self.app.post('/scrape/',
                           content_type='application/json',
-                          data=json.dumps({'url': sample_url}))
+                          data=json.dumps({'url': url}))
         # self.assertEqual(r.json, {'status': 'OK'})
         self.assertEqual(r.status_code, 200)
         
