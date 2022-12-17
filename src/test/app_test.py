@@ -6,16 +6,11 @@ from flask import request, jsonify
 import os
 import sys
 from importlib import util
-import pytest
 
-
-@pytest.fixture
 def sample_url():
     """Target URL to scrape metadata."""
     return 'https://hackersandslackers.com/creating-django-views/'
 
-
-@pytest.fixture
 def expected_json():
     """Expected metadata to be returned."""
     return {
