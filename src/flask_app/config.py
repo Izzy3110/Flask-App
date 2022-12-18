@@ -6,10 +6,6 @@ from datetime import datetime
 
 basedir = path.abspath(path.dirname(__file__))
 load_dotenv(path.join(basedir, ".env"))
-
-print(path.join(basedir, ".env"))
-print(os.path.isfile(path.join(basedir, ".env")))
-
 table_prefix = "flapp_"
 
 

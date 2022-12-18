@@ -11,7 +11,54 @@ import logging
 import os
 from os import environ
 import inspect
+from .models import db, OAuth2Client, OAuth2Token, AuthorizationCodeGrant, PasswordGrant, RefreshTokenGrant
+from authlib.oauth2.rfc6749 import grants
+from authlib.oauth2.rfc7636 import CodeChallenge
+from authlib.integrations.flask_oauth2 import (
+    AuthorizationServer,
+    ResourceProtector,
+)
+from authlib.integrations.sqla_oauth2 import (
+    create_query_client_func,
+    create_save_token_func,
+    create_revocation_endpoint,
+    create_bearer_token_validator,
+)
 
+require_oauth = None
+
+def c_oauth(app):
+    global require_oauth
+    query_client = create_query_client_func(db.session, OAuth2Client)
+    save_token = create_save_token_func(db.session, OAuth2Token)
+    authorization = AuthorizationServer(
+        query_client=query_client,
+        save_token=save_token,
+    )
+    require_oauth = ResourceProtector()
+
+        
+    
+    config_oauth(app, authorization, require_oauth)
+
+
+def config_oauth(app, authorization, require_oauth):
+    authorization.init_app(app)
+
+    # support all grants
+    authorization.register_grant(grants.ImplicitGrant)
+    authorization.register_grant(grants.ClientCredentialsGrant)
+    authorization.register_grant(AuthorizationCodeGrant, [CodeChallenge(required=True)])
+    authorization.register_grant(PasswordGrant)
+    authorization.register_grant(RefreshTokenGrant)
+
+    # support revocation
+    revocation_cls = create_revocation_endpoint(db.session, OAuth2Token)
+    authorization.register_endpoint(revocation_cls)
+
+    # protect resource
+    bearer_cls = create_bearer_token_validator(db.session, OAuth2Token)
+    require_oauth.register_token_validator(bearer_cls())
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, "..", ".env"))
@@ -44,6 +91,9 @@ name = "config"
 sys.modules[name] = module
 loader.exec_module(module)
 config = module
+
+
+
 from config import table_prefix, date_filestr, Config as CurrentConfig
 
 try:
@@ -60,9 +110,9 @@ try:
                             else:
                                 uncommon_[m[0]] = m[1]
                         print("--")
-                print(len(uncommon_.keys()))
-                print(uncommon_)
-                print(common_)
+                #print(len(uncommon_.keys()))
+                #print(uncommon_)
+                #print(common_)
                 #print("---")
                 #for m in inspect.getmembers(Config):
                 #    if not m[0].startswith("_"):
@@ -73,31 +123,64 @@ try:
 except NameError:
     pass
 
-db = SQLAlchemy()
+
 login_manager = LoginManager()
+
+
+def import_abs_module(filepath):
+    if os.path.isfile(filepath): 
+        file_nameonly = os.path.basename(filepath).rstrip(".py")
+        mod_spec = importlib.util.spec_from_file_location(file_nameonly, filepath)
+        if mod_spec is not None:
+            loader = importlib.util.LazyLoader(mod_spec.loader)
+            mod_spec.loader = loader
+            module = importlib.util.module_from_spec(mod_spec)
+            sys.modules[file_nameonly] = module
+            loader.exec_module(module)
+            return module
+        else:
+            print("error NONE")
+
+
 
 
 def create_app():
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_object(CurrentConfig)
+    app.config["OAUTH2_REFRESH_TOKEN_GENERATOR"] = True
+    app.config["AUTHLIB_INSECURE_TRANSPORT"] = 1
+    
     if app.config["FLASK_DEBUG"] == "development":
         app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database_"+date_filestr()+".db"
     
     db.init_app(app)
     login_manager.init_app(app)
-
+    
+    routes_ = {}
+    for file in os.listdir("./flask_login_tutorial/routes/"):
+        file_nameonly = os.path.basename(file).rstrip(".py")
+        routes_[file_nameonly] = import_abs_module(os.path.join("flask_login_tutorial", "routes", file_nameonly+".py"))
+        found_bp = None
+        for m in inspect.getmembers(routes_[file_nameonly]):
+            if not m[0].startswith("_"):
+                if m[0].endswith("_bp"):
+                    found_bp = m[1]
+                    break
+                #else:
+                #    print(m[0])
+                    
+        if found_bp is not None:
+            print("BP "+found_bp.url_prefix+": "+file_nameonly)
+            
+                        
+            app.register_blueprint(found_bp)
+    c_oauth(app)
+    
     with app.app_context():
-        from . import auth, routes, scrape
-        from .assets import compile_static_assets
-
-        app.register_blueprint(routes.main_bp)
-        app.register_blueprint(auth.auth_bp)
-        app.register_blueprint(scrape.scrape_bp)
-        
-
         db.create_all()
 
         if app.config["FLASK_DEBUG"] == "development":
+            from .assets import compile_static_assets
             print("compiling assets...")
             compile_static_assets(app)
 

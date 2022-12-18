@@ -1,0 +1,39 @@
+{% extends "layout.jinja2" %}
+
+{% block pagestyles %}
+  <link href="{{ url_for('static', filename='dist/css/dashboard.css') }}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.typekit.net/sus7rlu.css">
+{% endblock %}
+
+{% block content %}
+
+  <h1>{{ body }}</h1>
+  <div class="container-fluid">
+  <div class="col-3"></div>
+  <div class="container-fluid col-5">
+  <h2 style="text-align: center; margin-right: 35vw;">Clients</h2>
+  {% for client in clients %}
+	<div class="container-fluid" style="margin: 0 auto; max-width: 46vw; text-align: left; background: #111; color: #ECECEC;"> 
+		<pre>
+		<strong>Client Info</strong>
+		{%- for key in client.client_info %}
+		<strong>{{ key }}: </strong>{{ client.client_info[key] }}
+		{%- endfor %}
+		<br>
+		<strong>Client Metadata</strong>
+		{%- for key in client.client_metadata %}
+		<strong>{{ key }}: </strong>{{ client.client_metadata[key] }}
+		{%- endfor %}
+		</pre>
+	</div>
+	{% endfor %}
+	</div>
+	<div class="col-3"></div>
+	</div>
+
+  {% if current_user.is_authenticated %}
+    <p>Hi {{ current_user.name }}!</p>
+    <a href="{{ url_for('main_bp.logout') }}">Log out</a>
+  {% endif %}
+
+{% endblock %}

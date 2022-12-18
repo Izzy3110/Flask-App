@@ -1,8 +1,8 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for, current_app
 from flask_login import current_user, login_user
-from . import login_manager
-from .forms import LoginForm, SignupForm
-from .models import User, db
+from flask_login_tutorial import login_manager
+from flask_login_tutorial.forms import LoginForm, SignupForm
+from flask_login_tutorial.models import User, db
 import time    
 from datetime import datetime, date, time, timezone, timedelta
 import pytz
