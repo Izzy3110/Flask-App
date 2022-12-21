@@ -71,7 +71,7 @@ sys.path.append(src_dir)
 wsgi = lazy_import("wsgi")
 wyl = lazy_import("wyl")
 
-tested_app = wsgi.create_app
+tested_app = wsgi.create_app()
 if tested_app is not None:
     tested_app.secret_key = os.urandom(32)
 
