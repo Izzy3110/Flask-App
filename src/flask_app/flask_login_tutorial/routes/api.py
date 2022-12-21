@@ -15,7 +15,9 @@ from flask_login import current_user, login_required, logout_user
 from flask_login_tutorial.models import OAuth2Client, db, create_bearer_token_validator, OAuth2Token
 from werkzeug.security import gen_salt
 from authlib.integrations.flask_oauth2 import current_token
-
+from flask_login import login_user
+        
+from flask_login_tutorial.decorators import login_required_ext
 
 
 from authlib.integrations.flask_oauth2 import (
@@ -75,3 +77,17 @@ def oauth_index():
 def api_me():
     user = current_token.user
     return jsonify(id=user.id, name=user.name)
+
+
+
+@api_bp.route('/test')
+@login_required_ext
+# @require_oauth('profile')
+def api_test():
+    print(current_user)
+    if current_user.is_authenticated:
+        print("TEST")
+    else:
+        print("not auth")
+    return jsonify(id=current_user.id, name=current_user.name)
+

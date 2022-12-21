@@ -106,6 +106,12 @@ class User(UserMixin, db.Model):
     def get_user_id(self):
         return self.id
 
+    def check_email_password_auth(self, username, password):
+        user = User.query.filter_by(email=username).first()
+        if user and self.check_password(password=password):
+            return user
+        return False
+
     def __repr__(self):
         return "<User {}>".format(self.name)
 
