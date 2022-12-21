@@ -159,23 +159,27 @@ def create_app():
     login_manager.init_app(app)
     
     routes_ = {}
-    for file in os.listdir("./flask_login_tutorial/routes/"):
-        file_nameonly = os.path.basename(file).rstrip(".py")
-        routes_[file_nameonly] = import_abs_module(os.path.join("flask_login_tutorial", "routes", file_nameonly+".py"))
-        found_bp = None
-        for m in inspect.getmembers(routes_[file_nameonly]):
-            if not m[0].startswith("_"):
-                if m[0].endswith("_bp"):
-                    found_bp = m[1]
-                    break
-                #else:
-                #    print(m[0])
-                    
-        if found_bp is not None:
-            print("BP "+found_bp.url_prefix+": "+file_nameonly)
-            
+    routes_path = os.path.join(os.getcwd(), "flask_login_tutorial", "routes")
+    if os.path.isdir(routes_path):
+        for file in os.listdir(routes_path):
+            file_nameonly = os.path.basename(file).rstrip(".py")
+            routes_[file_nameonly] = import_abs_module(os.path.join(routes_path, file_nameonly+".py"))
+            found_bp = None
+            for m in inspect.getmembers(routes_[file_nameonly]):
+                if not m[0].startswith("_"):
+                    if m[0].endswith("_bp"):
+                        found_bp = m[1]
+                        break
+                    #else:
+                    #    print(m[0])
                         
-            app.register_blueprint(found_bp)
+            if found_bp is not None:
+                print("BP "+found_bp.url_prefix+": "+file_nameonly)
+                
+                            
+                app.register_blueprint(found_bp)
+    else:
+        print("no routes")
     c_oauth(app)
     
     with app.app_context():
