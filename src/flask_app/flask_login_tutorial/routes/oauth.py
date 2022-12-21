@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, render_template_string, redirect, url_for, request
+from flask import Blueprint, render_template, render_template_string, redirect, url_for, request, current_app, jsonify
 from pprint import pprint
 import requests
 import extruct
@@ -14,6 +14,7 @@ import lxml
 from flask_login import current_user, login_required, logout_user
 from flask_login_tutorial.models import OAuth2Client, db, create_bearer_token_validator, OAuth2Token
 from werkzeug.security import gen_salt
+from authlib.integrations.flask_oauth2 import current_token
 
 
 from authlib.integrations.flask_oauth2 import (
@@ -38,6 +39,7 @@ def split_by_crlf(s):
 
 @oauth_bp.route('/authorize', methods=['GET', 'POST'])
 def oauth_authorize():
+    authorization = current_app.config['auth']
     user = current_user
     # if user log status is not true (Auth server), then to log it in
     if not user:
@@ -80,7 +82,8 @@ def oauth_index():
     else:
         if current_user.is_authenticated:
             clients = OAuth2Client.query.filter_by(user_id=current_user.id).all()
-            print(clients)
+        else:
+            return redirect(url_for("auth_bp.login"))
         json_ = "{}"
         return render_template("oauth.jinja2",
                                template="dashboard-template",
@@ -104,7 +107,6 @@ def oauth_create_client():
         client_id_issued_at=client_id_issued_at,
         user_id=current_user.id,
     )
-    print(client)
     form = request.form
     
     client_metadata = {
@@ -116,8 +118,6 @@ def oauth_create_client():
         "scope": form["scope"],
         "token_endpoint_auth_method": form["token_endpoint_auth_method"]
     }
-    
-    print(client_metadata)
     client.set_client_metadata(client_metadata)
     
     
@@ -131,37 +131,14 @@ def oauth_create_client():
     db.session.commit()
     return redirect(url_for("oauth_bp.oauth_index"))
 
-@oauth_bp.route('/authorize', methods=['GET', 'POST'])
-def authorize():
-    user = current_user
-    # if user log status is not true (Auth server), then to log it in
-    if not user:
-        return redirect(url_for('oauth_bp.oauth_index', next=request.url))
-    if request.method == 'GET':
-        try:
-            grant = authorization.get_consent_grant(end_user=user)
-        except OAuth2Error as error:
-            return error.error
-        return render_template('oauth_bp.authorize', user=user, grant=grant)
-    if not user and 'username' in request.form:
-        username = request.form.get('username')
-        user = User.query.filter_by(name=username).first()
-    if request.form['confirm']:
-        grant_user = user
-    else:
-        grant_user = None
-    return authorization.create_authorization_response(grant_user=grant_user)
-
 @oauth_bp.route('/token', methods=['POST'])
 def issue_token():
-    return authorization.create_token_response()
+    authorization = current_app.config['auth']
+    
+    resp = authorization.create_token_response()
+    return resp
 
 @oauth_bp.route('/revoke', methods=['POST'])
 def revoke_token():
+    authorization = current_app.config['auth']
     return authorization.create_endpoint_response('revocation')
-
-@oauth_bp.route('/me')
-@require_oauth('profile')
-def api_me():
-    user = current_token.user
-    return jsonify(id=user.id, name=user.name)

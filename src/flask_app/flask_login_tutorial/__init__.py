@@ -44,6 +44,7 @@ def c_oauth(app):
 
 def config_oauth(app, authorization, require_oauth):
     authorization.init_app(app)
+    
 
     # support all grants
     authorization.register_grant(grants.ImplicitGrant)
@@ -59,6 +60,7 @@ def config_oauth(app, authorization, require_oauth):
     # protect resource
     bearer_cls = create_bearer_token_validator(db.session, OAuth2Token)
     require_oauth.register_token_validator(bearer_cls())
+    app.config['auth'] = authorization
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv(os.path.join(basedir, "..", ".env"))

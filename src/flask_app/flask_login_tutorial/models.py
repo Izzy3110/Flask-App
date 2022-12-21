@@ -103,6 +103,9 @@ class User(UserMixin, db.Model):
         """Check hashed password."""
         return check_password_hash(self.password, password)
 
+    def get_user_id(self):
+        return self.id
+
     def __repr__(self):
         return "<User {}>".format(self.name)
 
@@ -179,7 +182,7 @@ class AuthorizationCodeGrant(grants.AuthorizationCodeGrant):
 
 class PasswordGrant(grants.ResourceOwnerPasswordCredentialsGrant):
     def authenticate_user(self, username, password):
-        user = User.query.filter_by(username=username).first()
+        user = User.query.filter_by(name=username).first()
         if user is not None and user.check_password(password):
             return user
 

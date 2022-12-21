@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, render_template_string, redirect, url_for, request
+from flask import Blueprint, render_template, render_template_string, redirect, url_for, request, jsonify
 from pprint import pprint
 import requests
 import extruct
@@ -14,6 +14,8 @@ import lxml
 from flask_login import current_user, login_required, logout_user
 from flask_login_tutorial.models import OAuth2Client, db, create_bearer_token_validator, OAuth2Token
 from werkzeug.security import gen_salt
+from authlib.integrations.flask_oauth2 import current_token
+
 
 
 from authlib.integrations.flask_oauth2 import (
