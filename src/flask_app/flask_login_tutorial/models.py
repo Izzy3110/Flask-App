@@ -90,6 +90,22 @@ class User(UserMixin, db.Model):
     website = db.Column(db.String(60), index=False, unique=False, nullable=True)
     created_on = db.Column(db.DateTime, index=False, unique=False, nullable=True)
     last_login = db.Column(db.DateTime, index=False, unique=False, nullable=True)
+    totp_secret = db.String(length=16)
+
+    def __init__(self, **kwargs):
+        super(User, self).__init__(**kwargs)
+        if self.totp_secret is None:
+            self.otp_secret = base64.b32encode(os.urandom(10)).decode('utf-8')
+ 
+    def get_totp_secret(self):
+        user = User.query.filter_by(email=self.email).first()
+        return user.totp_secret if user.totp_secret is not None else False
+        
+    def get_totp_uri(self):
+        return f'otpauth://totp/TOTPDemo:{self.username}?secret={self.totp_secret}&issuer=TOTPDemo'
+
+    def verify_totp(self, token):
+        return otp.valid_totp(token, self.totp_secret)
 
     def update_last_login(self):
         self.last_login = mysql_time()

@@ -6,6 +6,10 @@ from flask_login_tutorial.models import User, db
 import time    
 from datetime import datetime, date, time, timezone, timedelta
 import pytz
+# pyotp
+import pyotp
+import inspect
+from sqlalchemy.sql import text
 
 
 auth_bp = Blueprint(
@@ -112,3 +116,54 @@ def unauthorized():
     """Redirect unauthorized users to Login page."""
     flash("You must be logged in to view that page.")
     return redirect(url_for("auth_bp.login"))
+
+# 2FA page route
+
+@auth_bp.route("/2fa")
+def login_2fa():
+    # generating random secret key for authentication
+    secret = pyotp.random_base32()
+    if current_user.is_authenticated:
+        print(current_user.email)
+        user = User.query.filter_by(email=current_user.email).first()
+        
+        print(user)
+        print(user.get_totp_secret())
+        for m in inspect.getmembers(user):
+            if not m[0].startswith("_"):
+                print(m)
+        # print(hasattr(user, "totp_secret"))
+        res = db.session.query(text("totp_secret FROM flapp_user")).all()
+        print("RES")
+        print(res) 
+        print("RES END")
+
+        print(getattr(user, 'totp_secret', None))
+        # print(getattr("totp_secret", None))
+        
+    return render_template(
+        "2fa.jinja2",
+        title="2FA",
+        body="2FA",
+        secret=secret
+    )
+    
+   
+    
+# 2FA form route
+@auth_bp.route("/2fa", methods=["POST"])
+def login_2fa_form():
+    # getting secret key used by user
+    secret = request.form.get("secret")
+    # getting OTP provided by user
+    otp = int(request.form.get("otp"))
+
+    # verifying submitted OTP with PyOTP
+    if pyotp.TOTP(secret).verify(otp):
+        # inform users if OTP is valid
+        flash("The TOTP 2FA token is valid", "success")
+        return redirect(url_for("auth_bp.login_2fa"))
+    else:
+        # inform users if OTP is invalid
+        flash("You have supplied an invalid 2FA token!", "danger")
+        return redirect(url_for("auth_bp.login_2fa"))
