@@ -11,6 +11,11 @@ import pyotp
 import inspect
 from sqlalchemy.sql import text
 
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.orm.exc import MultipleResultsFound
+
+
+    
 
 auth_bp = Blueprint(
     "auth_bp", __name__, url_prefix="/"
@@ -119,27 +124,54 @@ def unauthorized():
 
 # 2FA page route
 
-@auth_bp.route("/2fa")
-def login_2fa():
-    # generating random secret key for authentication
-    secret = pyotp.random_base32()
-    if current_user.is_authenticated:
-        print(current_user.email)
-        user = User.query.filter_by(email=current_user.email).first()
-        
-        print(user)
-        print(user.get_totp_secret())
-        for m in inspect.getmembers(user):
-            if not m[0].startswith("_"):
-                print(m)
-        # print(hasattr(user, "totp_secret"))
-        res = db.session.query(text("totp_secret FROM flapp_user")).all()
-        print("RES")
-        print(res) 
-        print("RES END")
 
-        print(getattr(user, 'totp_secret', None))
-        # print(getattr("totp_secret", None))
+
+@auth_bp.route("/2fa/<int:generate_new>", methods=['GET', 'POST'], strict_slashes=False)
+def login_2fa_gen(generate_new=None):
+    secret = None
+    secret_ = pyotp.random_base32()
+    if request.method == "GET":
+        if not current_user.is_authenticated:
+            return redirect(url_for("auth_bp.login"))
+    if current_user.is_authenticated:
+        user = User.query.filter_by(email=current_user.email).first()
+        user_dict = user.to_dict()
+        if "otp_secret" in user_dict.keys():
+            if user_dict["otp_secret"] is None or (generate_new is not None and generate_new):
+                user.otp_secret = secret_
+                db.session.commit()
+            else:
+                secret = user.otp_secret
+    else:
+        secret = secret_
+    if secret is None:
+        secret = secret_
+        
+    return render_template(
+        "2fa.jinja2",
+        title="2FA",
+        body="2FA",
+        secret=secret
+    )
+
+
+@auth_bp.route("/2fa", methods=['GET', 'POST'], strict_slashes=False)
+def login_2fa():
+    if request.method == "GET":
+        if not current_user.is_authenticated:
+            return redirect(url_for("auth_bp.login"))
+    if current_user.is_authenticated:
+        user = User.query.filter_by(email=current_user.email).first()
+        user_dict = user.to_dict()
+        if "otp_secret" in user_dict.keys():
+            if user_dict["otp_secret"] is None:
+                user.otp_secret = secret
+                db.session.commit()
+            else:
+                secret = user.otp_secret
+    else:
+        secret = pyotp.random_base32()
+        
         
     return render_template(
         "2fa.jinja2",
