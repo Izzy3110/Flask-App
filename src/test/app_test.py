@@ -95,86 +95,86 @@ if tested_app is not None:
             else:
                 return jsonify({'status': 'bad input'}), 400
 
-'''
-class FlaskAppTests(unittest.TestCase):
+        '''
+        class FlaskAppTests(unittest.TestCase):
 
-    def setUp(self):
+            def setUp(self):
 
-        tested_app.config['TESTING'] = True
-        self.app = tested_app.test_client()
-''' 
-    '''
-    def test_get_hello_endpoint(self):
-        r = self.app.get('/')
-        self.assertEqual(r.status_code, 302)
-        # self.assertEqual(r.data, b'Hello World!')
+                tested_app.config['TESTING'] = True
+                self.app = tested_app.test_client()
+        ''' 
+        '''
+        def test_get_hello_endpoint(self):
+            r = self.app.get('/')
+            self.assertEqual(r.status_code, 302)
+            # self.assertEqual(r.data, b'Hello World!')
 
-    def test_post_hello_endpoint(self):
-        r = self.app.post('/')
-        self.assertEqual(r.status_code, 405)
+        def test_post_hello_endpoint(self):
+            r = self.app.post('/')
+            self.assertEqual(r.status_code, 405)
 
-    def test_endpoints_scrape_exists(self):
-        r = self.app.get('/scrape/')
-        self.assertEqual(r.status_code, 302)
+        def test_endpoints_scrape_exists(self):
+            r = self.app.get('/scrape/')
+            self.assertEqual(r.status_code, 302)
+            
+            
         
         
-    
-    
-    LOGIN REQUIRED
-    
-    def test_post_scrape_url(self):
-        global expected_json
+        LOGIN REQUIRED
         
-        url = sample_url()
-        """Match scrape's fetched metadata to known value."""
-        # metadata = scrape(url)
-        # assert metadata == expected_json
-        r = self.app.post('/scrape/',
-                          content_type='application/json',
-                          data=json.dumps({'url': url}))
-        # self.assertEqual(r.json, {'status': 'OK'})
-        self.assertEqual(r.status_code, 302)
-    
+        def test_post_scrape_url(self):
+            global expected_json
+            
+            url = sample_url()
+            """Match scrape's fetched metadata to known value."""
+            # metadata = scrape(url)
+            # assert metadata == expected_json
+            r = self.app.post('/scrape/',
+                              content_type='application/json',
+                              data=json.dumps({'url': url}))
+            # self.assertEqual(r.json, {'status': 'OK'})
+            self.assertEqual(r.status_code, 302)
+        
 
 
-    def test_endpoints_api_get(self):
-        r = self.app.get('/api')
-        self.assertEqual(r.json, {'status': 'test'})
+        def test_endpoints_api_get(self):
+            r = self.app.get('/api')
+            self.assertEqual(r.json, {'status': 'test'})
 
-    def test_endpoints_api_post_correct(self):
-        r = self.app.post('/api',
-                          content_type='application/json',
-                          data=json.dumps({'name': 'Den', 'age': 100}))
-        self.assertEqual(r.json, {'status': 'OK'})
-        self.assertEqual(r.status_code, 200)
+        def test_endpoints_api_post_correct(self):
+            r = self.app.post('/api',
+                              content_type='application/json',
+                              data=json.dumps({'name': 'Den', 'age': 100}))
+            self.assertEqual(r.json, {'status': 'OK'})
+            self.assertEqual(r.status_code, 200)
 
-        r = self.app.post('/api',
-                          content_type='application/json',
-                          data=json.dumps({'name': 'Den'}))
-        self.assertEqual(r.json, {'status': 'OK'})
-        self.assertEqual(r.status_code, 200)
+            r = self.app.post('/api',
+                              content_type='application/json',
+                              data=json.dumps({'name': 'Den'}))
+            self.assertEqual(r.json, {'status': 'OK'})
+            self.assertEqual(r.status_code, 200)
 
-    def test_endpoints_api_post_not_dict(self):
-        r = self.app.post('/api',
-                          content_type='application/json',
-                          data=json.dumps([{'name': 'Den'}]))
-        self.assertEqual(r.json, {'status': 'bad input'})
-        self.assertEqual(r.status_code, 400)
+        def test_endpoints_api_post_not_dict(self):
+            r = self.app.post('/api',
+                              content_type='application/json',
+                              data=json.dumps([{'name': 'Den'}]))
+            self.assertEqual(r.json, {'status': 'bad input'})
+            self.assertEqual(r.status_code, 400)
 
-    def test_endpoints_api_post_no_name(self):
-        r = self.app.post('/api',
-                          content_type='application/json',
-                          data=json.dumps({'age': 100}))
-        self.assertEqual(r.json, {'status': 'bad input'})
-        self.assertEqual(r.status_code, 400)
+        def test_endpoints_api_post_no_name(self):
+            r = self.app.post('/api',
+                              content_type='application/json',
+                              data=json.dumps({'age': 100}))
+            self.assertEqual(r.json, {'status': 'bad input'})
+            self.assertEqual(r.status_code, 400)
 
-    def test_endpoints_api_post_bad_age(self):
-        r = self.app.post('/api',
-                          content_type='application/json',
-                          data=json.dumps({'name': 'Den', 'age': '100'}))
-        self.assertEqual(r.json, {'status': 'bad input'})
-        self.assertEqual(r.status_code, 400)
-    '''
+        def test_endpoints_api_post_bad_age(self):
+            r = self.app.post('/api',
+                              content_type='application/json',
+                              data=json.dumps({'name': 'Den', 'age': '100'}))
+            self.assertEqual(r.json, {'status': 'bad input'})
+            self.assertEqual(r.status_code, 400)
+        '''
 
 if __name__ == '__main__':
     unittest.main()
