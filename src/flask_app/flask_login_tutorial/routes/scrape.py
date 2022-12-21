@@ -26,6 +26,8 @@ def scrape(url: str, scrape_uuid: str):
 
     parsed_url = urlparse(url)
     netloc = parsed_url.netloc
+    if not os.path.isdir(os.path.join(os.getcwd(), "data")):
+        os.mkdir(os.path.join(os.getcwd(), "data"))
     if not os.path.isdir(os.path.join("data", netloc)):
         os.mkdir(os.path.join("data", netloc))
 
