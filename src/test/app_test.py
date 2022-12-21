@@ -95,20 +95,25 @@ if tested_app is not None:
             else:
                 return jsonify({'status': 'bad input'}), 400
 
-        '''
+        
         class FlaskAppTests(unittest.TestCase):
 
             def setUp(self):
 
                 tested_app.config['TESTING'] = True
                 self.app = tested_app.test_client()
-        ''' 
-        '''
+        
         def test_get_hello_endpoint(self):
             r = self.app.get('/')
-            self.assertEqual(r.status_code, 302)
+            self.assertEqual(r.status_code, 200)
+            
+            
+        def test_get_login_endpoint(self):
+            r = self.app.get('/login')
+            self.assertEqual(r.status_code, 200)
+        
             # self.assertEqual(r.data, b'Hello World!')
-
+        '''
         def test_post_hello_endpoint(self):
             r = self.app.post('/')
             self.assertEqual(r.status_code, 405)
