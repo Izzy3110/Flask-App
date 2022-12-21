@@ -116,6 +116,10 @@ class FlaskAppTests(unittest.TestCase):
         self.assertEqual(r.status_code, 302)
         
         
+    '''
+    
+    LOGIN REQUIRED
+    
     def test_post_scrape_url(self):
         global expected_json
         
@@ -128,7 +132,7 @@ class FlaskAppTests(unittest.TestCase):
                           data=json.dumps({'url': url}))
         # self.assertEqual(r.json, {'status': 'OK'})
         self.assertEqual(r.status_code, 302)
-        
+    '''
 
 
     def test_endpoints_api_get(self):

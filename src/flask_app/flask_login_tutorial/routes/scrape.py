@@ -11,8 +11,10 @@ from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 import lxml.html as lh
 import lxml
-from flask_login import current_user, login_required, logout_user
-
+from flask_login import current_user, login_required, logout_user, login_user
+from flask_httpauth import HTTPBasicAuth
+from base64 import b64decode
+from flask_login_tutorial.models import User
 
 scrape_bp = Blueprint(
     "scrape_bp", __name__, url_prefix="/scrape", template_folder="templates", static_folder="static"
@@ -115,19 +117,10 @@ def get_json(url):
 
 @login_required
 @scrape_bp.route("/", methods=['GET', 'POST'])
-def login():
-    if current_user.is_authenticated:
-        if request.method == "POST":
-            if request.values.get("url") is not None:
-                test_url = request.values.get("url")
-                json_ = get_json(url=test_url)
-                return render_template("scrape.jinja2",
-                                       template="dashboard-template",
-                                       body="Scrape Index",
-                                       scrape_json=json.dumps(json.loads(json_), indent=4)
-                                       )
-        else:
-            test_url = 'https://hackersandslackers.com/creating-django-views/'
+def scrape_index():
+    if request.method == "POST":
+        if request.values.get("url") is not None:
+            test_url = request.values.get("url")
             json_ = get_json(url=test_url)
             return render_template("scrape.jinja2",
                                    template="dashboard-template",
@@ -135,4 +128,22 @@ def login():
                                    scrape_json=json.dumps(json.loads(json_), indent=4)
                                    )
     else:
-        return redirect(url_for("auth_bp.login"))
+        test_url = 'https://hackersandslackers.com/creating-django-views/'
+        json_ = get_json(url=test_url)
+        return render_template("scrape.jinja2",
+                               template="dashboard-template",
+                               body="Scrape Index",
+                               scrape_json=json.dumps(json.loads(json_), indent=4)
+                               )
+    if request.method == "POST":
+        token_ = request.headers.get("Authorization").split("Basic ")[1]
+        username, password = (b64decode(token_)).decode().split(":")
+        user = User.query.filter_by(email=username).first()
+        if user and user.check_password(password=password):
+            user.update_last_login()
+            
+            login_user(user)
+            next_page = request.args.get("next")
+            return redirect(next_page or url_for("scrape_bp.scrape_index"))
+        else:
+            return redirect(url_for("auth_bp.login"))
