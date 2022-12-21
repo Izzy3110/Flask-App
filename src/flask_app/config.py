@@ -25,7 +25,7 @@ class Config:
 
     # Flask-SQLAlchemy
     SQLALCHEMY_DATABASE_URI = environ.get("SQLALCHEMY_DATABASE_URI", "mysql+pymysql://flask_app_mysql:myFlaskMysqlPass1@localhost:3306/flask_app")
-    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     # Flask-Assets
