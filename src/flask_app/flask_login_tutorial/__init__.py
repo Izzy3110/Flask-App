@@ -167,8 +167,8 @@ def create_app():
     app.config["AUTHLIB_INSECURE_TRANSPORT"] = 1
     app.config["sec_man"] = sec_man
     app.config["APP_BASE"] = os.path.dirname(os.path.abspath(__file__))
-    if app.config["FLASK_DEBUG"] == "development":
-        app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database_"+date_filestr()+".db"
+    # if app.config["FLASK_DEBUG"] == "development":
+    #     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database_"+date_filestr()+".db"
     
     db.init_app(app)
     login_manager.init_app(app)
