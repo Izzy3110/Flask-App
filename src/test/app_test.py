@@ -31,11 +31,12 @@ sys.path.append(wyl_dir)
 wsgi = lazy_import("wsgi")
 wyl = lazy_import("wyl")
 
-tested_app = wsgi.create_app()
-if tested_app is not None:
-    tested_app.secret_key = os.urandom(32)
-    print(tested_app)
-    print(type(tested_app))
+#tested_app = wsgi.create_app()
+#if tested_app is not None:
+#    tested_app.secret_key = os.urandom(32)
+#    print(tested_app)
+#    print(type(tested_app))
 
 if __name__ == '__main__':
-    unittest.main()
+#    unittest.main()
+    pass
