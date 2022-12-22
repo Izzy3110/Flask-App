@@ -1,0 +1,25 @@
+{% extends "layout.jinja2" %}
+
+{% block pagestyles %}
+  <link href="{{ url_for('static', filename='dist/css/dashboard.css') }}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.typekit.net/sus7rlu.css">
+{% endblock %}
+
+{% block content %}
+  <h1>{{ body }} - RESULT</h1>
+  <style>
+	.some {
+		min-width: 20vw; min-height: 10vh; border: 1px solid #000; background: #FFFFFF;
+	}
+</style>
+<script>
+$(document).ready(function() {
+	$("#someselector").css({
+		"all": "initial"
+	}).css({
+		"all": ""
+	}).addClass("some")
+})
+</script>
+  <div id="someselector"></div>
+{% endblock %}

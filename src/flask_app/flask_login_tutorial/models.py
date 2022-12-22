@@ -9,6 +9,7 @@ import time
 from datetime import datetime, date, time, timezone, timedelta
 import pytz
 import base64
+from sqlalchemy.dialects.mysql import LONGTEXT
 
 from authlib.integrations.flask_oauth2 import (
     AuthorizationServer,
@@ -26,7 +27,7 @@ from authlib.oauth2.rfc7636 import CodeChallenge
 import unittest
 import json
 
-from flask import request, jsonify
+from flask import request, jsonify, current_app
 
 from authlib.integrations.sqla_oauth2 import (
     OAuth2ClientMixin,
@@ -37,7 +38,7 @@ from authlib.integrations.sqla_oauth2 import (
 import inspect
 import os
 import sys
-
+import onetimepass
 import importlib.util
 import sys
 from flask_sqlalchemy import SQLAlchemy
@@ -84,13 +85,15 @@ class User(UserMixin, db.Model):
     __tablename__ = table_prefix+"user"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=False)
+    username = db.Column(db.String(100), nullable=False, unique=True)
     email = db.Column(db.String(40), unique=True, nullable=False)
+    twofactor_enabled = db.Column(db.Integer, unique=False, nullable=True)
     password = db.Column(
-        db.String(200), primary_key=False, unique=False, nullable=False
+        LONGTEXT, primary_key=False, unique=True, nullable=False
     )
     website = db.Column(db.String(60), index=False, unique=False, nullable=True)
-    created_on = db.Column(db.DateTime, index=False, unique=False, nullable=True)
-    last_login = db.Column(db.DateTime, index=False, unique=False, nullable=True)
+    created_on = db.Column(db.String(60), index=False, unique=False, nullable=True)
+    last_login = db.Column(db.String(60), index=False, unique=False, nullable=True)
     otp_secret = db.Column(db.String(length=16), index=False, unique=False, nullable=True)
 
     def __init__(self, **kwargs):
@@ -115,29 +118,41 @@ class User(UserMixin, db.Model):
         return self.otp_secret
         
     def get_totp_uri(self):
-        return f'otpauth://totp/TOTPDemo:{self.name}?secret={self.otp_secret}&issuer=TOTPDemo'
+        #return f'otpauth://totp/TOTPDemo:{self.name}?secret={self.otp_secret}&issuer=TOTPDemo'
+        return 'otpauth://totp/WYL OAuth:{0}?secret={1}&issuer=WYL-OAuth' \
+            .format(self.username, self.otp_secret)
 
     def verify_totp(self, token):
-        return otp.valid_totp(token, self.otp_secret)
+        return onetimepass.valid_totp(token, self.otp_secret)
 
     def update_last_login(self):
         self.last_login = mysql_time()
         db.session.commit()  # Create new user
 
+
+    def set_two_factor(self, state):
+        self.twofactor_enabled = 1 if state == "false" else 0
+        print("###################################\n")
+        print(self.twofactor_enabled)
+        db.session.commit()  # Create new user
+        print("###################################\n")
+
     def set_password(self, password):
         """Create hashed password."""
-        self.password = generate_password_hash(password, method="sha256")
+        self.password = password
 
-    def check_password(self, password):
+    def check_password(self, password, sec_man, user):
         """Check hashed password."""
-        return check_password_hash(self.password, password)
+        return sec_man.decrypt_from_base(user.password) == password
+        #print(password)
+        #return check_password_hash(self.password, password)
 
     def get_user_id(self):
         return self.id
 
-    def check_email_password_auth(self, username, password):
-        user = User.query.filter_by(email=username).first()
-        if user and self.check_password(password=password):
+    def check_email_password_auth(self, user_email_, password):
+        user = User.query.filter_by(email=user_email_).first()
+        if user and self.check_password(password=user.password, sec_man=current_app.config["sec_man"]):
             return user
         return False
 

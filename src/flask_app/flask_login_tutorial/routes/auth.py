@@ -1,7 +1,7 @@
 from flask import Blueprint, flash, redirect, render_template, request, url_for, current_app
 from flask_login import current_user, login_user
 from flask_login_tutorial import login_manager
-from flask_login_tutorial.forms import LoginForm, SignupForm
+from flask_login_tutorial.forms import LoginForm, SignupForm, FALoginForm
 from flask_login_tutorial.models import User, db
 import time    
 from datetime import datetime, date, time, timezone, timedelta
@@ -10,7 +10,7 @@ import pytz
 import pyotp
 import inspect
 from sqlalchemy.sql import text
-
+from flask import session
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm.exc import MultipleResultsFound
 
@@ -35,7 +35,7 @@ def mysql_time() -> str:
     aware_europe_berlin = datetime.now(pytz.timezone('Europe/Berlin'))
     current_app.logger.debug('tz: Europe/Berlin DateTime', aware_europe_berlin)
 
-    return aware_europe_berlin.strftime('%Y-%m-%d %H:%M:%S')
+    return aware_europe_berlin
 
 
 @auth_bp.route("/signup", methods=["GET", "POST"])
@@ -48,12 +48,20 @@ def signup():
     """
     form = SignupForm()
     if form.validate_on_submit():
-        existing_user = User.query.filter_by(email=form.email.data).first()
-        if existing_user is None:
+        existing_email = User.query.filter_by(email=form.email.data).first()
+        existing_username = User.query.filter_by(username=form.username.data).first()
+        print("EX_USER: "+str(existing_username))
+        print("EX_MAIL: "+str(existing_email))
+        
+        if existing_email is None and existing_username is None:
+            pass_encrypted = current_app.config["sec_man"].encrypt_to_base(form.password.data.encode("utf-8"))
             user = User(
-                name=form.name.data, email=form.email.data, website=form.website.data, created_on=mysql_time()
+                name=form.name.data, username=form.username.data, email=form.email.data, website=form.website.data, created_on=mysql_time()
             )
-            user.set_password(form.password.data)
+                        
+            current_app.logger.debug("CONN: "+str(request.headers.get('X-Real-Ip')))
+            print("pass: "+str(pass_encrypted))
+            user.set_password(pass_encrypted)
             db.session.add(user)
             db.session.commit()  # Create new user
 
@@ -73,13 +81,40 @@ def signup():
 
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
-    current_app.logger.debug("CONN: "+str(request.headers.get('X-Real-Ip')))
     """
     Log-in page for registered users.
 
     GET requests serve Log-in page.
     POST requests validate and redirect user to dashboard.
     """
+    
+    if "login_method" in dict(request.values).keys():
+        print(request.values.get("login_method") == "2fa")
+        print(request.values.get("token"))
+        
+        user = User.query.filter_by(email=request.values.get("email")).first()     
+        if user is not None:
+            session["email"] = user.email
+            if user.verify_totp(request.values.get("token")):
+                user.update_last_login()
+                
+                login_user(user)
+                next_page = request.args.get("next")
+                return redirect(next_page or url_for("main_bp.dashboard"))
+            else:
+                print("cannot verify")
+        return render_template(
+            "2fa-login.jinja2",
+            title="2FA Login",
+            email=session["email"] if "email" in session.keys() else "",
+            template="dashboard-template",
+            body="2FA"
+        )
+    
+    
+    
+    
+    
     # Bypass if user is logged in
     if current_user.is_authenticated:
         current_app.logger.debug("LOGIN detected: "+current_user.email)            
@@ -88,8 +123,18 @@ def login():
     form = LoginForm()
     # Validate login attempt
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if user and user.check_password(password=form.password.data):
+        user = User.query.filter_by(email=form.email.data).first()            
+        if user is not None:
+            if user.twofactor_enabled:
+                return render_template(
+                    "2fa-login.jinja2",
+                    title="2FA Login",
+                    email=user.email,
+                    template="dashboard-template",
+                    body="2FA"
+                )
+        
+        if user and user.check_password(password=form.password.data, sec_man=current_app.config["sec_man"], user=user):
 
             print("UPDATE USER LOGIN TIME")
             user.update_last_login()
@@ -150,6 +195,7 @@ def login_2fa_gen(generate_new=None):
     return render_template(
         "2fa.jinja2",
         title="2FA",
+        template="dashboard-template",
         body="2FA",
         secret=secret
     )
@@ -162,6 +208,7 @@ def login_2fa():
             return redirect(url_for("auth_bp.login"))
     if current_user.is_authenticated:
         user = User.query.filter_by(email=current_user.email).first()
+        
         user_dict = user.to_dict()
         if "otp_secret" in user_dict.keys():
             if user_dict["otp_secret"] is None:
@@ -175,9 +222,12 @@ def login_2fa():
         
     return render_template(
         "2fa.jinja2",
+        template="dashboard-template",
         title="2FA",
         body="2FA",
-        secret=secret
+        totp_url=user.get_totp_uri(),
+        secret=secret,
+        twofactor_enabled=user.twofactor_enabled
     )
     
    

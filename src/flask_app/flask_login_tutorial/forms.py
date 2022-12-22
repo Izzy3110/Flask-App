@@ -3,11 +3,11 @@ from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, Optional
 
-
 class SignupForm(FlaskForm):
     """User Sign-up Form."""
 
     name = StringField("Name", validators=[DataRequired()])
+    username = StringField("Username", validators=[DataRequired()])
     email = StringField(
         "Email",
         validators=[
@@ -41,4 +41,14 @@ class LoginForm(FlaskForm):
         "Email", validators=[DataRequired(), Email(message="Enter a valid email.")]
     )
     password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField("Log In")
+
+class FALoginForm(FlaskForm):
+    """User 2FA Log-in Form."""
+
+    email = StringField(
+        "Email", validators=[DataRequired(), Email(message="Enter a valid email.")]
+    )
+    password = PasswordField("Password", validators=[DataRequired()])
+    token = StringField('Token', validators=[DataRequired(), Length(6, 6)])
     submit = SubmitField("Log In")

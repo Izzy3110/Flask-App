@@ -9,15 +9,16 @@ from flask import has_request_context, request
 from flask.logging import default_handler
 import logging
 import os
-from os import environ
 import inspect
 from .models import db, OAuth2Client, OAuth2Token, AuthorizationCodeGrant, PasswordGrant, RefreshTokenGrant
 from authlib.oauth2.rfc6749 import grants
 from authlib.oauth2.rfc7636 import CodeChallenge
+
 from authlib.integrations.flask_oauth2 import (
     AuthorizationServer,
     ResourceProtector,
 )
+
 from authlib.integrations.sqla_oauth2 import (
     create_query_client_func,
     create_save_token_func,
@@ -94,6 +95,23 @@ sys.modules[name] = module
 loader.exec_module(module)
 config = module
 
+path_ = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "wyl", "__init__.py")
+if os.path.isfile(path_):
+    wyl_spec = importlib.util.spec_from_file_location("wyl", path_)
+    loader = importlib.util.LazyLoader(wyl_spec.loader)
+    wyl_spec.loader = loader
+    wyl_module = importlib.util.module_from_spec(wyl_spec)
+    name = "wyl"
+    sys.modules[name] = wyl_module
+    loader.exec_module(wyl_module)
+    wyl = wyl_module
+    if "rsa_key.bin" in os.listdir(os.path.dirname(os.path.abspath(__file__))):
+        sec_man = wyl.SecMan(
+            privatekey_filedir="/usr/local/src/Flask-App/src/flask_app/flask_login_tutorial", 
+            password_str=os.environ.get("APP_PASSWORD")
+        )
+    else:
+        print(">>>> <<<< NO KEY!")
 
 
 from config import table_prefix, date_filestr, Config as CurrentConfig
@@ -111,19 +129,14 @@ try:
                                 common_[m[0]] = m[1]
                             else:
                                 uncommon_[m[0]] = m[1]
-                        print("--")
-                #print(len(uncommon_.keys()))
-                #print(uncommon_)
-                #print(common_)
-                #print("---")
-                #for m in inspect.getmembers(Config):
-                #    if not m[0].startswith("_"):
-                #        print(m)
-                print("---##")
             else:
-                print("Config loaded")
+                print(">>> Config loaded")
 except NameError:
     pass
+
+
+
+
 
 
 login_manager = LoginManager()
@@ -147,13 +160,15 @@ def import_abs_module(filepath):
 
 
 def create_app():
+    global sec_man
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_object(CurrentConfig)
     app.config["OAUTH2_REFRESH_TOKEN_GENERATOR"] = True
     app.config["AUTHLIB_INSECURE_TRANSPORT"] = 1
-    
-    if app.config["FLASK_DEBUG"] == "development":
-        app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database_"+date_filestr()+".db"
+    app.config["sec_man"] = sec_man
+    app.config["APP_BASE"] = os.path.dirname(os.path.abspath(__file__))
+    #if app.config["FLASK_DEBUG"] == "development":
+    #    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database_"+date_filestr()+".db"
     
     db.init_app(app)
     login_manager.init_app(app)
@@ -184,7 +199,8 @@ def create_app():
     
     with app.app_context():
         db.create_all()
-
+        
+        print("ENV: "+str(app.config["FLASK_DEBUG"]))
         if app.config["FLASK_DEBUG"] == "development":
             from .assets import compile_static_assets
             print("compiling assets...")

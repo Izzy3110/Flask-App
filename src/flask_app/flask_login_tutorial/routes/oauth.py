@@ -86,7 +86,7 @@ def oauth_index():
             return redirect(url_for("auth_bp.login"))
         json_ = "{}"
         return render_template("oauth.jinja2",
-                               template="dashboard-template",
+                               template="dashboard",
                                body="OAuth Index",
                                user=current_user, clients=clients
                                )

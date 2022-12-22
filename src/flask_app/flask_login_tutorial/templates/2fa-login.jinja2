@@ -1,0 +1,18 @@
+{% extends "layout.jinja2" %}
+
+{% block pagestyles %}
+  <link href="{{ url_for('static', filename='dist/css/dashboard.css') }}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.typekit.net/sus7rlu.css">
+{% endblock %}
+{% block content %}
+
+<h1>2FA-Authentication Enabled</h1>
+<h4>Please enter token from Authentication App</h4>
+<form action="" method="post">
+<input type="hidden" name="login_method" value="2fa">
+<input type="text" name="email" value="{{ email }}">
+<input type="text" maxlength="6" name="token">
+<input type="submit" value="Login">
+<a href="javascript:history.back()">Go Back</a>
+
+{% endblock %}

@@ -1,9 +1,54 @@
 """Create and bundle CSS and JS files."""
-from flask_assets import Bundle, Environment
+from flask_assets import Bundle, Environment 
+from Crypto.PublicKey import RSA
+import os
+import sys
+from dotenv import load_dotenv
+
+def recreate_key():
+    load_dotenv()
+    key_size = 4096
+    key_filename = "rsa_key.bin"
+    key_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), key_filename)
+    algo = "scryptAndAES128-CBC"
+    pkcs_int = 8
+    secret_code = os.environ.get("APP_PASSWORD", "UnguessablePW123!")
+
+    pubkey_filename = os.path.basename(key_filename).rstrip(".bin") + ".pub"
+    pubkey_filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), pubkey_filename)
+
+    #if not os.path.isfile(key_filepath):
+    print(">> CREATEING NEW RSA...", end='')
+    key = RSA.generate(key_size)
+    encrypted_key = key.export_key(
+        passphrase=secret_code, 
+        pkcs=pkcs_int,
+        protection=algo
+    )
+
+    file_out = open(key_filepath, "wb")
+    file_out.write(encrypted_key)
+    file_out.close()
+    with open(pubkey_filepath, "w") as pubkey_f:
+        pubkey_f.write(key.publickey().export_key("PEM").decode("utf-8"))
+        pubkey_f.close()
+    print("done")
+    # else:
+    #     encoded_key = open(key_filepath, "rb").read()
+    #     key = RSA.import_key(encoded_key, passphrase=secret_code)
+    # 
+    #     with open(pubkey_filepath, "w") as pubkey_f:
+    #         pubkey_f.write(key.publickey().export_key("PEM").decode("utf-8"))
+    #         pubkey_f.close()
 
 
 def compile_static_assets(app):
     """Configure static asset bundles."""
+
+    recreate_key()
+    
+    
+    
     assets = Environment(app)
     Environment.auto_build = True
     Environment.debug = False
