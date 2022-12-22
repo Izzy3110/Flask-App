@@ -25,7 +25,7 @@ jobs:
           cache-dependency-path: |
             **/requirements*.txt
       - name: Install xmllint
-        run: sudo apt-get install -y libxml2-utils libcurl4-openssl-dev libssl-dev build-essential
+        run: sudo apt-get install -y libxslt libxml2 libxml2-utils libcurl4-openssl-dev libssl-dev build-essential
       - name: Install requirements
         run: |
           python -m pip install --upgrade pip
